@@ -7,7 +7,7 @@ public class ScreenSchulteTable implements Screen {
 
     MyGdxGame myGdxGame;
 
-    ScreenSchulteTable(MyGdxGame myGdxGame) {
+    public ScreenSchulteTable(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
     }
 

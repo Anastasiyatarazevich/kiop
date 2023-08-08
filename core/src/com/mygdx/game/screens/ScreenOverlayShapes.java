@@ -7,7 +7,7 @@ public class ScreenOverlayShapes implements Screen {
 
     MyGdxGame myGdxGame;
 
-    ScreenOverlayShapes(MyGdxGame myGdxGame) {
+    public ScreenOverlayShapes(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
     }
 

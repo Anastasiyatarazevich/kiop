@@ -7,7 +7,7 @@ public class ScreenMenu implements Screen {
 
     MyGdxGame myGdxGame;
 
-    ScreenMenu(MyGdxGame myGdxGame) {
+    public ScreenMenu(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
     }
 

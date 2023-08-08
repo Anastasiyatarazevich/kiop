@@ -7,7 +7,7 @@ public class ScreenProofreadingTest implements Screen {
 
     MyGdxGame myGdxGame;
 
-    ScreenProofreadingTest(MyGdxGame myGdxGame) {
+    public ScreenProofreadingTest(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
     }
 

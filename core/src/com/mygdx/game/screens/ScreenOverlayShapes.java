@@ -1,6 +1,7 @@
 package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
 
 public class ScreenOverlayShapes implements Screen {
@@ -18,7 +19,7 @@ public class ScreenOverlayShapes implements Screen {
 
     @Override
     public void render(float delta) {
-
+        ScreenUtils.clear(0, 0, 0, 1);
     }
 
     @Override

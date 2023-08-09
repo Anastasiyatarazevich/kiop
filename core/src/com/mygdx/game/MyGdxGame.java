@@ -37,7 +37,7 @@ public class MyGdxGame extends Game {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, ApplicationSettings.SCR_WIDTH, ApplicationSettings.SCR_HEIGHT);
 
-        commonFont = new BitmapFont(Gdx.files.internal("fonts/ArialCommon.fnt"));
+        commonFont = new BitmapFont(Gdx.files.internal("fonts/ArialGray64.fnt"));
 
         screenProofreadingTest = new ScreenProofreadingTest(this);
         screenOverlayShapes = new ScreenOverlayShapes(this);

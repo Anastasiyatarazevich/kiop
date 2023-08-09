@@ -1,6 +1,6 @@
 info face="Arial" size=64 bold=0 italic=0 charset="" unicode=0 stretchH=100 smooth=1 aa=1 padding=1,1,1,1 spacing=-2,-2
 common lineHeight=74 base=58 scaleW=512 scaleH=512 pages=2 packed=0
-page id=0 file="ArialBlack641.png"
+page id=0 file="ArialBlack64.png"
 page id=1 file="ArialBlack642.png"
 chars count=163
 char id=0       x=217  y=359  width=34   height=43   xoffset=7    yoffset=16   xadvance=48   page=0    chnl=0 

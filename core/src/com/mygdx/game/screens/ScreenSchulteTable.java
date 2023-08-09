@@ -2,14 +2,18 @@ package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextTooltip;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.testSessions.SessionSchulteTable;
 import com.mygdx.game.testSessions.sessionsStates.StateSchulteTable;
 import com.mygdx.game.ui.BackgroundPixmap;
+import com.mygdx.game.ui.TextButton;
 import com.mygdx.game.ui.View;
 import com.mygdx.game.utils.RenderHelper;
 import com.mygdx.game.utils.SceneHelper;
+import org.w3c.dom.Text;
 
 import static com.mygdx.game.utils.UsingColors.COLOR_BG_GRAY;
 
@@ -34,11 +38,17 @@ public class ScreenSchulteTable implements Screen {
         scenePassed = new SceneHelper();
 
         BackgroundPixmap background = new BackgroundPixmap(COLOR_BG_GRAY);
+        TextButton startButton = new TextButton(
+                myGdxGame.fontArialBlack64,
+                "Начать",
+                "schulteTable/buttonBackground.png",
+                155, 591);
 
         scenePassed.addActor(background);
         sceneBreak.addActor(background);
         sceneTableShowing.addActor(background);
         sceneGreeting.addActor(background);
+        sceneGreeting.addActor(startButton);
     }
 
     @Override

@@ -5,14 +5,21 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.ui.ImageView;
 import com.mygdx.game.ui.View;
+import com.mygdx.game.utils.schulteHelper.TableItem;
 
 public class TableItemView extends View {
     public String value;
-    private ImageView backgroundImage;
     public BitmapFont font;
+    private ImageView backgroundImage;
+    private OnTableItemClicked onTableItemClicked;
 
     float textX;
     float textY;
+
+    public void setOnTableItemClicked(OnTableItemClicked onTableItemClicked) {
+        this.onTableItemClicked = onTableItemClicked;
+        setOnClickListener(onClickListener);
+    }
 
     public TableItemView(BitmapFont font, String value, float x, float y, float width, float height) {
         super(x, y);
@@ -20,13 +27,9 @@ public class TableItemView extends View {
         this.height = height;
         this.value = value;
         this.font = font;
-        GlyphLayout gl = new GlyphLayout(font, this.value);
-        float textWidth = gl.width;
-        float textHeight = gl.height;
 
         textX = 0;
         textY = 0;
-
 
         this.backgroundImage = new ImageView(x, y, width, height, "schulteTable/tileActive.png");
     }
@@ -42,9 +45,28 @@ public class TableItemView extends View {
         //textY = y;
     }
 
+    public void setItemSelected() {
+        backgroundImage.setImgSource("schulteTable/tileSelected.png");
+    }
+
     @Override
     public void draw(MyGdxGame myGdxGame) {
         backgroundImage.draw(myGdxGame);
         font.draw(myGdxGame.batch, value, textX, textY);
     }
+
+    public interface OnTableItemClicked {
+        void onClicked(TableItemView tableItemView);
+    }
+
+    TableItemView getContext() {
+        return this;
+    }
+
+    OnClickListener onClickListener = new OnClickListener() {
+        @Override
+        public void onClicked() {
+            onTableItemClicked.onClicked(getContext());
+        }
+    };
 }

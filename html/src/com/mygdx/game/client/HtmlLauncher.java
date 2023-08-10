@@ -5,12 +5,15 @@ import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
 import com.mygdx.game.MyGdxGame;
 
+import static com.mygdx.game.utils.ApplicationSettings.SCR_HEIGHT;
+import static com.mygdx.game.utils.ApplicationSettings.SCR_WIDTH;
+
 public class HtmlLauncher extends GwtApplication {
 
         @Override
         public GwtApplicationConfiguration getConfig () {
                 // Resizable application, uses available space in browser
-                return new GwtApplicationConfiguration(true);
+                return new GwtApplicationConfiguration(SCR_WIDTH, SCR_HEIGHT);
                 // Fixed size application:
                 //return new GwtApplicationConfiguration(480, 320);
         }

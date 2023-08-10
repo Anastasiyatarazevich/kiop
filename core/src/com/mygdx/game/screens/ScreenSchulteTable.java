@@ -7,6 +7,7 @@ import com.mygdx.game.testSessions.sessionsStates.StateSchulteTable;
 import com.mygdx.game.ui.BackgroundPixmap;
 import com.mygdx.game.ui.TextButton;
 import com.mygdx.game.ui.View;
+import com.mygdx.game.ui.shulteTable.TableItemView;
 import com.mygdx.game.ui.shulteTable.TableView;
 import com.mygdx.game.utils.RenderHelper;
 import com.mygdx.game.utils.SceneHelper;
@@ -37,7 +38,8 @@ public class ScreenSchulteTable implements Screen {
         sceneBreak = new SceneHelper();
         scenePassed = new SceneHelper();
 
-        tableView = new TableView(623, 163, COUNT_OF_SCHULTE_TABLES, myGdxGame.fontArialGray64, SCHULTE_TABLE_ITEMS_SIZE);
+        tableView = new TableView(623, 163, COUNT_OF_SCHULTE_TABLES, myGdxGame.fontArialGray64,
+                SCHULTE_TABLE_ITEMS_SIZE, onTableItemClicked);
 
         BackgroundPixmap background = new BackgroundPixmap(COLOR_BG_GRAY);
         TextButton startButton = new TextButton(
@@ -126,6 +128,14 @@ public class ScreenSchulteTable implements Screen {
         public void onClicked() {
             testSession.startTest();
             setTable();
+        }
+    };
+
+
+    TableItemView.OnTableItemClicked onTableItemClicked = new TableItemView.OnTableItemClicked() {
+        @Override
+        public void onClicked(TableItemView tableItemView) {
+            tableItemView.setItemSelected();
         }
     };
 }

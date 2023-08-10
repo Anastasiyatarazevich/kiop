@@ -3,6 +3,8 @@ package com.mygdx.game.ui;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.MyGdxGame;
 
+import java.util.Objects;
+
 public class ImageView extends View {
 
     String imgSource;
@@ -10,6 +12,12 @@ public class ImageView extends View {
 
     public void setImgTexture(Texture imgTexture) {
         this.imgTexture = imgTexture;
+    }
+
+    public void setImgSource(String imgSource) {
+        if (imgSource.equals(this.imgSource)) return;
+        this.imgSource = imgSource;
+        imgTexture = new Texture(imgSource);
     }
 
     public ImageView(float x, float y, float width, float height, String imgSource) {

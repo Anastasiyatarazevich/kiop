@@ -24,11 +24,11 @@ public class TableItem {
 
     }
 
-    void startTimer() {
+    public void startTimer() {
         spentTime = TimeUtils.millis();
     }
 
-    void endTimer() {
+    public void endTimer() {
         spentTime = TimeUtils.millis() - spentTime;
     }
 

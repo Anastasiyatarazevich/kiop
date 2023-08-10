@@ -21,7 +21,7 @@ public class ScreenMenu implements Screen {
 
         TextView textViewTest1 = new TextView(myGdxGame.fontArialGray64, "Test1", 100, 200);
         TextView textViewTest2 = new TextView(myGdxGame.fontArialGray64, "Test2", 100, 300);
-        TextView textViewTest3 = new TextView(myGdxGame.fontArialGray64, "Test3", 100, 400);
+        TextView textViewTest3 = new TextView(myGdxGame.fontArialGray64, "Schulte table test", 100, 400);
 
         textViewTest1.setOnClickListener(textView1clicked);
         textViewTest2.setOnClickListener(textView2clicked);

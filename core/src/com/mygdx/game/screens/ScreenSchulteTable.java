@@ -11,9 +11,9 @@ import com.mygdx.game.ui.shulteTable.TableItemView;
 import com.mygdx.game.ui.shulteTable.TableView;
 import com.mygdx.game.utils.RenderHelper;
 import com.mygdx.game.utils.SceneHelper;
+import com.mygdx.game.utils.schulteHelper.SelectionResponse;
 
-import static com.mygdx.game.utils.ApplicationSettings.COUNT_OF_SCHULTE_TABLES;
-import static com.mygdx.game.utils.ApplicationSettings.SCHULTE_TABLE_ITEMS_SIZE;
+import static com.mygdx.game.utils.ApplicationSettings.*;
 import static com.mygdx.game.utils.UsingColors.COLOR_BG_GRAY;
 
 public class ScreenSchulteTable implements Screen {
@@ -38,7 +38,7 @@ public class ScreenSchulteTable implements Screen {
         sceneBreak = new SceneHelper();
         scenePassed = new SceneHelper();
 
-        tableView = new TableView(623, 163, COUNT_OF_SCHULTE_TABLES, myGdxGame.fontArialGray64,
+        tableView = new TableView(623, 163, SCHULTE_TABLE_SIZE, myGdxGame.fontArialGray64,
                 SCHULTE_TABLE_ITEMS_SIZE, onTableItemClicked);
 
         BackgroundPixmap background = new BackgroundPixmap(COLOR_BG_GRAY);
@@ -99,6 +99,10 @@ public class ScreenSchulteTable implements Screen {
         tableView.setTable(testSession.tables.get(testSession.tableIdx).tableMatrix);
     }
 
+    void closeTable(int closingCode) {
+        testSession.testState = StateSchulteTable.BREAK;
+    }
+
     RenderHelper.DrawScenes drawScenes = new RenderHelper.DrawScenes() {
         @Override
         public void draw() {
@@ -135,7 +139,20 @@ public class ScreenSchulteTable implements Screen {
     TableItemView.OnTableItemClicked onTableItemClicked = new TableItemView.OnTableItemClicked() {
         @Override
         public void onClicked(TableItemView tableItemView) {
-            tableItemView.setItemSelected();
+            SelectionResponse clickResponse = testSession.checkSelection(Integer.parseInt(tableItemView.value));
+            switch (clickResponse) {
+                case SUCCESS:
+                    tableItemView.setItemSelected();
+                    if (!testSession.tables.get(testSession.tableIdx).nextItem())
+                        closeTable(0);
+                    break;
+                case ERROR:
+                    // todo: fill some logic
+                    break;
+                case DUPLICATE:
+                    // todo: fill some logic
+                    break;
+            }
         }
     };
 }

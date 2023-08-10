@@ -13,6 +13,7 @@ public class Table {
 
     public ArrayList<TableItem> tableMatrix;
     int tableSize;
+    public int countOfSelectedItems;
 
     public Table(int tableSize) {
         this.tableSize = tableSize;
@@ -22,9 +23,18 @@ public class Table {
     public void generateTable() {
         tableMatrix.clear();
         for (int i = 0; i < tableSize * tableSize; i++) {
-            tableMatrix.add(new TableItem(i));
+            tableMatrix.add(new TableItem(i + 1));
         }
         Collections.shuffle(tableMatrix);
+        countOfSelectedItems = -1;
+    }
+
+    public boolean nextItem() {
+        countOfSelectedItems += 1;
+        if (countOfSelectedItems > 0) tableMatrix.get(countOfSelectedItems - 1).endTimer();
+        if (countOfSelectedItems < tableSize * tableSize) tableMatrix.get(countOfSelectedItems).startTimer();
+        else return false;
+        return true;
     }
 
 }

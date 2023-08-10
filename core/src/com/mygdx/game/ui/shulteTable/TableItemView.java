@@ -55,8 +55,11 @@ public class TableItemView extends View {
         font.draw(myGdxGame.batch, value, textX, textY);
     }
 
-    public interface OnTableItemClicked {
-        void onClicked(TableItemView tableItemView);
+    @Override
+    public boolean isHit(float tx, float ty) {
+        boolean isTouchHitComponent = x < tx && tx < x + width && y < ty && ty < y + height;
+        if (isTouchHitComponent && onClickListener != null) onClickListener.onClicked();
+        return isTouchHitComponent;
     }
 
     TableItemView getContext() {
@@ -69,4 +72,8 @@ public class TableItemView extends View {
             onTableItemClicked.onClicked(getContext());
         }
     };
+
+    public interface OnTableItemClicked {
+        void onClicked(TableItemView tableItemView);
+    }
 }

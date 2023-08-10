@@ -37,6 +37,7 @@ public class MyGdxGame extends Game {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, ApplicationSettings.SCR_WIDTH, ApplicationSettings.SCR_HEIGHT);
 
+        // todo: rebuild fonts
         commonFont = new BitmapFont(Gdx.files.internal("fonts/ArialGray64.fnt"));
         fontArialBlack64 = new BitmapFont(Gdx.files.internal("fonts/ArialBlack64.fnt"));
         fontArialGray64 = new BitmapFont(Gdx.files.internal("fonts/ArialGray64.fnt"));

@@ -9,6 +9,7 @@ import com.mygdx.game.ui.TextButton;
 import com.mygdx.game.ui.View;
 import com.mygdx.game.ui.shulteTable.TableItemView;
 import com.mygdx.game.ui.shulteTable.TableView;
+import com.mygdx.game.ui.shulteTable.TimeCounterView;
 import com.mygdx.game.utils.RenderHelper;
 import com.mygdx.game.utils.SceneHelper;
 import com.mygdx.game.utils.schulteHelper.SelectionResponse;
@@ -28,6 +29,7 @@ public class ScreenSchulteTable implements Screen {
     SceneHelper scenePassed;
 
     TableView tableView;
+    TimeCounterView timeCounterView;
 
     public ScreenSchulteTable(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
@@ -40,6 +42,8 @@ public class ScreenSchulteTable implements Screen {
 
         tableView = new TableView(623, 163, SCHULTE_TABLE_SIZE, myGdxGame.fontArialGray64,
                 SCHULTE_TABLE_ITEMS_SIZE, onTableItemClicked);
+        timeCounterView = new TimeCounterView(590, 921, "Оставшееся время",
+                myGdxGame.fontArialGray64, myGdxGame.fontArialBlack64, 30000);
 
         BackgroundPixmap background = new BackgroundPixmap(COLOR_BG_GRAY);
         TextButton startButton = new TextButton(
@@ -52,6 +56,9 @@ public class ScreenSchulteTable implements Screen {
         scenePassed.addActor(background);
         sceneBreak.addActor(background);
         sceneTableShowing.addActor(background);
+
+        // todo: make better margins
+        //sceneTableShowing.addActor(timeCounterView);
         sceneTableShowing.addActors(tableView.getAllViews());
         sceneGreeting.addActor(background);
         sceneGreeting.addActor(startButton);
@@ -61,11 +68,13 @@ public class ScreenSchulteTable implements Screen {
     public void show() {
         if (testSession.testState == StateSchulteTable.GREETING) {
             testSession.startSession(COUNT_OF_SCHULTE_TABLES);
+            timeCounterView.startTimer();
         }
     }
 
     @Override
     public void render(float delta) {
+        timeCounterView.updateTimer();
         justTouched = RenderHelper.checkTouch(myGdxGame);
         RenderHelper.draw(myGdxGame, drawScenes);
     }

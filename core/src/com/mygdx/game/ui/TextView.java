@@ -23,6 +23,13 @@ public class TextView extends View {
         if ((int) x == -1) this.x = ApplicationSettings.SCR_WIDTH / 2 - width / 2;
     }
 
+    public void setText(String text) {
+        GlyphLayout gl = new GlyphLayout(font, text);
+        width = gl.width;
+        height = gl.height;
+        this.text = text;
+    }
+
     @Override
     public void draw(MyGdxGame myGdxGame) {
         font.draw(myGdxGame.batch, text, x, y);

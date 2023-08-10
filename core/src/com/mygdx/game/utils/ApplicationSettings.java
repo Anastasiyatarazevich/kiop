@@ -9,5 +9,8 @@ public class ApplicationSettings {
     // ----------- Schulte Table settings
 
     public static int COUNT_OF_SCHULTE_TABLES = 5;
+    public static int SCHULTE_TABLE_SIZE = 5;
+    public static int SCHULTE_TABLE_ITEMS_SIZE = 125;
+    public static int SCHULTE_TABLE_ITEMS_PADDING = 20;
 
 }

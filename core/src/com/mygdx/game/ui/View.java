@@ -6,8 +6,8 @@ public class View {
 
     public float x;
     public float y;
-    float width;
-    float height;
+    public float width;
+    public float height;
     public boolean isVisible;
     public OnClickListener onClickListener;
 
@@ -22,7 +22,7 @@ public class View {
         isVisible = true;
     }
 
-    View(float x, float y) {
+    public View(float x, float y) {
         this.x = x;
         this.y = y;
         this.onClickListener = null;

@@ -17,6 +17,10 @@ public class SceneHelper {
         uiComponentsList.add(view);
     }
 
+    public void addActors(ArrayList<View> listView) {
+        uiComponentsList.addAll(listView);
+    }
+
     public void drawScene(MyGdxGame myGdxGame) {
         for (View component : uiComponentsList) {
             component.draw(myGdxGame);

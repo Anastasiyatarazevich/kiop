@@ -26,6 +26,7 @@ public class MyGdxGame extends Game {
 
     public BitmapFont commonFont;
     public BitmapFont fontArialBlack64;
+    public BitmapFont fontArialGray64;
 
     @Override
     public void create() {
@@ -38,6 +39,7 @@ public class MyGdxGame extends Game {
 
         commonFont = new BitmapFont(Gdx.files.internal("fonts/ArialGray64.fnt"));
         fontArialBlack64 = new BitmapFont(Gdx.files.internal("fonts/ArialBlack64.fnt"));
+        fontArialGray64 = new BitmapFont(Gdx.files.internal("fonts/ArialGray64.fnt"));
 
         screenProofreadingTest = new ScreenProofreadingTest(this);
         screenOverlayShapes = new ScreenOverlayShapes(this);

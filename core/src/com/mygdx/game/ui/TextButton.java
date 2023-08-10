@@ -10,8 +10,6 @@ public class TextButton extends View {
     private ImageView backgroundImage;
     public BitmapFont font;
 
-    // adjusting vars
-
     public int imagePaddingVertical;
     public int imagePaddingHorizontal;
 
@@ -21,32 +19,32 @@ public class TextButton extends View {
 
     public TextButton(BitmapFont font, String text, String backgroundSource, int paddingVertical, int paddingHorizontal,
                       float x, float y) {
-        super(x + paddingHorizontal, y + paddingVertical);
+        super(x, y);
         this.imagePaddingVertical = paddingVertical;
         this.imagePaddingHorizontal = paddingHorizontal;
         this.text = text;
         this.font = font;
         GlyphLayout gl = new GlyphLayout(font, text);
-        width = gl.width;
-        height = gl.height;
+        float textWidth = gl.width;
+        float textHeight = gl.height;
 
-        this.backgroundImage = new ImageView(
-                x, y,
-                width + 2 * imagePaddingHorizontal,
-                height + 2 * imagePaddingVertical,
-                backgroundSource);
+        width = textWidth + 2 * imagePaddingHorizontal;
+        height = textHeight + 2 * imagePaddingVertical;
+
+        this.backgroundImage = new ImageView(x, y, width, height, backgroundSource);
     }
 
-    public void setText(String text) {
-        this.text = text;
-        GlyphLayout gl = new GlyphLayout(font, text);
-        width = gl.width;
+    @Override
+    public boolean isHit(float tx, float ty) {
+        boolean isTouchHitComponent = x < tx && tx < x + width && y < ty && ty < y + height;
+        if (isTouchHitComponent && onClickListener != null) onClickListener.onClicked();
+        return isTouchHitComponent;
     }
 
     @Override
     public void draw(MyGdxGame myGdxGame) {
         backgroundImage.draw(myGdxGame);
-        font.draw(myGdxGame.batch, text, x, height + y);
+        font.draw(myGdxGame.batch, text, x + imagePaddingHorizontal, height + y - imagePaddingVertical);
     }
 
 }

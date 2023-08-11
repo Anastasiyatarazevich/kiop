@@ -31,8 +31,15 @@ public class TextView extends View {
     }
 
     @Override
+    public boolean isHit(float tx, float ty) {
+        boolean isTouchHitComponent = x < tx && tx < x + width && y < ty && ty < y + height;
+        if (isTouchHitComponent && onClickListener != null) onClickListener.onClicked();
+        return isTouchHitComponent;
+    }
+
+    @Override
     public void draw(MyGdxGame myGdxGame) {
-        font.draw(myGdxGame.batch, text, x, y);
+        font.draw(myGdxGame.batch, text, x, y + height);
     }
 
 }

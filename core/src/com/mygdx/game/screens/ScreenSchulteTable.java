@@ -6,7 +6,9 @@ import com.mygdx.game.testSessions.SessionSchulteTable;
 import com.mygdx.game.testSessions.sessionsStates.StateSchulteTable;
 import com.mygdx.game.ui.BackgroundPixmap;
 import com.mygdx.game.ui.TextButton;
+import com.mygdx.game.ui.TextView;
 import com.mygdx.game.ui.View;
+import com.mygdx.game.ui.shulteTable.TableCounterView;
 import com.mygdx.game.ui.shulteTable.TableItemView;
 import com.mygdx.game.ui.shulteTable.TableView;
 import com.mygdx.game.ui.shulteTable.TimeCounterView;
@@ -29,7 +31,10 @@ public class ScreenSchulteTable implements Screen {
     SceneHelper scenePassed;
 
     TableView tableView;
+    TextView motivatorTextView;
+    TextView smallTableCounterView;
     TimeCounterView timeCounterView;
+    TableCounterView tableCounterView;
 
     public ScreenSchulteTable(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
@@ -40,10 +45,14 @@ public class ScreenSchulteTable implements Screen {
         sceneBreak = new SceneHelper();
         scenePassed = new SceneHelper();
 
-        tableView = new TableView(623, 163, SCHULTE_TABLE_SIZE, myGdxGame.fontArialGray64,
+        tableView = new TableView(623, 120, SCHULTE_TABLE_SIZE, myGdxGame.fontArialGray64,
                 SCHULTE_TABLE_ITEMS_SIZE, onTableItemClicked);
-        timeCounterView = new TimeCounterView(590, 921, "Оставшееся время",
-                myGdxGame.fontArialGray64, myGdxGame.fontArialBlack64, 30000);
+        timeCounterView = new TimeCounterView(623, 921, "Оставшееся время",
+                myGdxGame.fontArialBlack64, myGdxGame.fontArialBlackBold64, 30000);
+        tableCounterView = new TableCounterView(636, 660, "Осталось", "таблицы",
+                myGdxGame.fontArialBlack64, myGdxGame.fontArialBlackBold64, 5);
+        smallTableCounterView = new TextView(myGdxGame.fontArialGray32, "1/5", -1, 43);
+        motivatorTextView = new TextView(myGdxGame.fontArialBlack64, "Так держать!", -1, 816);
 
         BackgroundPixmap background = new BackgroundPixmap(COLOR_BG_GRAY);
         TextButton startButton = new TextButton(
@@ -55,11 +64,12 @@ public class ScreenSchulteTable implements Screen {
 
         scenePassed.addActor(background);
         sceneBreak.addActor(background);
+        sceneBreak.addActor(motivatorTextView);
+        sceneBreak.addActor(tableCounterView);
         sceneTableShowing.addActor(background);
-
-        // todo: make better margins
-        //sceneTableShowing.addActor(timeCounterView);
+        sceneTableShowing.addActor(timeCounterView);
         sceneTableShowing.addActors(tableView.getAllViews());
+        sceneTableShowing.addActor(smallTableCounterView);
         sceneGreeting.addActor(background);
         sceneGreeting.addActor(startButton);
     }
@@ -74,7 +84,10 @@ public class ScreenSchulteTable implements Screen {
 
     @Override
     public void render(float delta) {
-        timeCounterView.updateTimer();
+        int timeLeft = timeCounterView.updateTimer();
+        if (timeLeft < 0 || testSession.testState == StateSchulteTable.TABLE_SHOWING) {
+            closeTable(1);
+        }
         justTouched = RenderHelper.checkTouch(myGdxGame);
         RenderHelper.draw(myGdxGame, drawScenes);
     }
@@ -110,6 +123,7 @@ public class ScreenSchulteTable implements Screen {
 
     void closeTable(int closingCode) {
         testSession.testState = StateSchulteTable.BREAK;
+        tableCounterView.decreaseCountOfTimes();
     }
 
     RenderHelper.DrawScenes drawScenes = new RenderHelper.DrawScenes() {

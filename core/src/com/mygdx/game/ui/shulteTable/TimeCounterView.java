@@ -15,7 +15,7 @@ public class TimeCounterView extends View {
     long startTime;
     TextView textViewTitle;
     TextView textViewTime;
-    int padding = 20;
+    int padding = 64;
 
     public TimeCounterView(float x, float y, String text, BitmapFont fontText, BitmapFont fontTime, int fullTime) {
         super(x, y);
@@ -36,8 +36,9 @@ public class TimeCounterView extends View {
         startTime = TimeUtils.millis();
     }
 
-    public void updateTimer() {
+    public int updateTimer() {
         int time = (int) ((fullTime - (TimeUtils.millis() - startTime)) / 1000);
         textViewTime.setText(String.valueOf(time));
+        return time;
     }
 }

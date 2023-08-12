@@ -12,9 +12,11 @@ import com.mygdx.game.ui.shulteTable.TableCounterView;
 import com.mygdx.game.ui.shulteTable.TableItemView;
 import com.mygdx.game.ui.shulteTable.TableView;
 import com.mygdx.game.ui.shulteTable.TimeCounterView;
+import com.mygdx.game.utils.ApplicationSettings;
 import com.mygdx.game.utils.RenderHelper;
 import com.mygdx.game.utils.SceneHelper;
 import com.mygdx.game.utils.schulteHelper.SelectionResponse;
+import org.w3c.dom.Text;
 
 import static com.mygdx.game.utils.ApplicationSettings.*;
 import static com.mygdx.game.utils.UsingColors.COLOR_BG_GRAY;
@@ -50,8 +52,8 @@ public class ScreenSchulteTable implements Screen {
         timeCounterView = new TimeCounterView(623, 921, "Оставшееся время",
                 myGdxGame.fontArialBlack64, myGdxGame.fontArialBlackBold64, 30000);
         tableCounterView = new TableCounterView(636, 660, "Осталось", "таблицы",
-                myGdxGame.fontArialBlack64, myGdxGame.fontArialBlackBold64, 5);
-        smallTableCounterView = new TextView(myGdxGame.fontArialGray32, "1/5", -1, 43);
+                myGdxGame.fontArialBlack64, myGdxGame.fontArialBlackBold64, COUNT_OF_SCHULTE_TABLES);
+        smallTableCounterView = new TextView(myGdxGame.fontArialGray32, "1/" + COUNT_OF_SCHULTE_TABLES, -1, 43);
         motivatorTextView = new TextView(myGdxGame.fontArialBlack64, "Так держать!", -1, 816);
 
         BackgroundPixmap background = new BackgroundPixmap(COLOR_BG_GRAY);
@@ -59,13 +61,31 @@ public class ScreenSchulteTable implements Screen {
                 myGdxGame.fontArialBlack64,
                 "Начать",
                 "schulteTable/buttonBackground.png",
-                775, 155);
+                775, 155
+        );
+        TextButton continueButton = new TextButton(
+                myGdxGame.fontArialBlack64,
+                "Продолжить",
+                "schulteTable/buttonBackground.png",
+                775, 228
+        );
+        TextButton backButton = new TextButton(
+                myGdxGame.fontArialBlack64,
+                "В меню",
+                "schulteTable/buttonBackground.png",
+                775, 228
+        );
+
+        backButton.setOnClickListener(onBackButtonClicked);
         startButton.setOnClickListener(onStartButtonClicked);
+        continueButton.setOnClickListener(onContinueButtonClicked);
 
         scenePassed.addActor(background);
+        scenePassed.addActor(backButton);
         sceneBreak.addActor(background);
         sceneBreak.addActor(motivatorTextView);
         sceneBreak.addActor(tableCounterView);
+        sceneBreak.addActor(continueButton);
         sceneTableShowing.addActor(background);
         sceneTableShowing.addActor(timeCounterView);
         sceneTableShowing.addActors(tableView.getAllViews());
@@ -85,7 +105,7 @@ public class ScreenSchulteTable implements Screen {
     @Override
     public void render(float delta) {
         int timeLeft = timeCounterView.updateTimer();
-        if (timeLeft < 0 || testSession.testState == StateSchulteTable.TABLE_SHOWING) {
+        if (timeLeft < 0 && testSession.testState == StateSchulteTable.TABLE_SHOWING) {
             closeTable(1);
         }
         justTouched = RenderHelper.checkTouch(myGdxGame);
@@ -122,6 +142,10 @@ public class ScreenSchulteTable implements Screen {
     }
 
     void closeTable(int closingCode) {
+        if (testSession.tableIdx == COUNT_OF_SCHULTE_TABLES - 1) {
+            testSession.testState = StateSchulteTable.PASSED;
+            return;
+        }
         testSession.testState = StateSchulteTable.BREAK;
         tableCounterView.decreaseCountOfTimes();
     }
@@ -176,6 +200,24 @@ public class ScreenSchulteTable implements Screen {
                     // todo: fill some logic
                     break;
             }
+        }
+    };
+
+    View.OnClickListener onContinueButtonClicked = new View.OnClickListener() {
+        @Override
+        public void onClicked() {
+            testSession.nextTable();
+            setTable();
+            testSession.testState = StateSchulteTable.TABLE_SHOWING;
+            timeCounterView.startTimer();
+            smallTableCounterView.setText((testSession.tableIdx + 1) + "/" + COUNT_OF_SCHULTE_TABLES);
+        }
+    };
+
+    View.OnClickListener onBackButtonClicked = new View.OnClickListener() {
+        @Override
+        public void onClicked() {
+            myGdxGame.setScreen(myGdxGame.screenMenu);
         }
     };
 }

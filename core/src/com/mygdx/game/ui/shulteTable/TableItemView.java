@@ -49,6 +49,10 @@ public class TableItemView extends View {
         backgroundImage.setImgSource("schulteTable/tileSelected.png");
     }
 
+    public void setItemActive() {
+        backgroundImage.setImgSource("schulteTable/tileActive.png");
+    }
+
     @Override
     public void draw(MyGdxGame myGdxGame) {
         backgroundImage.draw(myGdxGame);

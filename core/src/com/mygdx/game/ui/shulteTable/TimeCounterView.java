@@ -11,6 +11,7 @@ public class TimeCounterView extends View {
 
     BitmapFont fontText;
     BitmapFont fontTime;
+    boolean wasTimerActivated;
     int fullTime;
     long startTime;
     TextView textViewTitle;
@@ -22,6 +23,7 @@ public class TimeCounterView extends View {
         this.fontTime = fontTime;
         this.fontText = fontText;
         this.fullTime = fullTime;
+        this.wasTimerActivated = false;
         this.textViewTitle = new TextView(fontText, text, x, y);
         this.textViewTime = new TextView(fontTime, String.valueOf(fullTime / 1000), x + textViewTitle.width + padding, y);
     }

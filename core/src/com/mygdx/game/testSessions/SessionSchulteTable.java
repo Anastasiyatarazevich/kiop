@@ -34,12 +34,14 @@ public class SessionSchulteTable {
 
     public void startTest() {
         testState = StateSchulteTable.TABLE_SHOWING;
-        newTable();
+        tables.get(tableIdx).generateTable();
         tables.get(tableIdx).nextItem();
     }
 
-    public void newTable() {
+    public void nextTable() {
+        tableIdx += 1;
         tables.get(tableIdx).generateTable();
+        tables.get(tableIdx).nextItem();
     }
 
     public SelectionResponse checkSelection(int value) {

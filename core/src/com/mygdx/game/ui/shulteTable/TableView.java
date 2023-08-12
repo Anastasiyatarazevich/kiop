@@ -34,6 +34,7 @@ public class TableView extends View {
         // tableItems.clear();
         for (int i = 0; i < values.size(); i++) {
             tableItems.get(i).setText(String.valueOf(values.get(i).getItemValue()));
+            tableItems.get(i).setItemActive();
         }
     }
 

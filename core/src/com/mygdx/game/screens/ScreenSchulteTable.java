@@ -49,7 +49,7 @@ public class ScreenSchulteTable implements Screen {
 
         tableView = new TableView(623, 120, SCHULTE_TABLE_SIZE, myGdxGame.fontArialGray64,
                 SCHULTE_TABLE_ITEMS_SIZE, onTableItemClicked);
-        timeCounterView = new TimeCounterView(623, 921, "Оставшееся время",
+        timeCounterView = new TimeCounterView(623, 921, "Прошло времени",
                 myGdxGame.fontArialBlack64, myGdxGame.fontArialBlackBold64, 30000);
         tableCounterView = new TableCounterView(636, 660, "Осталось", "таблицы",
                 myGdxGame.fontArialBlack64, myGdxGame.fontArialBlackBold64, COUNT_OF_SCHULTE_TABLES);

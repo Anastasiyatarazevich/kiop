@@ -1,6 +1,7 @@
 package com.mygdx.game.utils.schulteHelper;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.ui.View;
 
@@ -13,6 +14,7 @@ public class Table {
 
     public ArrayList<TableItem> tableMatrix;
     int tableSize;
+    private long spendTime;
     public int countOfSelectedItems;
 
     public Table(int tableSize) {
@@ -31,10 +33,26 @@ public class Table {
 
     public boolean nextItem() {
         countOfSelectedItems += 1;
+        if (countOfSelectedItems == 0) startTimer();
         if (countOfSelectedItems > 0) tableMatrix.get(countOfSelectedItems - 1).endTimer();
         if (countOfSelectedItems < tableSize * tableSize) tableMatrix.get(countOfSelectedItems).startTimer();
-        else return false;
+        else {
+            endTimer();
+            return false;
+        }
         return true;
+    }
+
+    public void startTimer() {
+        spendTime = TimeUtils.millis();
+    }
+
+    public void endTimer() {
+        spendTime = TimeUtils.millis() - spendTime;
+    }
+
+    public int getSpendTime() {
+        return (int) spendTime;
     }
 
 }

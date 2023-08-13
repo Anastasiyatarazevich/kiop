@@ -21,4 +21,5 @@ public class ApplicationSettings {
     public static int SCHULTE_TABLE_ITEMS_SIZE = 125;
     public static int SCHULTE_TABLE_ITEMS_PADDING = 20;
 
+
 }

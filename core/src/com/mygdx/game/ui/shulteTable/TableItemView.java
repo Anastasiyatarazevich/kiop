@@ -9,10 +9,12 @@ import com.mygdx.game.utils.schulteHelper.TableItem;
 
 public class TableItemView extends View {
     public String value;
+    public char symbol;
     public BitmapFont font;
     private ImageView backgroundImage;
     private OnTableItemClicked onTableItemClicked;
 
+    public boolean isClicked;
     float textX;
     float textY;
 
@@ -32,6 +34,8 @@ public class TableItemView extends View {
         textY = 0;
 
         this.backgroundImage = new ImageView(x, y, width, height, "schulteTable/tileActive.png");
+
+        isClicked = false;
     }
 
     public void setText(String text) {
@@ -44,6 +48,19 @@ public class TableItemView extends View {
         textY = y + height - (height - textHeight) / 2;
         //textY = y;
     }
+
+    public void setText(char text) {
+        this.symbol = text;
+        System.out.println(text);
+        GlyphLayout gl = new GlyphLayout(font, "dd");
+        float textWidth = gl.width;
+        float textHeight = gl.height;
+
+        textX = x + (width - textWidth) / 2;
+        textY = y + height - (height - textHeight) / 2;
+        //textY = y;
+    }
+
 
     public void setItemSelected() {
         backgroundImage.setImgSource("schulteTable/tileSelected.png");

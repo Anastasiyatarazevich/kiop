@@ -1,8 +1,9 @@
 package com.mygdx.game.ui;
 
+import com.badlogic.gdx.utils.Disposable;
 import com.mygdx.game.MyGdxGame;
 
-public class View {
+public class View implements Disposable {
 
     public float x;
     public float y;
@@ -37,8 +38,12 @@ public class View {
         return isTouchHitComponent;
     }
 
+    @Override
+    public void dispose() {}
+
     public interface OnClickListener {
         void onClicked();
     }
+
 
 }

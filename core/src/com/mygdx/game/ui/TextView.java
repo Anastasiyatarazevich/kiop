@@ -2,6 +2,7 @@ package com.mygdx.game.ui;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.utils.ApplicationSettings;
 
@@ -23,6 +24,7 @@ public class TextView extends View {
         if ((int) x == -1) this.x = ApplicationSettings.SCR_WIDTH / 2 - width / 2;
     }
 
+
     public void setText(String text) {
         GlyphLayout gl = new GlyphLayout(font, text);
         width = gl.width;
@@ -41,5 +43,6 @@ public class TextView extends View {
     public void draw(MyGdxGame myGdxGame) {
         font.draw(myGdxGame.batch, text, x, y + height);
     }
+
 
 }

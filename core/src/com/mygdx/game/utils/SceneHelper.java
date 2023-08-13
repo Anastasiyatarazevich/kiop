@@ -33,4 +33,8 @@ public class SceneHelper {
         }
     }
 
+    //todo: write disposing
+    public void showScreen(){
+
+    }
 }

@@ -1,5 +1,7 @@
 package com.mygdx.game.screens;
 
+import static com.mygdx.game.utils.UsingColors.COLOR_BG_GRAY;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -20,7 +22,7 @@ public class ScreenMenu implements Screen {
         uiComponentsList = new ArrayList<>();
 
         TextView textViewTest1 = new TextView(myGdxGame.fontArialGray64, "Test1", 100, 200);
-        TextView textViewTest2 = new TextView(myGdxGame.fontArialGray64, "Test2", 100, 300);
+        TextView textViewTest2 = new TextView(myGdxGame.fontArialGray64, "Коррекатурная проба", 100, 300);
         TextView textViewTest3 = new TextView(myGdxGame.fontArialGray64, "Schulte table test", 100, 400);
 
         textViewTest1.setOnClickListener(textView1clicked);
@@ -48,7 +50,7 @@ public class ScreenMenu implements Screen {
             }
         }
 
-        ScreenUtils.clear(0, 0, 0, 1);
+        ScreenUtils.clear(COLOR_BG_GRAY);
         myGdxGame.camera.update();
         myGdxGame.batch.begin();
         myGdxGame.batch.setProjectionMatrix(myGdxGame.camera.combined);

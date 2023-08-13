@@ -39,8 +39,10 @@ public class TimeCounterView extends View {
     }
 
     public int updateTimer() {
-        int time = (int) ((fullTime - (TimeUtils.millis() - startTime)) / 1000);
+        // int time = (int) ((fullTime - (TimeUtils.millis() - startTime)) / 1000);
+        int time = (int) ((TimeUtils.millis() - startTime) / 1000);
         textViewTime.setText(String.valueOf(time));
-        return time;
+        // return time;
+        return 0;
     }
 }

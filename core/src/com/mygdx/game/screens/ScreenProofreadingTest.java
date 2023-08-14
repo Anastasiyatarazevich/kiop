@@ -30,7 +30,6 @@ public class ScreenProofreadingTest implements Screen {
 
     SessionProofTest testSession;
 
-    boolean justTouched;
     ProofReadingTestResults proofReadingTestResults;
 
     public ScreenProofreadingTest(MyGdxGame myGdxGame) {
@@ -78,8 +77,6 @@ public class ScreenProofreadingTest implements Screen {
 
         sceneGreeting.addActor(background);
         sceneGreeting.addActor(startButton);
-
-
     }
 
     @Override
@@ -89,8 +86,8 @@ public class ScreenProofreadingTest implements Screen {
 
     @Override
     public void render(float delta) {
-        justTouched = RenderHelper.checkTouch(myGdxGame);
-        RenderHelper.draw(myGdxGame, drawScenes);
+        boolean justTouched = RenderHelper.checkTouch(myGdxGame);
+        RenderHelper.draw(myGdxGame, drawScenes, justTouched);
     }
 
     @Override
@@ -125,7 +122,6 @@ public class ScreenProofreadingTest implements Screen {
         proofReadingTestResults = new ProofReadingTestResults();
         testSession.endTest(proofReadingTestResults);
         System.out.println("Результаты корректурной пробы: " + proofReadingTestResults);
-
     }
 
 
@@ -136,7 +132,7 @@ public class ScreenProofreadingTest implements Screen {
 
     RenderHelper.DrawScenes drawScenes = new RenderHelper.DrawScenes() {
         @Override
-        public void draw() {
+        public void draw(boolean justTouched) {
             switch (testSession.testState) {
                 case TABLE_SHOWING:
                     if (justTouched) sceneTableShowing.checkHits(myGdxGame);

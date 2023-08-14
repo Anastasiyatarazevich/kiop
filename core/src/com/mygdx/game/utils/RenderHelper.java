@@ -15,19 +15,19 @@ public class RenderHelper {
         return false;
     }
 
-    public static void draw(MyGdxGame myGdxGame, DrawScenes drawScenes) {
+    public static void draw(MyGdxGame myGdxGame, DrawScenes drawScenes, boolean justTouch) {
         ScreenUtils.clear(0, 0, 0, 1);
         myGdxGame.camera.update();
         myGdxGame.batch.begin();
         myGdxGame.batch.setProjectionMatrix(myGdxGame.camera.combined);
 
-        drawScenes.draw();
+        drawScenes.draw(justTouch);
 
         myGdxGame.batch.end();
     }
 
     public interface DrawScenes {
-        void draw();
+        void draw(boolean justTouched);
     }
 
 }

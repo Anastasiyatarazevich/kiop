@@ -25,7 +25,6 @@ public class ScreenSchulteTable implements Screen {
 
     MyGdxGame myGdxGame;
     SessionSchulteTable testSession;
-    boolean justTouched;
 
     SceneHelper sceneGreeting;
     SceneHelper sceneTableShowing;
@@ -82,14 +81,17 @@ public class ScreenSchulteTable implements Screen {
 
         scenePassed.addActor(background);
         scenePassed.addActor(backButton);
+
         sceneBreak.addActor(background);
         sceneBreak.addActor(motivatorTextView);
         sceneBreak.addActor(tableCounterView);
         sceneBreak.addActor(continueButton);
+
         sceneTableShowing.addActor(background);
         sceneTableShowing.addActor(timeCounterView);
         sceneTableShowing.addActors(tableView.getAllViews());
         sceneTableShowing.addActor(smallTableCounterView);
+
         sceneGreeting.addActor(background);
         sceneGreeting.addActor(startButton);
     }
@@ -108,8 +110,8 @@ public class ScreenSchulteTable implements Screen {
         if (timeLeft < 0 && testSession.testState == StateSchulteTable.TABLE_SHOWING) {
             closeTable(1);
         }
-        justTouched = RenderHelper.checkTouch(myGdxGame);
-        RenderHelper.draw(myGdxGame, drawScenes);
+        boolean justTouched = RenderHelper.checkTouch(myGdxGame);
+        RenderHelper.draw(myGdxGame, drawScenes, justTouched);
     }
 
     @Override
@@ -152,7 +154,7 @@ public class ScreenSchulteTable implements Screen {
 
     RenderHelper.DrawScenes drawScenes = new RenderHelper.DrawScenes() {
         @Override
-        public void draw() {
+        public void draw(boolean justTouched) {
             switch (testSession.testState) {
                 case BREAK:
                     if (justTouched) sceneBreak.checkHits(myGdxGame);

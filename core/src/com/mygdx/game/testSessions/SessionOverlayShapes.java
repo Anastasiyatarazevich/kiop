@@ -2,6 +2,10 @@ package com.mygdx.game.testSessions;
 
 import com.mygdx.game.testSessions.sessionsStates.StateOverlayShapes;
 import com.mygdx.game.utils.overlayShapes.ColorMap;
+import com.mygdx.game.utils.overlayShapes.Shape;
+import com.mygdx.game.utils.overlayShapes.ShapesDescriptor;
+
+import java.util.ArrayList;
 
 import static com.mygdx.game.utils.ApplicationSettings.COUNT_OF_FILES;
 
@@ -11,11 +15,14 @@ public class SessionOverlayShapes {
     public ColorMap colorMap;
     private int selectedSample;
 
+    public ArrayList<Shape> shapeList;
+
     public int getSelectedSample() {
         return selectedSample;
     }
 
     public SessionOverlayShapes() {
+        shapeList = new ArrayList<>();
         testState = StateOverlayShapes.GREETING;
         startSession();
     }
@@ -31,17 +38,12 @@ public class SessionOverlayShapes {
         System.out.println("Selected sample: " + selectedSample);
         System.out.println("Count of samples: " + countOfSamples);
 
-        prepareColorMap(selectedSample);
+        colorMap = new ColorMap(selectedSample);
+        shapeList = ShapesDescriptor.getSampleShapes(selectedSample);
     }
 
     public void startTest() {
         testState = StateOverlayShapes.SHAPES_SHOWING;
-    }
-
-    private void prepareColorMap(int selectedSample) {
-        colorMap = new ColorMap(selectedSample);
-
-        System.out.println("Color code: " + colorMap.getColorCode(535, 360));
     }
 
 }

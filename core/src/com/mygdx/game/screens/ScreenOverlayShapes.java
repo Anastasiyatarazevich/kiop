@@ -4,14 +4,17 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.testSessions.SessionOverlayShapes;
-import com.mygdx.game.testSessions.sessionsStates.StateOverlayShapes;
 import com.mygdx.game.ui.BackgroundPixmap;
 import com.mygdx.game.ui.TextButton;
+import com.mygdx.game.ui.TextView;
 import com.mygdx.game.ui.View;
+import com.mygdx.game.ui.overlayShapes.ImageColumnView;
 import com.mygdx.game.ui.overlayShapes.ImageMapView;
 import com.mygdx.game.utils.RenderHelper;
 import com.mygdx.game.utils.SceneHelper;
+import com.mygdx.game.utils.overlayShapes.Shape;
 
+import static com.mygdx.game.utils.ApplicationSettings.COLORED_SHAPES_DIR;
 import static com.mygdx.game.utils.UsingColors.COLOR_BG_GRAY;
 
 public class ScreenOverlayShapes implements Screen {
@@ -36,6 +39,12 @@ public class ScreenOverlayShapes implements Screen {
 
         BackgroundPixmap background = new BackgroundPixmap(COLOR_BG_GRAY);
 
+        TextView textViewTitle = new TextView(
+                myGdxGame.fontArialBlack64,
+                "Перетащи овощи",
+                -1, 907
+        );
+
         TextButton startButton = new TextButton(
                 myGdxGame.fontArialBlack64,
                 "Начать",
@@ -43,7 +52,17 @@ public class ScreenOverlayShapes implements Screen {
                 775, 155
         );
 
-        ImageMapView imageMapView = new ImageMapView(100, 1280, 720, testSession.getSelectedSample(),
+        ImageColumnView imageColumnView1 = new ImageColumnView(140, 122, 720, 40);
+        ImageColumnView imageColumnView2 = new ImageColumnView(1760, 122, 720, 40);
+
+        for (int i = 0; i < testSession.shapeList.size(); i++) {
+            if (i < testSession.shapeList.size() / 2)
+                imageColumnView1.addImage(COLORED_SHAPES_DIR + testSession.shapeList.get(i).getName());
+            else
+                imageColumnView2.addImage(COLORED_SHAPES_DIR + testSession.shapeList.get(i).getName());
+        }
+
+        ImageMapView imageMapView = new ImageMapView(122, 1280, 720, testSession.getSelectedSample(),
                 onImageMapViewPressed, myGdxGame);
 
         startButton.setOnClickListener(onStartButtonClicked);
@@ -52,9 +71,14 @@ public class ScreenOverlayShapes implements Screen {
         sceneGreeting.addActor(startButton);
 
         sceneShpaesShowing.addActor(background);
-        sceneGreeting.addActor(imageMapView);
+        sceneShpaesShowing.addActor(imageMapView);
+        sceneShpaesShowing.addActor(textViewTitle);
+        sceneShpaesShowing.addActor(imageColumnView1);
+        sceneShpaesShowing.addActor(imageColumnView2);
 
         scenePassed.addActor(background);
+
+        System.out.println("Count of shapes: " + testSession.shapeList.size());
     }
 
     @Override

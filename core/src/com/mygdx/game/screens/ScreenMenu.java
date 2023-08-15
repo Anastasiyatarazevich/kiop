@@ -21,7 +21,7 @@ public class ScreenMenu implements Screen {
 
         uiComponentsList = new ArrayList<>();
 
-        TextView textViewTest1 = new TextView(myGdxGame.fontArialGray64, "Test1", 100, 200);
+        TextView textViewTest1 = new TextView(myGdxGame.fontArialGray64, "Овощной рай(рагу)", 100, 200);
         TextView textViewTest2 = new TextView(myGdxGame.fontArialGray64, "Коррекатурная проба", 100, 300);
         TextView textViewTest3 = new TextView(myGdxGame.fontArialGray64, "Schulte table test", 100, 400);
 

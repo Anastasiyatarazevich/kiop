@@ -25,7 +25,7 @@ public class TableViewProof extends View {
             TableItemView tableItemView = new TableItemView(font, "", x + itemX, y + itemY, itemsSize, itemsSize);
             tableItemView.setOnTableItemClicked(onTableItemClicked);
             tableItems.add(tableItemView);
-            System.out.println(tableItems.size());
+            // System.out.println(tableItems.size());
         }
     }
 

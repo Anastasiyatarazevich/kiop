@@ -4,9 +4,11 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.testSessions.SessionOverlayShapes;
+import com.mygdx.game.testSessions.sessionsStates.StateOverlayShapes;
 import com.mygdx.game.ui.BackgroundPixmap;
 import com.mygdx.game.ui.TextButton;
 import com.mygdx.game.ui.View;
+import com.mygdx.game.ui.overlayShapes.ImageMapView;
 import com.mygdx.game.utils.RenderHelper;
 import com.mygdx.game.utils.SceneHelper;
 
@@ -41,19 +43,25 @@ public class ScreenOverlayShapes implements Screen {
                 775, 155
         );
 
+        ImageMapView imageMapView = new ImageMapView(100, 1280, 720, testSession.getSelectedSample(),
+                onImageMapViewPressed, myGdxGame);
+
         startButton.setOnClickListener(onStartButtonClicked);
 
         sceneGreeting.addActor(background);
         sceneGreeting.addActor(startButton);
 
         sceneShpaesShowing.addActor(background);
+        sceneGreeting.addActor(imageMapView);
 
         scenePassed.addActor(background);
     }
 
     @Override
     public void show() {
-
+        /*if (testSession.testState == StateOverlayShapes.GREETING) {
+            testSession.startSession();
+        }*/
     }
 
     @Override
@@ -116,4 +124,11 @@ public class ScreenOverlayShapes implements Screen {
         }
     };
 
+    ImageMapView.OnImageMapViewPressed onImageMapViewPressed = new ImageMapView.OnImageMapViewPressed() {
+        @Override
+        public void onPressed(int localX, int localY) {
+            int code = testSession.colorMap.getColorCode(localX, localY);
+            System.out.println("Color code: " + code);
+        }
+    };
 }

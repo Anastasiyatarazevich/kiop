@@ -30,16 +30,18 @@ public class View implements Disposable {
         isVisible = true;
     }
 
-    public void draw(MyGdxGame myGdxGame) {}
+    public void draw(MyGdxGame myGdxGame) {
+    }
 
-    public boolean isHit(float tx, float ty){
+    public boolean isHit(float tx, float ty) {
         boolean isTouchHitComponent = x < tx && tx < x + width && y > ty && ty > y - height;
         if (isTouchHitComponent && onClickListener != null) onClickListener.onClicked();
         return isTouchHitComponent;
     }
 
     @Override
-    public void dispose() {}
+    public void dispose() {
+    }
 
     public interface OnClickListener {
         void onClicked();

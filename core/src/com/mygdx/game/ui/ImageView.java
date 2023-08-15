@@ -5,10 +5,12 @@ import com.mygdx.game.MyGdxGame;
 
 import java.util.Objects;
 
+import static com.mygdx.game.utils.ApplicationSettings.SCR_WIDTH;
+
 public class ImageView extends View {
 
     String imgSource;
-    Texture imgTexture;
+    public Texture imgTexture;
 
     public void setImgTexture(Texture imgTexture) {
         this.imgTexture = imgTexture;
@@ -24,6 +26,14 @@ public class ImageView extends View {
         super(x, y, width, height);
         this.imgSource = imgSource;
         imgTexture = new Texture(imgSource);
+    }
+
+    // generate image that align center
+    public ImageView(float y, float width, float height, String imgSource) {
+        super(0, y, width, height);
+        this.imgSource = imgSource;
+        imgTexture = new Texture(imgSource);
+        x = (float) (SCR_WIDTH - imgTexture.getWidth()) / 2;
     }
 
     public ImageView(float x, float y, float width, float height, Texture imgTexture) {

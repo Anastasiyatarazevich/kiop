@@ -1,6 +1,10 @@
 package com.mygdx.game.screens;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.testSessions.SessionOverlayShapes;
@@ -27,9 +31,19 @@ public class ScreenOverlayShapes implements Screen {
     private SceneHelper sceneShpaesShowing;
     private SceneHelper scenePassed;
 
+    //для перемещения картинки
+    private Texture image;
+
+    ImageMapView imageMapView;
+    Shape shape;
 
     public ScreenOverlayShapes(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
+
+        //пока пример чисто с beet
+        image = new Texture("/Users/anastasiatarazevich/AndroidStudioProjects/kiop/assets/overlayShapes/coloredShapes/beet.png");
+        shape = new Shape(185, 70, 53, "beet", image);
+
 
         testSession = new SessionOverlayShapes();
 
@@ -62,7 +76,7 @@ public class ScreenOverlayShapes implements Screen {
                 imageColumnView2.addImage(COLORED_SHAPES_DIR + testSession.shapeList.get(i).getName());
         }
 
-        ImageMapView imageMapView = new ImageMapView(122, 1280, 720, testSession.getSelectedSample(),
+        imageMapView = new ImageMapView(122, 1280, 720, testSession.getSelectedSample(),
                 onImageMapViewPressed, myGdxGame);
 
         startButton.setOnClickListener(onStartButtonClicked);
@@ -70,6 +84,7 @@ public class ScreenOverlayShapes implements Screen {
         sceneGreeting.addActor(background);
         sceneGreeting.addActor(startButton);
 
+//        sceneShpaesShowing.addActor(shape);
         sceneShpaesShowing.addActor(background);
         sceneShpaesShowing.addActor(imageMapView);
         sceneShpaesShowing.addActor(textViewTitle);
@@ -79,13 +94,12 @@ public class ScreenOverlayShapes implements Screen {
         scenePassed.addActor(background);
 
         System.out.println("Count of shapes: " + testSession.shapeList.size());
+
+        Gdx.input.setInputProcessor(new MyInputProcessor());
     }
 
     @Override
     public void show() {
-        /*if (testSession.testState == StateOverlayShapes.GREETING) {
-            testSession.startSession();
-        }*/
     }
 
     @Override
@@ -94,6 +108,7 @@ public class ScreenOverlayShapes implements Screen {
 
         boolean justTouched = RenderHelper.checkTouch(myGdxGame);
         RenderHelper.draw(myGdxGame, drawScenes, justTouched);
+
     }
 
     @Override
@@ -120,6 +135,7 @@ public class ScreenOverlayShapes implements Screen {
     public void dispose() {
 
     }
+
 
     RenderHelper.DrawScenes drawScenes = new RenderHelper.DrawScenes() {
         @Override
@@ -153,6 +169,36 @@ public class ScreenOverlayShapes implements Screen {
         public void onPressed(int localX, int localY) {
             int code = testSession.colorMap.getColorCode(localX, localY);
             System.out.println("Color code: " + code);
+
+            RenderHelper.dragAndDrop(shape, code);
+
         }
     };
+
+    private class MyInputProcessor extends InputAdapter {
+        //check touchDown
+        @Override
+        public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+            if (button == Input.Buttons.LEFT) {
+                if (screenX >= imageMapView.x && screenX < imageMapView.x + imageMapView.width &&
+                        Gdx.graphics.getHeight() - screenY >= imageMapView.y &&
+                        Gdx.graphics.getHeight() - screenY < imageMapView.y + imageMapView.height) {
+                    RenderHelper.isDragging = true;
+                    System.out.println("Down");
+                }
+            }
+            return true;
+        }
+
+        //check touchUp
+        @Override
+        public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+            if (button == Input.Buttons.LEFT) {
+                RenderHelper.isDragging = false;
+            }
+            System.out.println("Up");
+            return true;
+        }
+    }
+
 }

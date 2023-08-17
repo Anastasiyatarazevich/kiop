@@ -2,18 +2,18 @@ package com.mygdx.game.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
-import com.mygdx.game.utils.overlayShapes.Shape;
+import com.mygdx.game.ui.View;
 
 
 public class RenderHelper extends InputAdapter {
 
-    public static boolean isDragging;
+    public static boolean isDragging = false;
     static int x, y;
-    static int codeOfShape;
+    static int deltaX, deltaY;
+
+    private static View dragginView;
 
     public static boolean checkTouch(MyGdxGame myGdxGame) {
         if (Gdx.input.justTouched()) {
@@ -24,12 +24,20 @@ public class RenderHelper extends InputAdapter {
         return false;
     }
 
+    public static void setDraggingView(View view, int startX, int startY) {
+        dragginView = view;
+        // deltaX = (int) (startX - view.x);
+        // deltaY = (int) (startY - view.y);
+        deltaX = 0;
+        deltaY = 0;
+    }
 
-    public static void dragAndDrop(Shape shape, int code) {
-        codeOfShape = code;
-        if (isDragging) {
-            System.out.println("Dragging");
-        }
+    public static View getDragginView() {
+        return dragginView;
+    }
+
+    public static void clearDraggingView() {
+        dragginView = null;
     }
 
     public static void draw(MyGdxGame myGdxGame, DrawScenes drawScenes, boolean justTouch) {
@@ -41,14 +49,12 @@ public class RenderHelper extends InputAdapter {
 
         drawScenes.draw(justTouch);
 
-        if (isDragging) {
-            x = Gdx.input.getX();
-            y = Gdx.graphics.getHeight() - Gdx.input.getY();
-            switch (codeOfShape) {
-                case 8:
-                    myGdxGame.batch.draw(new Texture("/Users/anastasiatarazevich/AndroidStudioProjects/kiop/assets/overlayShapes/coloredShapes/beet.png"), x, y);
-                    break;
-            }
+        if (dragginView != null && isDragging) {
+            x = (int) (Gdx.input.getX() - deltaX - dragginView.width / 2);
+            y = (int) (Gdx.graphics.getHeight() - (Gdx.input.getY() + deltaY) - dragginView.height / 2);
+            dragginView.x = x;
+            dragginView.y = y;
+            dragginView.draw(myGdxGame);
         }
         myGdxGame.batch.end();
     }

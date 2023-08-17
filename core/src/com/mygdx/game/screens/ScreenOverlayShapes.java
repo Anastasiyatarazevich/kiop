@@ -4,21 +4,20 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.testSessions.SessionOverlayShapes;
-import com.mygdx.game.ui.BackgroundPixmap;
-import com.mygdx.game.ui.TextButton;
-import com.mygdx.game.ui.TextView;
-import com.mygdx.game.ui.View;
+import com.mygdx.game.ui.*;
 import com.mygdx.game.ui.overlayShapes.ImageColumnView;
 import com.mygdx.game.ui.overlayShapes.ImageMapView;
 import com.mygdx.game.utils.RenderHelper;
 import com.mygdx.game.utils.SceneHelper;
+import com.mygdx.game.utils.overlayShapes.ColorsCodes;
 import com.mygdx.game.utils.overlayShapes.Shape;
 
-import static com.mygdx.game.utils.ApplicationSettings.COLORED_SHAPES_DIR;
+import java.util.ArrayList;
+
+import static com.mygdx.game.utils.ApplicationSettings.*;
 import static com.mygdx.game.utils.UsingColors.COLOR_BG_GRAY;
 
 public class ScreenOverlayShapes implements Screen {
@@ -31,25 +30,24 @@ public class ScreenOverlayShapes implements Screen {
     private SceneHelper sceneShpaesShowing;
     private SceneHelper scenePassed;
 
-    //для перемещения картинки
-    private Texture image;
-
     ImageMapView imageMapView;
-    Shape shape;
+    ImageColumnView imageColumnView1, imageColumnView2;
+
+    ArrayList<ImageView> listShapesImages;
+
 
     public ScreenOverlayShapes(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
 
         //пока пример чисто с beet
-        image = new Texture("/Users/anastasiatarazevich/AndroidStudioProjects/kiop/assets/overlayShapes/coloredShapes/beet.png");
-        shape = new Shape(185, 70, 53, "beet", image);
-
 
         testSession = new SessionOverlayShapes();
 
         sceneShpaesShowing = new SceneHelper();
         sceneGreeting = new SceneHelper();
         scenePassed = new SceneHelper();
+
+        listShapesImages = new ArrayList<>();
 
         BackgroundPixmap background = new BackgroundPixmap(COLOR_BG_GRAY);
 
@@ -66,14 +64,29 @@ public class ScreenOverlayShapes implements Screen {
                 775, 155
         );
 
-        ImageColumnView imageColumnView1 = new ImageColumnView(140, 122, 720, 40);
-        ImageColumnView imageColumnView2 = new ImageColumnView(1760, 122, 720, 40);
+        TextView endTitle = new TextView(
+                myGdxGame.fontArialBlack64,
+                "Я это ваше рагу овощное...",
+                -1, 900
+        );
+
+        TextButton menuButton = new TextButton(
+                myGdxGame.fontArialBlack64,
+                "Вернуться в лес",
+                "schulteTable/buttonBackground.png",
+                -1, 300
+        );
+
+        menuButton.setOnClickListener(onMenuButtonClicked);
+
+        imageColumnView1 = new ImageColumnView(137, 122, 720, 25);
+        imageColumnView2 = new ImageColumnView(1630, 122, 720, 25);
 
         for (int i = 0; i < testSession.shapeList.size(); i++) {
             if (i < testSession.shapeList.size() / 2)
-                imageColumnView1.addImage(COLORED_SHAPES_DIR + testSession.shapeList.get(i).getName());
+                imageColumnView1.addImage(COLUMN_BLACK_AND_WHITE_SHAPES_DIR + testSession.shapeList.get(i).getName());
             else
-                imageColumnView2.addImage(COLORED_SHAPES_DIR + testSession.shapeList.get(i).getName());
+                imageColumnView2.addImage(COLUMN_BLACK_AND_WHITE_SHAPES_DIR + testSession.shapeList.get(i).getName());
         }
 
         imageMapView = new ImageMapView(122, 1280, 720, testSession.getSelectedSample(),
@@ -92,14 +105,24 @@ public class ScreenOverlayShapes implements Screen {
         sceneShpaesShowing.addActor(imageColumnView2);
 
         scenePassed.addActor(background);
+        scenePassed.addActor(menuButton);
+        scenePassed.addActor(endTitle);
 
         System.out.println("Count of shapes: " + testSession.shapeList.size());
+
+        for (int i = 0; i < testSession.shapeList.size(); i++) {
+            Shape shape = testSession.shapeList.get(i);
+            listShapesImages.add(new ImageView(shape.getX(), shape.getY(), BLACK_AND_WHITE_SHAPES_DIR + shape.getName()));
+        }
 
         Gdx.input.setInputProcessor(new MyInputProcessor());
     }
 
     @Override
     public void show() {
+        /*if (testSession.testState == StateOverlayShapes.GREETING) {
+            testSession.startSession();
+        }*/
     }
 
     @Override
@@ -108,7 +131,6 @@ public class ScreenOverlayShapes implements Screen {
 
         boolean justTouched = RenderHelper.checkTouch(myGdxGame);
         RenderHelper.draw(myGdxGame, drawScenes, justTouched);
-
     }
 
     @Override
@@ -135,7 +157,6 @@ public class ScreenOverlayShapes implements Screen {
     public void dispose() {
 
     }
-
 
     RenderHelper.DrawScenes drawScenes = new RenderHelper.DrawScenes() {
         @Override
@@ -164,19 +185,29 @@ public class ScreenOverlayShapes implements Screen {
         }
     };
 
+    View.OnClickListener onMenuButtonClicked = new View.OnClickListener() {
+        @Override
+        public void onClicked() {
+            myGdxGame.setScreen(myGdxGame.screenMenu);
+        }
+    };
+
     ImageMapView.OnImageMapViewPressed onImageMapViewPressed = new ImageMapView.OnImageMapViewPressed() {
         @Override
         public void onPressed(int localX, int localY) {
             int code = testSession.colorMap.getColorCode(localX, localY);
-            System.out.println("Color code: " + code);
 
-            RenderHelper.dragAndDrop(shape, code);
-
+            for (int i = 0; i < testSession.shapeList.size(); i++) {
+                if (ColorsCodes.getImageNameByColorCode(code).equals(
+                        testSession.shapeList.get(i).getName().split("\\.")[0])) {
+                    RenderHelper.setDraggingView(listShapesImages.get(i), (int) myGdxGame.touch.x, (int) myGdxGame.touch.y);
+                    return;
+                }
+            }
         }
     };
 
     private class MyInputProcessor extends InputAdapter {
-        //check touchDown
         @Override
         public boolean touchDown(int screenX, int screenY, int pointer, int button) {
             if (button == Input.Buttons.LEFT) {
@@ -184,19 +215,49 @@ public class ScreenOverlayShapes implements Screen {
                         Gdx.graphics.getHeight() - screenY >= imageMapView.y &&
                         Gdx.graphics.getHeight() - screenY < imageMapView.y + imageMapView.height) {
                     RenderHelper.isDragging = true;
-                    System.out.println("Down");
                 }
             }
             return true;
         }
 
-        //check touchUp
         @Override
         public boolean touchUp(int screenX, int screenY, int pointer, int button) {
             if (button == Input.Buttons.LEFT) {
                 RenderHelper.isDragging = false;
+
+                if (RenderHelper.getDragginView() == null) return false;
+                String draggingShapeName = ((ImageView) RenderHelper.getDragginView()).getImgSource();
+                draggingShapeName = draggingShapeName.split("/")[draggingShapeName.split("/").length - 1];
+                RenderHelper.clearDraggingView();
+                String shapeName = imageColumnView1.getImgSource(screenX, SCR_HEIGHT - screenY);
+                if (shapeName.isEmpty()) shapeName = imageColumnView2.getImgSource(screenX, SCR_HEIGHT - screenY);
+
+                System.out.println("shape name: " + shapeName);
+
+                if (!shapeName.isEmpty()) {
+                    shapeName = shapeName.split("/")[shapeName.split("/").length - 1];
+                    for (int i = 0; i < testSession.shapeList.size(); i++) {
+                        if (testSession.shapeList.get(i).getName().equals(shapeName)) {
+
+                            if (!shapeName.equals(draggingShapeName)) continue;
+
+                            testSession.shapeWasFound(i);
+
+                            if (i < testSession.shapeList.size() / 2) {
+                                String newDir = COLORED_SHAPES_DIR + testSession.shapeList.get(i).getName();
+                                imageColumnView1.imagesList.get(i).setImgSource(newDir);
+                            } else {
+                                int newIdx = i - testSession.shapeList.size() / 2;
+                                String newDir = COLORED_SHAPES_DIR + testSession.shapeList.get(i).getName();
+                                imageColumnView2.imagesList.get(newIdx).setImgSource(newDir);
+                            }
+                            return true;
+
+                        }
+                    }
+                }
+
             }
-            System.out.println("Up");
             return true;
         }
     }

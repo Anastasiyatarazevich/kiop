@@ -29,6 +29,8 @@ public class ApplicationSettings {
     public static String OVERLAY_PICTURES_DIR = "overlayShapes/overlayPictures/";
     public static String COLOR_MAP_DIR = "overlayShapes/colorMap/";
     public static String COLORED_SHAPES_DIR = "overlayShapes/coloredShapes/";
+    public static String BLACK_AND_WHITE_SHAPES_DIR = "overlayShapes/blackWhiteShapes/";
+    public static String COLUMN_BLACK_AND_WHITE_SHAPES_DIR = "overlayShapes/columnsBlackWhiteShapes/";
 
     // TODO: remove it
     public static int COUNT_OF_FILES = 1;

@@ -14,24 +14,42 @@ public class ColorsCodes {
         // took this data from my description.txt
         // just because I can't read txt files I hardcoded it
 
-        // purple
+        // purple (eggplant)
         if (red == 163 && green == 73 && blue == 164) return 1;
-        // lime
+        // lime (broccoli)
         if (red == 181 && green == 230 && blue == 29) return 2;
-        // blue
+        // blue (cauliflower)
         if (red == 0 && green == 162 && blue == 232) return 3;
-        // green
+        // green (peas)
         if (red == 34 && green == 177 && blue == 76) return 4;
-        // carrot
+        // carrot (cabbage)
         if (red == 255 && green == 127 && blue == 39) return 5;
-        // orange
+        // orange (pumpkin)
         if (red == 255 && green == 201 && blue == 14) return 6;
-        // yellow
+        // yellow (corn)
         if (red == 255 && green == 242 && blue == 0) return 7;
-        // brown
+        // brown (beet)
         if (red == 136 && green == 0 && blue == 21) return 8;
+        // red (pepper)
+        if (red == 100 && green == 0 && blue == 21) return 9;
+        //  swamp (carrot)
+        if (red == 50 && green == 50 && blue == 0) return 8;
 
         return 0;
+    }
+
+    public static String getImageNameByColorCode(int code) {
+        if (code == 1) return "eggplant";
+        if (code == 2) return "broccoli";
+        if (code == 3) return "cauliflower";
+        if (code == 4) return "peas";
+        if (code == 5) return "cabbage";
+        if (code == 6) return "pumpkin";
+        if (code == 7) return "corn";
+        if (code == 8) return "beet";
+        if (code == 9) return "pepper";
+        if (code == 10) return "carrot";
+        return "";
     }
 
 }

@@ -16,10 +16,22 @@ public class ImageView extends View {
         this.imgTexture = imgTexture;
     }
 
+    public String getImgSource() {
+        return imgSource;
+    }
+
     public void setImgSource(String imgSource) {
         if (imgSource.equals(this.imgSource)) return;
         this.imgSource = imgSource;
         imgTexture = new Texture(imgSource);
+    }
+
+    public ImageView(float x, float y, String imgSource) {
+        super(x, y);
+        this.imgSource = imgSource;
+        imgTexture = new Texture(imgSource);
+        width = imgTexture.getWidth();
+        height = imgTexture.getHeight();
     }
 
     public ImageView(float x, float y, float width, float height, String imgSource) {
@@ -39,6 +51,11 @@ public class ImageView extends View {
     public ImageView(float x, float y, float width, float height, Texture imgTexture) {
         super(x, y, width, height);
         this.imgTexture = imgTexture;
+    }
+
+    // TODO: implement this method
+    public void setRotation(int rotation) {
+
     }
 
     @Override

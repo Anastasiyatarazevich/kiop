@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.mygdx.game.MyGdxGame;
 
+import static com.mygdx.game.utils.ApplicationSettings.SCR_WIDTH;
+
 public class TextButton extends View {
 
     public String text;
@@ -15,6 +17,7 @@ public class TextButton extends View {
 
     public TextButton(BitmapFont font, String text, String backgroundSource, float x, float y) {
         this(font, text, backgroundSource, 20, 40, x, y);
+        checkForAlignCenter();
     }
 
     public TextButton(BitmapFont font, String text, String backgroundSource, int paddingVertical, int paddingHorizontal,
@@ -31,7 +34,15 @@ public class TextButton extends View {
         width = textWidth + 2 * imagePaddingHorizontal;
         height = textHeight + 2 * imagePaddingVertical;
 
-        this.backgroundImage = new ImageView(x, y, width, height, backgroundSource);
+        checkForAlignCenter();
+
+        this.backgroundImage = new ImageView(this.x, this.y, width, height, backgroundSource);
+    }
+
+    void checkForAlignCenter() {
+        if (x == -1) {
+            x = (float) SCR_WIDTH / 2 - width / 2;
+        }
     }
 
     @Override

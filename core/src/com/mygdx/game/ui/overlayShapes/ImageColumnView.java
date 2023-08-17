@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class ImageColumnView extends View {
 
-    ArrayList<ImageView> imagesList;
+    public ArrayList<ImageView> imagesList;
     int imagesPadding;
 
     public ImageColumnView(float x, float y, int height, int imagesPadding) {
@@ -32,7 +32,7 @@ public class ImageColumnView extends View {
             ImageView imageView = imagesList.get(i);
             imageView.height = newHeight;
             imageView.width = (float) imageView.imgTexture.getWidth() / imageView.imgTexture.getHeight() * imageView.height;
-            imageView.x = x - imageView.width / 2;
+            imageView.x = x;
             imageView.y = y + newHeight * i + imagesPadding * i;
         }
     }
@@ -42,5 +42,13 @@ public class ImageColumnView extends View {
         for (ImageView imageView : imagesList) {
             imageView.draw(myGdxGame);
         }
+    }
+    public String getImgSource(float tx, float ty) {
+        for (ImageView view: imagesList) {
+            if (view.isHit(tx, ty)) {
+                return view.getImgSource();
+            }
+        }
+        return "";
     }
 }

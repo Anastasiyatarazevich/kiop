@@ -10,6 +10,7 @@ public class Shape {
     private  int y;
     private final int rotation;
     private final String name;
+    private boolean isFound;
 
     private Texture texture;
 
@@ -24,23 +25,12 @@ public class Shape {
     private Image image;
 
     public Shape(int x, int y, int rotation, String name) {
+        isFound = false;
         this.x = x;
         this.y = y;
         this.rotation = rotation;
         this.name = name;
     }
-
-    public Shape(int x, int y, int rotation, String name, Texture texture) {
-        this.x = x;
-        this.y = y;
-        this.rotation = rotation;
-        this.name = name;
-        this.texture = texture;
-        image = new Image(texture);
-        image.rotateBy(this.rotation);
-    }
-
-
 
     public int getX() {
         return x;
@@ -64,5 +54,13 @@ public class Shape {
 
     public void setTexture(Texture texture) {
         this.texture = texture;
+    }
+
+    public void wasFound() {
+        this.isFound = true;
+    }
+
+    public boolean getIsFound() {
+        return isFound;
     }
 }

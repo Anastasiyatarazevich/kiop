@@ -16,6 +16,7 @@ public class SessionOverlayShapes {
     private int selectedSample;
 
     public ArrayList<Shape> shapeList;
+    public int leftShapes;
 
     public int getSelectedSample() {
         return selectedSample;
@@ -40,10 +41,21 @@ public class SessionOverlayShapes {
 
         colorMap = new ColorMap(selectedSample);
         shapeList = ShapesDescriptor.getSampleShapes(selectedSample);
+        leftShapes = shapeList.size();
     }
 
     public void startTest() {
         testState = StateOverlayShapes.SHAPES_SHOWING;
     }
 
+    public void shapeWasFound(int shapeIdx) {
+        shapeList.get(shapeIdx).wasFound();
+        leftShapes -= 1;
+
+        // TODO: implement here timer stop
+
+        if (leftShapes == 0) {
+            testState = StateOverlayShapes.PASSED;
+        }
+    }
 }

@@ -5,14 +5,22 @@ import java.util.ArrayList;
 public class ShapesDescriptor {
 
     static String[] allDescriptions = {
-            "(808, 353);15;broccoli.png\n" +
-                    "(186, 199);4;cabbage.png\n" +
-                    "(463, 92);81;cauliflower.png\n" +
-                    "(672, 246);2;peas.png\n" +
-                    "(185, 70);53;beet.png\n" +
-                    "(94, 92);78;corn.png\n" +
-                    "(669, 211);59;pumpkin.png\n" +
-                    "(500, 226);57;eggplant.png\n"
+            "(707, 282);11;cauliflower.png\n" +
+                    "(816, 81);3;peas.png\n" +
+                    "(242, 242);68;beet.png\n" +
+                    "(151, 51);14;pumpkin.png\n" +
+                    "(662, 268);85;cabbage.png\n" +
+                    "(458, 157);73;eggplant.png\n" +
+                    "(399, 318);65;pepper.png\n" +
+                    "(-10, 153);68;carrot.png\n",
+            "(-5, 131);30;peas.png\n" +
+                    "(751, 170);44;corn.png\n" +
+                    "(520, 303);81;cauliflower.png\n" +
+                    "(667, 207);8;broccoli.png\n" +
+                    "(213, 109);60;carrot.png\n" +
+                    "(206, 268);41;cabbage.png\n" +
+                    "(680, 44);52;beet.png\n" +
+                    "(374, 127);81;eggplant.png\n"
     };
 
     private static int clearNumber(String inputStr) {

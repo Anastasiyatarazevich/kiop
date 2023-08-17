@@ -6,6 +6,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.ui.View;
 
+import static com.mygdx.game.utils.ApplicationSettings.SCR_HEIGHT;
+
 
 public class RenderHelper extends InputAdapter {
 
@@ -28,8 +30,8 @@ public class RenderHelper extends InputAdapter {
         dragginView = view;
         // deltaX = (int) (startX - view.x);
         // deltaY = (int) (startY - view.y);
-        deltaX = 0;
-        deltaY = 0;
+        deltaX = (int) (view.width / 2);
+        deltaY = (int) (view.height / 2);
     }
 
     public static View getDragginView() {
@@ -46,12 +48,12 @@ public class RenderHelper extends InputAdapter {
         myGdxGame.batch.begin();
         myGdxGame.batch.setProjectionMatrix(myGdxGame.camera.combined);
 
-
         drawScenes.draw(justTouch);
 
         if (dragginView != null && isDragging) {
-            x = (int) (Gdx.input.getX() - deltaX - dragginView.width / 2);
-            y = (int) (Gdx.graphics.getHeight() - (Gdx.input.getY() + deltaY) - dragginView.height / 2);
+
+            x = (int) (Gdx.input.getX() - deltaX);
+            y = (int) (SCR_HEIGHT - (Gdx.input.getY() + deltaY));
             dragginView.x = x;
             dragginView.y = y;
             dragginView.draw(myGdxGame);

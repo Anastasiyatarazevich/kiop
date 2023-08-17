@@ -113,6 +113,10 @@ public class ScreenOverlayShapes implements Screen {
         for (int i = 0; i < testSession.shapeList.size(); i++) {
             Shape shape = testSession.shapeList.get(i);
             listShapesImages.add(new ImageView(shape.getX(), shape.getY(), BLACK_AND_WHITE_SHAPES_DIR + shape.getName()));
+            shape.setX((int) (shape.getX() + imageMapView.x));
+            shape.setY((int) (shape.getY() + imageMapView.y));
+            // shape.setX((int) (imageMapView.x));
+            // shape.setY((int) (imageMapView.y));
         }
 
         Gdx.input.setInputProcessor(new MyInputProcessor());
@@ -200,7 +204,10 @@ public class ScreenOverlayShapes implements Screen {
             for (int i = 0; i < testSession.shapeList.size(); i++) {
                 if (ColorsCodes.getImageNameByColorCode(code).equals(
                         testSession.shapeList.get(i).getName().split("\\.")[0])) {
-                    RenderHelper.setDraggingView(listShapesImages.get(i), (int) myGdxGame.touch.x, (int) myGdxGame.touch.y);
+                    listShapesImages.get(i).x = testSession.shapeList.get(i).getX();
+                    listShapesImages.get(i).y = testSession.shapeList.get(i).getY();
+                    RenderHelper.setDraggingView(listShapesImages.get(i), (int) myGdxGame.touch.x, (int) (myGdxGame.touch.y));
+                    System.out.println(testSession.shapeList.get(i).getX() + " - " + testSession.shapeList.get(i).getY());
                     return;
                 }
             }

@@ -22,8 +22,6 @@ public class Shape {
         this.y = y;
     }
 
-    private Image image;
-
     public Shape(int x, int y, int rotation, String name) {
         isFound = false;
         this.x = x;

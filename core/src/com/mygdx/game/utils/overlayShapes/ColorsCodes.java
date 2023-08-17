@@ -4,7 +4,7 @@ public class ColorsCodes {
 
     public static int getCode(double red, double green, double blue) {
 
-        // we get range (0-1) from libjdx Texture
+        // we get range (0-1) from libgdx Texture
         // but it better to check in real rgb format
 
         green = (int) (green * 255);
@@ -31,9 +31,9 @@ public class ColorsCodes {
         // brown (beet)
         if (red == 136 && green == 0 && blue == 21) return 8;
         // red (pepper)
-        if (red == 100 && green == 0 && blue == 21) return 9;
+        if (red == 255 && green == 174 && blue == 201) return 9;
         //  swamp (carrot)
-        if (red == 50 && green == 50 && blue == 0) return 8;
+        if (red == 200 && green == 191 && blue == 231) return 10;
 
         return 0;
     }

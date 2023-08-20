@@ -1,5 +1,8 @@
 package com.mygdx.game.testSessions;
 
+import static com.mygdx.game.utils.ApplicationSettings.PROOF_READING_COLUMNS;
+import static com.mygdx.game.utils.ApplicationSettings.PROOF_READING_ROWS;
+
 import com.badlogic.gdx.utils.TimeUtils;
 import com.mygdx.game.testSessions.results.ResultsProofReadingTest;
 import com.mygdx.game.testSessions.sessionsStates.StateProofTable;
@@ -25,7 +28,7 @@ public class SessionProofTest {
 
 
     public void startTest() {
-        table = new TableProofReading(4, 7);
+        table = new TableProofReading(PROOF_READING_ROWS, PROOF_READING_COLUMNS);
         testState = StateProofTable.TABLE_SHOWING;
         table.generateTable();
         targetLetter = table.getTargetLetter();

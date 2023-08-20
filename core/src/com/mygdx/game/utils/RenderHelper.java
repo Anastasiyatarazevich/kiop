@@ -2,8 +2,10 @@ package com.mygdx.game.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.ui.SpriteShapes;
 import com.mygdx.game.ui.View;
 
 import static com.mygdx.game.utils.ApplicationSettings.SCR_HEIGHT;
@@ -15,7 +17,9 @@ public class RenderHelper extends InputAdapter {
     static int x, y;
     static int deltaX, deltaY;
 
-    private static View dragginView;
+    static SpriteShapes spriteShapes;
+    private static View draggingView;
+    private static SpriteShapes draggingViewSprite;
 
     public static boolean checkTouch(MyGdxGame myGdxGame) {
         if (Gdx.input.justTouched()) {
@@ -27,20 +31,36 @@ public class RenderHelper extends InputAdapter {
     }
 
     public static void setDraggingView(View view, int startX, int startY) {
-        dragginView = view;
+        draggingView = view;
         // deltaX = (int) (startX - view.x);
         // deltaY = (int) (startY - view.y);
         deltaX = (int) (view.width / 2);
         deltaY = (int) (view.height / 2);
     }
 
-    public static View getDragginView() {
-        return dragginView;
+
+    public static void setDraggingView(SpriteShapes spriteShapes, int startX, int startY) {
+        draggingViewSprite = spriteShapes;
+        // deltaX = (int) (startX - view.x);
+        // deltaY = (int) (startY - view.y);
+        deltaX = (int) (spriteShapes.getWidth() / 2);
+        deltaY = (int) (spriteShapes.getWidth() / 2);
+    }
+
+
+    public static View getDraggingView() {
+        return draggingView;
+    }
+
+    public static SpriteShapes getDraggingViewSprite() {
+        return draggingViewSprite;
     }
 
     public static void clearDraggingView() {
-        dragginView = null;
+        draggingView = null;
+        draggingViewSprite = null;
     }
+
 
     public static void draw(MyGdxGame myGdxGame, DrawScenes drawScenes, boolean justTouch) {
         ScreenUtils.clear(0, 0, 0, 1);
@@ -50,14 +70,26 @@ public class RenderHelper extends InputAdapter {
 
         drawScenes.draw(justTouch);
 
-        if (dragginView != null && isDragging) {
+//        if (draggingView != null && isDragging) {
+//
+//            x = (int) (Gdx.input.getX() - deltaX);
+//            y = (int) (SCR_HEIGHT - (Gdx.input.getY() + deltaY));
+//            draggingView.x = x;
+//            draggingView.y = y;
+//            draggingView.draw(myGdxGame);
+//        }
+
+        if (draggingViewSprite != null && isDragging) {
 
             x = (int) (Gdx.input.getX() - deltaX);
             y = (int) (SCR_HEIGHT - (Gdx.input.getY() + deltaY));
-            dragginView.x = x;
-            dragginView.y = y;
-            dragginView.draw(myGdxGame);
+            draggingViewSprite.setPos(x, y);
+            draggingViewSprite.draw(myGdxGame);
         }
+
+//        spriteShapes = new SpriteShapes(new Texture("/Users/anastasiatarazevich/AndroidStudioProjects/kiop/assets/overlayShapes/blackWhiteShapes/beet.png"));
+//        spriteShapes.draw(myGdxGame);
+
         myGdxGame.batch.end();
     }
 

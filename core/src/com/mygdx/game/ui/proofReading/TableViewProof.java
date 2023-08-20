@@ -46,6 +46,9 @@ public class TableViewProof extends View {
 
     @Override
     public void dispose() {
-        tableItems.clear();
+//        tableItems.clear();
+        for (TableItemView i: tableItems) {
+            i.setClicked(false);
+        }
     }
 }

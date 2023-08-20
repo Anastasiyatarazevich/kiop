@@ -49,18 +49,14 @@ public class TableItemView extends View {
         //textY = y;
     }
 
-    public void setText(char text) {
-        this.symbol = text;
-        System.out.println(text);
-        GlyphLayout gl = new GlyphLayout(font, "dd");
-        float textWidth = gl.width;
-        float textHeight = gl.height;
 
-        textX = x + (width - textWidth) / 2;
-        textY = y + height - (height - textHeight) / 2;
-        //textY = y;
+    public void setClicked(boolean clicked) {
+        isClicked = clicked;
     }
 
+    public boolean getIsClicked() {
+        return isClicked;
+    }
 
     public void setItemSelected() {
         backgroundImage.setImgSource("schulteTable/tileSelected.png");

@@ -1,6 +1,9 @@
 package com.mygdx.game.screens;
 
 
+import static com.mygdx.game.utils.ApplicationSettings.PROOF_READING_COLUMNS;
+import static com.mygdx.game.utils.ApplicationSettings.PROOF_READING_ITEMS_SIZE;
+import static com.mygdx.game.utils.ApplicationSettings.PROOF_READING_ROWS;
 import static com.mygdx.game.utils.UsingColors.COLOR_BG_GRAY;
 
 import com.badlogic.gdx.Screen;
@@ -41,8 +44,8 @@ public class ScreenProofreadingTest implements Screen {
 
         testSession = new SessionProofTest();
 
-        tableView = new TableViewProof(623, 120, 4, 7, myGdxGame.fontArialGray64,
-                125, onTableItemClicked);
+        tableView = new TableViewProof(100, 120, PROOF_READING_ROWS, PROOF_READING_COLUMNS, myGdxGame.fontArialGray64,
+                PROOF_READING_ITEMS_SIZE, onTableItemClicked);
         findText = new FindTextView(636, 921, "Найди: ", myGdxGame.fontArialBlack64, " ");
         goBackText = new TextView(myGdxGame.fontArialBlack64, "Молодец, ты справился!", -1, 816);
 
@@ -107,12 +110,13 @@ public class ScreenProofreadingTest implements Screen {
     @Override
     public void hide() {
         testSession.setCounter(0);
+        tableView.dispose();
 //        this.dispose();
     }
 
     @Override
     public void dispose() {
-        //todo: add dispode method
+        //todo: add dispose method
 //        tableView.dispose();
     }
 
@@ -144,6 +148,7 @@ public class ScreenProofreadingTest implements Screen {
                     break;
                 case PASSED:
                     if (justTouched) scenePassed.checkHits(myGdxGame);
+
                     scenePassed.drawScene(myGdxGame);
                     break;
             }
@@ -169,7 +174,7 @@ public class ScreenProofreadingTest implements Screen {
     TableItemView.OnTableItemClicked onTableItemClicked = new TableItemView.OnTableItemClicked() {
         @Override
         public void onClicked(TableItemView tableItemView) {
-            if (!tableItemView.isClicked) {
+            if (!(tableItemView.getIsClicked())) {
                 SelectionResponse clickResponse = testSession.checkSelection(tableItemView.value);
                 System.out.println(clickResponse);
                 switch (clickResponse) {
@@ -182,7 +187,8 @@ public class ScreenProofreadingTest implements Screen {
                         }
                         break;
                 }
-                tableItemView.isClicked = true;
+                tableItemView.setClicked(true);
+//                tableItemView.isClicked = true;
             }
         }
     };

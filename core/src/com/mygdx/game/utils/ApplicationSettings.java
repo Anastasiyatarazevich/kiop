@@ -23,6 +23,16 @@ public class ApplicationSettings {
     public static int SCHULTE_TABLE_ITEMS_PADDING = 20;
 
 
+    // ---- Proof-Reading test settings
+
+
+    // ---- ---- Ui
+
+    public static int PROOF_READING_ROWS = 7;
+    public static int PROOF_READING_COLUMNS = 16;
+    public static int PROOF_READING_ITEMS_SIZE = 100;
+
+
     // ---- Overlay shapes settings
 
     public static String COLOR_MAP_DESCRIPTIONS_DIR = "overlayShapes/colorMap/";

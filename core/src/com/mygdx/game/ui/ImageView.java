@@ -1,6 +1,8 @@
 package com.mygdx.game.ui;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.mygdx.game.MyGdxGame;
 
 import java.util.Objects;
@@ -12,6 +14,7 @@ public class ImageView extends View {
     String imgSource;
     public Texture imgTexture;
 
+    public Sprite sprite;
     public void setImgTexture(Texture imgTexture) {
         this.imgTexture = imgTexture;
     }
@@ -24,12 +27,29 @@ public class ImageView extends View {
         if (imgSource.equals(this.imgSource)) return;
         this.imgSource = imgSource;
         imgTexture = new Texture(imgSource);
+
+        sprite = new Sprite(imgTexture);
+//        sprite.setRotation(0);
     }
+
+    public void setImgSource2(String imgSource) {
+        if (imgSource.equals(this.imgSource)) return;
+        this.imgSource = imgSource;
+        imgTexture = new Texture(imgSource);
+
+        sprite = new Sprite(imgTexture);
+//        sprite.setRotation(0);
+    }
+
 
     public ImageView(float x, float y, String imgSource) {
         super(x, y);
         this.imgSource = imgSource;
         imgTexture = new Texture(imgSource);
+
+        sprite = new Sprite(imgTexture, (int) x, (int) y);
+//        sprite.setRotation(0);
+
         width = imgTexture.getWidth();
         height = imgTexture.getHeight();
     }
@@ -38,6 +58,9 @@ public class ImageView extends View {
         super(x, y, width, height);
         this.imgSource = imgSource;
         imgTexture = new Texture(imgSource);
+
+        sprite = new Sprite(imgTexture, (int) x, (int) y, (int) width, (int) height);
+        sprite.setRotation(0);
     }
 
     // generate image that align center
@@ -45,6 +68,10 @@ public class ImageView extends View {
         super(0, y, width, height);
         this.imgSource = imgSource;
         imgTexture = new Texture(imgSource);
+
+        sprite = new Sprite(imgTexture, 0, (int) y, (int) width, (int) height);
+        sprite.setRotation(0);
+
         x = (float) (SCR_WIDTH - imgTexture.getWidth()) / 2;
     }
 
@@ -61,6 +88,7 @@ public class ImageView extends View {
     @Override
     public void draw(MyGdxGame myGdxGame) {
         myGdxGame.batch.draw(imgTexture, x, y, width, height);
+//        sprite.draw(myGdxGame.batch);
     }
 
     @Override

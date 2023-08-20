@@ -45,7 +45,7 @@ public class WebHelper {
                 String error = t.getMessage();
             }
             public void cancelled() {
-                // request aborded
+                // request aborted
             }
         });
     }

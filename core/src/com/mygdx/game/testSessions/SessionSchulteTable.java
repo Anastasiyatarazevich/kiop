@@ -1,9 +1,10 @@
 package com.mygdx.game.testSessions;
 
-import com.badlogic.gdx.utils.TimeUtils;
+import com.mygdx.game.testSessions.results.ResultsSchulteTable;
 import com.mygdx.game.testSessions.sessionsStates.StateSchulteTable;
 import com.mygdx.game.utils.schulteHelper.SelectionResponse;
 import com.mygdx.game.utils.schulteHelper.Table;
+import com.mygdx.game.utils.time.Timer;
 
 import java.util.ArrayList;
 
@@ -11,13 +12,17 @@ import static com.mygdx.game.utils.ApplicationSettings.*;
 
 public class SessionSchulteTable {
 
+    public ResultsSchulteTable testResults;
     public StateSchulteTable testState;
-    long sessionTime;
+
     public int tableIdx;
     public ArrayList<Table> tables;
+    Timer fullTime;
 
     public SessionSchulteTable() {
+        fullTime = new Timer();
         tables = new ArrayList<>();
+        testResults = new ResultsSchulteTable();
         testState = StateSchulteTable.GREETING;
     }
 
@@ -28,13 +33,25 @@ public class SessionSchulteTable {
         for (int i = 0; i < countOfTables; i++) {
             tables.add(new Table(SCHULTE_TABLE_SIZE));
         }
-        sessionTime = TimeUtils.millis();
+        fullTime.startTimer();
     }
 
     public void startTest() {
         testState = StateSchulteTable.TABLE_SHOWING;
         tables.get(tableIdx).generateTable();
         tables.get(tableIdx).nextItem();
+    }
+
+    public void endTest() {
+        fullTime.terminateTimer();
+        int testOnlyTime = 0;
+        for (Table table: tables) {
+            testOnlyTime += table.timer.getFinalTimeInSeconds();
+        }
+        testState = StateSchulteTable.PASSED;
+        testResults.setTime(testOnlyTime);
+        // TODO: fetch user age from game session
+        testResults.setWorkEffectiveMark(10, tables.size());
     }
 
     public void nextTable() {
@@ -53,51 +70,7 @@ public class SessionSchulteTable {
         return SelectionResponse.ERROR;
     }
 
-    public int getWorkEffectiveMark(int userAge) {
 
-        int spentTime = 0;
-        for (Table table : tables) {
-            spentTime += table.getSpendTime();
-        }
-        int mark = spentTime / tables.size();
-
-        if (userAge == 6) {
-            if (mark >= 56 && mark <= 60) return 5;
-            if (mark >= 61 && mark <= 70) return 4;
-            if (mark >= 71 && mark <= 80) return 3;
-            if (mark >= 81 && mark <= 90) return 2;
-            return 1;
-        }
-        if (userAge == 7) {
-            if (mark >= 51 && mark <= 55) return 5;
-            if (mark >= 56 && mark <= 65) return 4;
-            if (mark >= 66 && mark <= 75) return 3;
-            if (mark >= 76 && mark <= 85) return 2;
-            return 1;
-        }
-        if (userAge == 8) {
-            if (mark >= 46 && mark <= 50) return 5;
-            if (mark >= 51 && mark <= 60) return 4;
-            if (mark >= 61 && mark <= 70) return 3;
-            if (mark >= 71 && mark <= 80) return 2;
-            return 1;
-        }
-        if (userAge == 9) {
-            if (mark >= 41 && mark <= 46) return 5;
-            if (mark >= 46 && mark <= 55) return 4;
-            if (mark >= 56 && mark <= 65) return 3;
-            if (mark >= 66 && mark <= 75) return 2;
-            return 1;
-        }
-        if (userAge == 10) {
-            if (mark >= 36 && mark <= 40) return 5;
-            if (mark >= 41 && mark <= 50) return 4;
-            if (mark >= 51 && mark <= 60) return 3;
-            if (mark >= 61 && mark <= 70) return 2;
-            return 1;
-        }
-        return 0;
-    }
 
 
 }

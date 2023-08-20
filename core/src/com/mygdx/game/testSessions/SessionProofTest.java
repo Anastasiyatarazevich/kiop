@@ -1,7 +1,7 @@
 package com.mygdx.game.testSessions;
 
 import com.badlogic.gdx.utils.TimeUtils;
-import com.mygdx.game.testSessions.results.ProofReadingTestResults;
+import com.mygdx.game.testSessions.results.ResultsProofReadingTest;
 import com.mygdx.game.testSessions.sessionsStates.StateProofTable;
 import com.mygdx.game.utils.proofReadingHelper.TableProofReading;
 import com.mygdx.game.utils.schulteHelper.SelectionResponse;
@@ -33,7 +33,7 @@ public class SessionProofTest {
         startTime = TimeUtils.millis();
     }
 
-    public void endTest(ProofReadingTestResults results) {
+    public void endTest(ResultsProofReadingTest results) {
         overallTime = TimeUtils.millis() - startTime;
         long min = (int) (overallTime / 1000) / 60;
         long sec = (int) (overallTime / 1000) % 60;

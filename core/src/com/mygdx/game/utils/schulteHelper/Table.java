@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.ui.View;
+import com.mygdx.game.utils.time.Timer;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,12 +15,14 @@ public class Table {
 
     public ArrayList<TableItem> tableMatrix;
     int tableSize;
-    private long spendTime;
+    public Timer timer;
     public int countOfSelectedItems;
 
     public Table(int tableSize) {
         this.tableSize = tableSize;
+
         tableMatrix = new ArrayList<>();
+        timer = new Timer();
     }
 
     public void generateTable() {
@@ -33,26 +36,14 @@ public class Table {
 
     public boolean nextItem() {
         countOfSelectedItems += 1;
-        if (countOfSelectedItems == 0) startTimer();
+        if (countOfSelectedItems == 0) timer.startTimer();
         if (countOfSelectedItems > 0) tableMatrix.get(countOfSelectedItems - 1).endTimer();
         if (countOfSelectedItems < tableSize * tableSize) tableMatrix.get(countOfSelectedItems).startTimer();
         else {
-            endTimer();
+            timer.terminateTimer();
             return false;
         }
         return true;
-    }
-
-    public void startTimer() {
-        spendTime = TimeUtils.millis();
-    }
-
-    public void endTimer() {
-        spendTime = TimeUtils.millis() - spendTime;
-    }
-
-    public int getSpendTime() {
-        return (int) spendTime;
     }
 
 }

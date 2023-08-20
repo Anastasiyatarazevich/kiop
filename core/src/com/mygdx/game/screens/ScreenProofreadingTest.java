@@ -6,7 +6,7 @@ import static com.mygdx.game.utils.UsingColors.COLOR_BG_GRAY;
 import com.badlogic.gdx.Screen;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.testSessions.SessionProofTest;
-import com.mygdx.game.testSessions.results.ProofReadingTestResults;
+import com.mygdx.game.testSessions.results.ResultsProofReadingTest;
 import com.mygdx.game.testSessions.sessionsStates.StateProofTable;
 import com.mygdx.game.ui.BackgroundPixmap;
 import com.mygdx.game.ui.TextButton;
@@ -30,7 +30,7 @@ public class ScreenProofreadingTest implements Screen {
 
     SessionProofTest testSession;
 
-    ProofReadingTestResults proofReadingTestResults;
+    ResultsProofReadingTest proofReadingTestResults;
 
     public ScreenProofreadingTest(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
@@ -119,7 +119,7 @@ public class ScreenProofreadingTest implements Screen {
 
     void closeGame() {
         testSession.testState = StateProofTable.PASSED;
-        proofReadingTestResults = new ProofReadingTestResults();
+        proofReadingTestResults = new ResultsProofReadingTest();
         testSession.endTest(proofReadingTestResults);
         System.out.println("Результаты корректурной пробы: " + proofReadingTestResults);
     }

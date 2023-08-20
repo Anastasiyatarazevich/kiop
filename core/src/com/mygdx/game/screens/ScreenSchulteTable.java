@@ -145,7 +145,8 @@ public class ScreenSchulteTable implements Screen {
 
     void closeTable(int closingCode) {
         if (testSession.tableIdx == COUNT_OF_SCHULTE_TABLES - 1) {
-            testSession.testState = StateSchulteTable.PASSED;
+            testSession.endTest();
+            System.out.println(testSession.testResults);
             return;
         }
         testSession.testState = StateSchulteTable.BREAK;
@@ -196,10 +197,10 @@ public class ScreenSchulteTable implements Screen {
                         closeTable(0);
                     break;
                 case ERROR:
-                    // todo: fill some logic
+                    testSession.testResults.addError();
                     break;
                 case DUPLICATE:
-                    // todo: fill some logic
+                    testSession.testResults.addDuplicate();
                     break;
             }
         }

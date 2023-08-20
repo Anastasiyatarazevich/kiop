@@ -1,10 +1,10 @@
 package com.mygdx.game.testSessions.results;
 
-public class ProofReadingTestResults {
+public class ResultsProofReadingTest {
     private long  min, sec;
     private int errors;
 
-    public ProofReadingTestResults() {
+    public ResultsProofReadingTest() {
         this.errors = 0;
         this.min = 0;
         this.sec = 0;

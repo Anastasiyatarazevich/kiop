@@ -14,6 +14,7 @@ import com.mygdx.game.utils.RenderHelper;
 import com.mygdx.game.utils.SceneHelper;
 import com.mygdx.game.utils.overlayShapes.ColorsCodes;
 import com.mygdx.game.utils.overlayShapes.Shape;
+import com.mygdx.game.utils.time.Timer;
 
 import java.util.ArrayList;
 
@@ -35,7 +36,6 @@ public class ScreenOverlayShapes implements Screen {
 
     ArrayList<ImageView> listShapesImages;
     ArrayList<SpriteShapes> spritelistShapesImages;
-
 
     public ScreenOverlayShapes(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;

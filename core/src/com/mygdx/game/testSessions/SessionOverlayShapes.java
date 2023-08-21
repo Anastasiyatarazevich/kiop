@@ -1,9 +1,12 @@
 package com.mygdx.game.testSessions;
 
+import com.mygdx.game.testSessions.results.ResultsOverlayShapes;
+import com.mygdx.game.testSessions.results.ResultsSchulteTable;
 import com.mygdx.game.testSessions.sessionsStates.StateOverlayShapes;
 import com.mygdx.game.utils.overlayShapes.ColorMap;
 import com.mygdx.game.utils.overlayShapes.Shape;
 import com.mygdx.game.utils.overlayShapes.ShapesDescriptor;
+import com.mygdx.game.utils.time.Timer;
 
 import java.util.ArrayList;
 
@@ -18,6 +21,11 @@ public class SessionOverlayShapes {
     public ArrayList<Shape> shapeList;
     public int leftShapes;
 
+    Timer fullTime;
+
+    public ResultsOverlayShapes testResults;
+
+
     public int getSelectedSample() {
         return selectedSample;
     }
@@ -25,6 +33,8 @@ public class SessionOverlayShapes {
     public SessionOverlayShapes() {
         shapeList = new ArrayList<>();
         testState = StateOverlayShapes.GREETING;
+        fullTime = new Timer();
+        testResults = new ResultsOverlayShapes();
         startSession();
     }
 
@@ -42,20 +52,24 @@ public class SessionOverlayShapes {
         colorMap = new ColorMap(selectedSample);
         shapeList = ShapesDescriptor.getSampleShapes(selectedSample);
         leftShapes = shapeList.size();
+
+
     }
 
     public void startTest() {
         testState = StateOverlayShapes.SHAPES_SHOWING;
+        fullTime.startTimer();
     }
 
     public void shapeWasFound(int shapeIdx) {
         shapeList.get(shapeIdx).wasFound();
         leftShapes -= 1;
 
-        // TODO: implement here timer stop
-
         if (leftShapes == 0) {
             testState = StateOverlayShapes.PASSED;
+            fullTime.terminateTimer();
+            testResults.setWorkEffectiveMark(fullTime.getFinalTimeInSeconds());
+            System.out.println(testResults);
         }
     }
 }

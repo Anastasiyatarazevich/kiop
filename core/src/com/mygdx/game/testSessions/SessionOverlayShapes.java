@@ -70,7 +70,7 @@ public class SessionOverlayShapes {
             testState = StateOverlayShapes.PASSED;
             fullTime.terminateTimer();
             testResults.setWorkEffectiveMark(fullTime.getFinalTimeInSeconds());
-//            System.out.println(testResults);
+            System.out.println(testResults);
 
             WebHelper.postRequest(testResults.getWorkEffectiveMark(), testResults.getSpentTimeInSeconds());
         }

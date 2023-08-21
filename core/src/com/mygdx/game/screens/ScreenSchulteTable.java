@@ -100,7 +100,6 @@ public class ScreenSchulteTable implements Screen {
     public void show() {
         if (testSession.testState == StateSchulteTable.GREETING) {
             testSession.startSession(COUNT_OF_SCHULTE_TABLES);
-            timeCounterView.startTimer();
         }
     }
 
@@ -181,6 +180,7 @@ public class ScreenSchulteTable implements Screen {
         @Override
         public void onClicked() {
             testSession.startTest();
+            timeCounterView.startTimer();
             setTable();
         }
     };

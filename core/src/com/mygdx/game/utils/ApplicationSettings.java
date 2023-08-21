@@ -6,7 +6,7 @@ public class ApplicationSettings {
     // ---- General settings
 
     public static int SCR_WIDTH = 1920;
-    public static int SCR_HEIGHT = 1080;
+    public static int SCR_HEIGHT = 1200;
 
     public static String COMMON_DELIMITER = " ";
 

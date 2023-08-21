@@ -3,6 +3,7 @@ package com.mygdx.game.testSessions;
 import com.mygdx.game.testSessions.results.ResultsOverlayShapes;
 import com.mygdx.game.testSessions.results.ResultsSchulteTable;
 import com.mygdx.game.testSessions.sessionsStates.StateOverlayShapes;
+import com.mygdx.game.utils.WebHelper;
 import com.mygdx.game.utils.overlayShapes.ColorMap;
 import com.mygdx.game.utils.overlayShapes.Shape;
 import com.mygdx.game.utils.overlayShapes.ShapesDescriptor;
@@ -69,7 +70,9 @@ public class SessionOverlayShapes {
             testState = StateOverlayShapes.PASSED;
             fullTime.terminateTimer();
             testResults.setWorkEffectiveMark(fullTime.getFinalTimeInSeconds());
-            System.out.println(testResults);
+//            System.out.println(testResults);
+
+            WebHelper.postRequest(testResults.getWorkEffectiveMark(), testResults.getSpentTimeInSeconds());
         }
     }
 }

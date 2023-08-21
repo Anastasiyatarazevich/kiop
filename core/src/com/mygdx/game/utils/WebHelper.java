@@ -6,39 +6,31 @@ import com.badlogic.gdx.net.HttpStatus;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonWriter;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
 public class WebHelper {
 
-    public static void makeRequest() {
-
-        Map<String, String> parameters = new HashMap<String, String>();
-
-        /*parameters.put("token", "<TOKEN>");
-        parameters.put("some_value", "1234");
-
-        final Json json = new Json();
-        json.setTypeName(null);
-        json.setOutputType(JsonWriter.OutputType.json);
-        json.setUsePrototypes(false);
-        String requestJson = json.toJson(parameters);*/
-
-        // Net.HttpRequest request = new Net.HttpRequest(Net.HttpMethods.POST);
+    public static void getRequest(){
         Net.HttpRequest request = new Net.HttpRequest(Net.HttpMethods.GET);
-        request.setUrl("https://libgdx.com/wiki/html5-backend-and-gwt-specifics");
-        // request.setContent(requestJson);
+        request.setUrl("http://localhost:8080/shapes");
 
         Gdx.net.sendHttpRequest(request, new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 HttpStatus status = httpResponse.getStatus();
                 if(status.getStatusCode() == 200) {
                     String responseJson = httpResponse.getResultAsString();
-                    System.out.println("success http response");
-                    System.out.println(responseJson);
                     Gdx.app.log("web response", responseJson);
                 } else {
-                    System.out.println("error ((( http response");
+                    System.out.println("Error\nStatus:" + httpResponse.getStatus() +" Response: " + httpResponse);
                 }
             }
             public void failed(Throwable t) {
@@ -49,5 +41,58 @@ public class WebHelper {
             }
         });
     }
+    public static void postRequest(int mark, int time) {
+        String url = "http://localhost:8080/add?";
+        Net.HttpRequest request = new Net.HttpRequest(Net.HttpMethods.POST);
 
+        Map<String, Integer> parameters = new HashMap<>();
+        parameters.put("mark", mark);
+        parameters.put("time", time);
+        //todo: create user profile class and get info from that
+        parameters.put("uId", 111);
+
+        try {
+            url += ParameterStringBuilder.getParamsString(parameters);
+            request.setUrl(url);
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+
+        Gdx.net.sendHttpRequest(request, new Net.HttpResponseListener() {
+            public void handleHttpResponse(Net.HttpResponse httpResponse) {
+                HttpStatus status = httpResponse.getStatus();
+                if(status.getStatusCode() == 200) {
+                    String responseJson = httpResponse.getResultAsString();
+                    Gdx.app.log("web response", responseJson);
+                } else {
+                    System.out.println("Error\nStatus:" + httpResponse.getStatus() +" Response: " + httpResponse);
+                }
+            }
+            public void failed(Throwable t) {
+                String error = t.getMessage();
+            }
+            public void cancelled() {
+                // request aborted
+            }
+        });
+    }
+}
+
+class ParameterStringBuilder {
+    public static String getParamsString(Map<String, Integer> params)
+            throws UnsupportedEncodingException {
+        StringBuilder result = new StringBuilder();
+
+        for (Map.Entry<String, Integer> entry : params.entrySet()) {
+            result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+            result.append("=");
+            result.append(entry.getValue());
+            result.append("&");
+        }
+
+        String resultString = result.toString();
+        return resultString.length() > 0
+                ? resultString.substring(0, resultString.length() - 1)
+                : resultString;
+    }
 }

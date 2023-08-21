@@ -54,8 +54,7 @@ public class MyGdxGame extends Game {
 
         setScreen(screenMenu);
 
-//        WebHelper.makeRequest();
-
+//WebHelper.getRequest();
     }
 
     @Override

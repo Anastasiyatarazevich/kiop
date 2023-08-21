@@ -14,6 +14,15 @@ public class ResultsOverlayShapes {
     public void setWorkEffectiveMark(int timeInSeconds) {
         workEffectiveMark = calculateWorkEffectiveMark(timeInSeconds);
     }
+
+    public int getSpentTimeInSeconds() {
+        return spentTimeInSeconds;
+    }
+
+    public int getWorkEffectiveMark() {
+        return workEffectiveMark;
+    }
+
     public int calculateWorkEffectiveMark(int timeInSeconds) {
         spentTimeInSeconds = timeInSeconds;
 

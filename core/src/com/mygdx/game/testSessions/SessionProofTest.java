@@ -23,7 +23,6 @@ public class SessionProofTest {
         testState = StateProofTable.GREETING;
         counter = 0;
         errors = 0;
-
     }
 
 

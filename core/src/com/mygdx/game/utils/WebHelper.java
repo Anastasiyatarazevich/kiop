@@ -12,7 +12,7 @@ public class WebHelper {
 
     public static void getRequest(){
         Net.HttpRequest request = new Net.HttpRequest(Net.HttpMethods.GET);
-        request.setUrl("http://localhost:8080/shapes");
+        request.setUrl("http://185.65.19.35:8080/shapes");
 
         Gdx.net.sendHttpRequest(request, new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
@@ -33,7 +33,7 @@ public class WebHelper {
         });
     }
     public static void postRequest(int mark, int time) {
-        String url = "http://localhost:8080/add?";
+        String url = "http://185.65.19.35:31/add?";
         Net.HttpRequest request = new Net.HttpRequest(Net.HttpMethods.POST);
 
         Map<String, Integer> parameters = new HashMap<>();
@@ -41,7 +41,7 @@ public class WebHelper {
         parameters.put("time", time);
         //todo: create user profile class and get info from that
         parameters.put("uId", 111);
-
+        System.out.println("hehehhe");
         try {
             url += ParameterStringBuilder.getParamsString(parameters);
             request.setUrl(url);

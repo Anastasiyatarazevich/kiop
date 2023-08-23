@@ -3,9 +3,7 @@ package com.mygdx.game.client;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
-import com.google.gwt.user.client.Window;
 import com.mygdx.game.MyGdxGame;
-import com.mygdx.game.utils.SessionHelper;
 
 import static com.mygdx.game.utils.ApplicationSettings.SCR_HEIGHT;
 import static com.mygdx.game.utils.ApplicationSettings.SCR_WIDTH;

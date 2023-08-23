@@ -12,6 +12,7 @@ import com.mygdx.game.screens.ScreenOverlayShapes;
 import com.mygdx.game.screens.ScreenProofreadingTest;
 import com.mygdx.game.screens.ScreenSchulteTable;
 import com.mygdx.game.utils.ApplicationSettings;
+import com.mygdx.game.utils.SessionHelper;
 import com.mygdx.game.utils.WebHelper;
 
 public class MyGdxGame extends Game {
@@ -53,8 +54,9 @@ public class MyGdxGame extends Game {
         screenMenu = new ScreenMenu(this);
 
         setScreen(screenMenu);
+        //WebHelper.getRequest();
 
-//WebHelper.getRequest();
+        Gdx.app.debug("param", SessionHelper.params);
     }
 
     @Override

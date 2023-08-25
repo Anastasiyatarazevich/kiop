@@ -39,11 +39,6 @@ public class TextButton extends View {
         this.backgroundImage = new ImageView(this.x, this.y, width, height, backgroundSource);
     }
 
-    void checkForAlignCenter() {
-        if (x == -1) {
-            x = (float) SCR_WIDTH / 2 - width / 2;
-        }
-    }
 
     @Override
     public boolean isHit(float tx, float ty) {

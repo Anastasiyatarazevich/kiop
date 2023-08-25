@@ -3,6 +3,8 @@ package com.mygdx.game.ui;
 import com.badlogic.gdx.utils.Disposable;
 import com.mygdx.game.MyGdxGame;
 
+import static com.mygdx.game.utils.ApplicationSettings.SCR_WIDTH;
+
 public class View implements Disposable {
 
     public float x;
@@ -47,5 +49,10 @@ public class View implements Disposable {
         void onClicked();
     }
 
+    public void checkForAlignCenter() {
+        if ((int) x == -1) {
+            x = (float) SCR_WIDTH / 2 - width / 2;
+        }
+    }
 
 }

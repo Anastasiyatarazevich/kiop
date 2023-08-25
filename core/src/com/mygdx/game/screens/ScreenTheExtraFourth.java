@@ -6,9 +6,13 @@ import com.mygdx.game.testSessions.SessionTheExtraFourth;
 import com.mygdx.game.ui.BackgroundPixmap;
 import com.mygdx.game.ui.TextButton;
 import com.mygdx.game.ui.View;
+import com.mygdx.game.ui.theExtraFourth.TableCardsView;
 import com.mygdx.game.utils.RenderHelper;
 import com.mygdx.game.utils.SceneHelper;
+import com.mygdx.game.utils.theExtraFourth.CardsPresets;
 
+import static com.mygdx.game.utils.ApplicationSettings.FOURTH_CARD_PADDING;
+import static com.mygdx.game.utils.ApplicationSettings.FOURTH_CARD_SIZE;
 import static com.mygdx.game.utils.UsingColors.COLOR_BG_GRAY;
 
 public class ScreenTheExtraFourth implements Screen {
@@ -20,6 +24,8 @@ public class ScreenTheExtraFourth implements Screen {
     SceneHelper sceneGreeting;
     SceneHelper sceneCardShowing;
 
+    TableCardsView tableCardsView;
+
     public ScreenTheExtraFourth(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
         testSession = new SessionTheExtraFourth();
@@ -27,6 +33,12 @@ public class ScreenTheExtraFourth implements Screen {
         scenePassed = new SceneHelper();
         sceneGreeting = new SceneHelper();
         sceneCardShowing = new SceneHelper();
+
+        tableCardsView = new TableCardsView(
+                -1, 160,
+                FOURTH_CARD_PADDING, FOURTH_CARD_SIZE,
+                CardsPresets.presets[testSession.currentQuadIdx].getListOfCardsSrc()
+        );
 
         BackgroundPixmap background = new BackgroundPixmap(COLOR_BG_GRAY);
 
@@ -37,12 +49,14 @@ public class ScreenTheExtraFourth implements Screen {
                 775, 155
         );
 
+        tableCardsView.setOnTableCardsClickListener(onTableCardsClicked);
         startButton.setOnClickListener(onStartButtonClicked);
 
         sceneGreeting.addActor(background);
         sceneGreeting.addActor(startButton);
 
         sceneCardShowing.addActor(background);
+        sceneCardShowing.addActor(tableCardsView);
 
         scenePassed.addActor(background);
     }
@@ -107,6 +121,13 @@ public class ScreenTheExtraFourth implements Screen {
         @Override
         public void onClicked() {
             testSession.startTest();
+        }
+    };
+
+    TableCardsView.OnTableCardsClickListener onTableCardsClicked = new TableCardsView.OnTableCardsClickListener() {
+        @Override
+        public void onClick(int cardIdx) {
+
         }
     };
 }

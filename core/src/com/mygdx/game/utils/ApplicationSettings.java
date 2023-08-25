@@ -45,4 +45,10 @@ public class ApplicationSettings {
     // TODO: remove it
     public static int COUNT_OF_FILES = 2;
 
+    // ---- The extra fourth settings
+
+    public static String FOURTH_CARD_DIR = "theExtraFourth/cardsImages/";
+    public static int FOURTH_CARD_SIZE = 300;
+    public static int FOURTH_CARD_PADDING = 50;
+
 }

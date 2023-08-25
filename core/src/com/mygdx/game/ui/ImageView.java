@@ -54,6 +54,14 @@ public class ImageView extends View {
         height = imgTexture.getHeight();
     }
 
+    public ImageView(float x, float y, Texture imgTexture) {
+        super(x, y);
+        this.imgTexture = imgTexture;
+        width = imgTexture.getWidth();
+        height = imgTexture.getHeight();
+    }
+
+
     public ImageView(float x, float y, float width, float height, String imgSource) {
         super(x, y, width, height);
         this.imgSource = imgSource;

@@ -68,7 +68,7 @@ public class ScreenOverlayShapes implements Screen {
 
         TextView endTitle = new TextView(
                 myGdxGame.fontArialBlack64,
-                "Я это ваше рагу овощное...",
+                "Молодец, ты справился!",
                 -1, 900
         );
 

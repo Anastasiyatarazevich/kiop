@@ -53,7 +53,7 @@ public class ScreenSchulteTable implements Screen {
         tableCounterView = new TableCounterView(636, 660, "Осталось", "таблицы",
                 myGdxGame.fontArialBlack64, myGdxGame.fontArialBlackBold64, COUNT_OF_SCHULTE_TABLES);
         smallTableCounterView = new TextView(myGdxGame.fontArialGray32, "1/" + COUNT_OF_SCHULTE_TABLES, -1, 43);
-        motivatorTextView = new TextView(myGdxGame.fontArialBlack64, "Так держать!", -1, 816);
+        motivatorTextView = new TextView(myGdxGame.fontArialBlack64, "Молодец, ты справился!", -1, 816);
 
         BackgroundPixmap background = new BackgroundPixmap(COLOR_BG_GRAY);
         TextButton startButton = new TextButton(
@@ -70,7 +70,7 @@ public class ScreenSchulteTable implements Screen {
         );
         TextButton backButton = new TextButton(
                 myGdxGame.fontArialBlack64,
-                "В меню",
+                "Вернуться в лес",
                 "schulteTable/buttonBackground.png",
                 775, 228
         );

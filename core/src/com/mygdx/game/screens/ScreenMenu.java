@@ -21,13 +21,16 @@ public class ScreenMenu implements Screen {
 
         uiComponentsList = new ArrayList<>();
 
-        TextView textViewTest1 = new TextView(myGdxGame.fontArialGray64, "Овощной рай(рагу)", 100, 200);
-        TextView textViewTest2 = new TextView(myGdxGame.fontArialGray64, "Коррекатурная проба", 100, 300);
-        TextView textViewTest3 = new TextView(myGdxGame.fontArialGray64, "Schulte table test", 100, 400);
+        TextView textViewTest1 = new TextView(myGdxGame.fontArialGray64, "1. Таблица Шульте", 100, 400);
+        TextView textViewTest2 = new TextView(myGdxGame.fontArialGray64, "2. Коррекатурная проба", 100, 300);
+        TextView textViewTest3 = new TextView(myGdxGame.fontArialGray64, "3. Наложенные фигуры", 100, 200);
+        TextView textViewTest4 = new TextView(myGdxGame.fontArialGray64, "4. Четвёртый лишний", 100, 200);
+        TextView textViewTest5 = new TextView(myGdxGame.fontArialGray64, "5. Матрицы Равена", 100, 200);
+        TextView textViewTest6 = new TextView(myGdxGame.fontArialGray64, "6. Мемо", 100, 200);
 
-        textViewTest1.setOnClickListener(textView1clicked);
+        textViewTest3.setOnClickListener(textView1clicked);
         textViewTest2.setOnClickListener(textView2clicked);
-        textViewTest3.setOnClickListener(textView3clicked);
+        textViewTest1.setOnClickListener(textView3clicked);
 
         uiComponentsList.add(textViewTest1);
         uiComponentsList.add(textViewTest2);

@@ -63,7 +63,7 @@ public class ScreenProofreadingTest implements Screen {
                 myGdxGame.fontArialBlack64,
                 "Вернуться в лес!",
                 "schulteTable/buttonBackground.png",
-                775, 228
+                -1, 228
         );
 
         backButton.setOnClickListener(onBackButtonClicked);

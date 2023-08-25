@@ -7,10 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
-import com.mygdx.game.screens.ScreenMenu;
-import com.mygdx.game.screens.ScreenOverlayShapes;
-import com.mygdx.game.screens.ScreenProofreadingTest;
-import com.mygdx.game.screens.ScreenSchulteTable;
+import com.mygdx.game.screens.*;
 import com.mygdx.game.utils.ApplicationSettings;
 import com.mygdx.game.utils.SessionHelper;
 import com.mygdx.game.utils.WebHelper;
@@ -22,8 +19,11 @@ public class MyGdxGame extends Game {
     public Vector3 touch;
 
     public ScreenProofreadingTest screenProofreadingTest;
+    public ScreenTheExtraFourth screenTheExtraFourth;
+    public ScreenRavenMatrices screenRavenMatrices;
     public ScreenOverlayShapes screenOverlayShapes;
     public ScreenSchulteTable screenSchulteTable;
+    public ScreenMemoTest screenMemoTest;
     public ScreenMenu screenMenu;
 
     public BitmapFont commonFont;
@@ -49,8 +49,11 @@ public class MyGdxGame extends Game {
         fontArialGray32 = new BitmapFont(Gdx.files.internal("fonts/ArialGray32.fnt"));
 
         screenProofreadingTest = new ScreenProofreadingTest(this);
+        screenTheExtraFourth = new ScreenTheExtraFourth(this);
+        screenRavenMatrices = new ScreenRavenMatrices(this);
         screenOverlayShapes = new ScreenOverlayShapes(this);
         screenSchulteTable = new ScreenSchulteTable(this);
+        screenMemoTest = new ScreenMemoTest(this);
         screenMenu = new ScreenMenu(this);
 
         setScreen(screenMenu);

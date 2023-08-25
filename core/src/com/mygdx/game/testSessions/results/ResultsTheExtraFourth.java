@@ -1,5 +1,7 @@
 package com.mygdx.game.testSessions.results;
 
+import com.mygdx.game.utils.theExtraFourth.CardsPresets;
+
 public class ResultsTheExtraFourth {
 
     private int count_of_selections;
@@ -12,7 +14,7 @@ public class ResultsTheExtraFourth {
         count_of_errors = 0;
     }
 
-    public int getCount_of_selections() {
+    public int getCountOfSelections() {
         return count_of_selections;
     }
 
@@ -24,7 +26,7 @@ public class ResultsTheExtraFourth {
         return workEffectiveMark;
     }
 
-    public int getCount_of_errors() {
+    public int getCountOfErrors() {
         return count_of_errors;
     }
 
@@ -32,12 +34,25 @@ public class ResultsTheExtraFourth {
         spentTimeInSeconds = timeInSeconds;
     }
 
-    public void add_error() {
+    public void addError() {
         count_of_errors += 1;
     }
 
-    public void add_selection() {
+    public void addSelection() {
         count_of_selections += 1;
     }
 
+    public void computeWorkEffectiveMark() {
+        workEffectiveMark = CardsPresets.presets.length - count_of_errors;
+    }
+
+    @Override
+    public String toString() {
+        return "ResultsSchulteTable{" +
+                "spentTimeInSeconds=" + spentTimeInSeconds +
+                ", count of errors=" + count_of_errors +
+                ", count of selections=" + count_of_selections +
+                ", workEffectiveMark=" + workEffectiveMark +
+                '}';
+    }
 }

@@ -23,7 +23,9 @@ public class SceneHelper {
 
     public void drawScene(MyGdxGame myGdxGame) {
         for (View component : uiComponentsList) {
-            component.draw(myGdxGame);
+            if (component.isVisible) {
+                component.draw(myGdxGame);
+            }
         }
     }
 
@@ -34,7 +36,7 @@ public class SceneHelper {
     }
 
     //todo: write disposing
-    public void showScreen(){
+    public void showScreen() {
 
     }
 }

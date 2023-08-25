@@ -52,6 +52,12 @@ public class TableCardsItemView extends View {
         imageViewBorder.isVisible = false;
     }
 
+    public void setCardImageSrc(String imageSrc) {
+        imageViewCard.setImgSource(imageSrc);
+        imageViewCard.x = imageViewBackground.x + imageViewBackground.width / 2 - imageViewCard.width / 2;
+        imageViewCard.y = imageViewBackground.y + imageViewBackground.height / 2 - imageViewCard.height / 2;
+    }
+
     @Override
     public void draw(MyGdxGame myGdxGame) {
         if (imageViewBorder.isVisible) imageViewBorder.draw(myGdxGame);
@@ -61,7 +67,7 @@ public class TableCardsItemView extends View {
 
     @Override
     public boolean isHit(float tx, float ty) {
-        boolean hit = imageViewCard.isHit(tx, ty);
+        boolean hit = imageViewBackground.isHit(tx, ty);
         if (hit) {
             isCardSelected = !isCardSelected;
         }

@@ -3,14 +3,14 @@ package com.mygdx.game.testSessions.results;
 public class ResultsSchulteTable {
 
     private int spentTimeInSeconds;
-    private int count_of_errors;
-    private int count_of_duplicates;
+    private int countOfErrors;
+    private int countOfDuplicates;
     private int workEffectiveMark;
 
     public ResultsSchulteTable() {
         spentTimeInSeconds = 0;
-        count_of_errors = 0;
-        count_of_duplicates = 0;
+        countOfErrors = 0;
+        countOfDuplicates = 0;
         workEffectiveMark = -1;
     }
 
@@ -22,16 +22,16 @@ public class ResultsSchulteTable {
         spentTimeInSeconds = timeInSeconds;
     }
 
-    public void setCount_of_errors(int count_of_errors) {
-        this.count_of_errors = count_of_errors;
+    public void setCountOfErrors(int countOfErrors) {
+        this.countOfErrors = countOfErrors;
     }
 
     public void addError() {
-        count_of_errors += 1;
+        countOfErrors += 1;
     }
 
     public void addDuplicate() {
-        count_of_duplicates += 1;
+        countOfDuplicates += 1;
     }
 
     public void setWorkEffectiveMark(int userAge, int countOfTables) {
@@ -83,10 +83,10 @@ public class ResultsSchulteTable {
     @Override
     public String toString() {
         return "ResultsSchulteTable{" +
-                "spentTimeInSeconds=" + spentTimeInSeconds +
-                ", count_of_errors=" + count_of_errors +
-                ", count_of_duplicates=" + count_of_duplicates +
-                ", workEffectiveMark=" + workEffectiveMark +
+                "spent Time In Seconds=" + spentTimeInSeconds +
+                ", count of errors=" + countOfErrors +
+                ", count of duplicates=" + countOfDuplicates +
+                ", work Effective Mark=" + workEffectiveMark +
                 '}';
     }
 }

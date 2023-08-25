@@ -28,6 +28,9 @@ public class ImageView extends View {
         this.imgSource = imgSource;
         imgTexture = new Texture(imgSource);
 
+        width = imgTexture.getWidth();
+        height = imgTexture.getHeight();
+
         sprite = new Sprite(imgTexture);
 //        sprite.setRotation(0);
     }

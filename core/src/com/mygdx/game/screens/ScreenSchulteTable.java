@@ -12,11 +12,9 @@ import com.mygdx.game.ui.shulteTable.TableCounterView;
 import com.mygdx.game.ui.shulteTable.TableItemView;
 import com.mygdx.game.ui.shulteTable.TableView;
 import com.mygdx.game.ui.shulteTable.TimeCounterView;
-import com.mygdx.game.utils.ApplicationSettings;
 import com.mygdx.game.utils.RenderHelper;
 import com.mygdx.game.utils.SceneHelper;
 import com.mygdx.game.utils.schulteHelper.SelectionResponse;
-import org.w3c.dom.Text;
 
 import static com.mygdx.game.utils.ApplicationSettings.*;
 import static com.mygdx.game.utils.UsingColors.COLOR_BG_GRAY;
@@ -46,16 +44,43 @@ public class ScreenSchulteTable implements Screen {
         sceneBreak = new SceneHelper();
         scenePassed = new SceneHelper();
 
-        tableView = new TableView(623, 120, SCHULTE_TABLE_SIZE, myGdxGame.fontArialGray64,
-                SCHULTE_TABLE_ITEMS_SIZE, onTableItemClicked);
-        timeCounterView = new TimeCounterView(623, 921, "Прошло времени",
-                myGdxGame.fontArialBlack64, myGdxGame.fontArialBlackBold64, 30000);
-        tableCounterView = new TableCounterView(636, 660, "Осталось", "таблицы",
-                myGdxGame.fontArialBlack64, myGdxGame.fontArialBlackBold64, COUNT_OF_SCHULTE_TABLES);
-        smallTableCounterView = new TextView(myGdxGame.fontArialGray32, "1/" + COUNT_OF_SCHULTE_TABLES, -1, 43);
-        motivatorTextView = new TextView(myGdxGame.fontArialBlack64, "Молодец, ты справился!", -1, 816);
+        tableView = new TableView(
+                623, 120,
+                SCHULTE_TABLE_SIZE,
+                myGdxGame.fontArialGray64,
+                SCHULTE_TABLE_ITEMS_SIZE,
+                onTableItemClicked
+        );
+
+        timeCounterView = new TimeCounterView(
+                623, 921,
+                "Прошло времени",
+                myGdxGame.fontArialBlack64,
+                myGdxGame.fontArialBlackBold64,
+                30000
+        );
+        tableCounterView = new TableCounterView(
+                636, 660,
+                "Осталось", "таблицы",
+                myGdxGame.fontArialBlack64,
+                myGdxGame.fontArialBlackBold64,
+                COUNT_OF_SCHULTE_TABLES
+        );
+
+        smallTableCounterView = new TextView(
+                myGdxGame.fontArialGray32,
+                "1/" + COUNT_OF_SCHULTE_TABLES,
+                -1, 43
+        );
+
+        motivatorTextView = new TextView(
+                myGdxGame.fontArialBlack64,
+                "Молодец, ты справился!",
+                -1, 816
+        );
 
         BackgroundPixmap background = new BackgroundPixmap(COLOR_BG_GRAY);
+
         TextButton startButton = new TextButton(
                 myGdxGame.fontArialBlack64,
                 "Начать",

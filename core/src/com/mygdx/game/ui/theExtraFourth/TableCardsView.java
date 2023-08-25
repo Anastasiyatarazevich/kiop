@@ -39,6 +39,14 @@ public class TableCardsView extends View {
         this.onTableCardsClickListener = onTableCardsClickListener;
     }
 
+    public void setCards(ArrayList<String> cardsSrc) {
+        idxOfSelectedCard = -1;
+        for (int i = 0; i < 4; i++) {
+            tableCardsItemView[i].setCardActive();
+            tableCardsItemView[i].setCardImageSrc(FOURTH_CARD_DIR + cardsSrc.get(i) + ".png");
+        }
+    }
+
     @Override
     public void draw(MyGdxGame myGdxGame) {
         for (TableCardsItemView cardView : tableCardsItemView) {

@@ -12,12 +12,13 @@ public class SessionTheExtraFourth {
 
     Timer fullTime;
     public int currentQuadIdx;
+    private int selectedCardIdx;
 
     public SessionTheExtraFourth() {
         testResults = new ResultsTheExtraFourth();
         fullTime = new Timer();
         testState = StateTheExtraFourth.GREETING;
-
+        selectedCardIdx = -1;
     }
 
     public void startTest() {
@@ -25,6 +26,34 @@ public class SessionTheExtraFourth {
         fullTime.startTimer();
         currentQuadIdx = 0;
         CardsPresets.shufflePreset();
+    }
+
+    public void endTest() {
+        testState = StateTheExtraFourth.PASSED;
+        fullTime.terminateTimer();
+        testResults.setTime(fullTime.getFinalTimeInSeconds());
+        testResults.computeWorkEffectiveMark();
+        System.out.println(testResults);
+    }
+
+    public void cardWasSelected(int idxOfCard) {
+        selectedCardIdx = idxOfCard;
+        testResults.addSelection();
+    }
+
+    public boolean nextCards() {
+        if (selectedCardIdx != CardsPresets.presets[currentQuadIdx].getIdxOfExtra()) {
+            testResults.addError();
+        }
+        currentQuadIdx += 1;
+        selectedCardIdx = -1;
+
+        if (currentQuadIdx == CardsPresets.presets.length) {
+            endTest();
+            return false;
+        }
+
+        return true;
     }
 
 }

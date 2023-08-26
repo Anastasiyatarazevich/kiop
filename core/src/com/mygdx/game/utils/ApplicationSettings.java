@@ -1,6 +1,8 @@
 package com.mygdx.game.utils;
 
 
+import com.sun.org.apache.bcel.internal.generic.PUSH;
+
 public class ApplicationSettings {
 
     // ---- General settings
@@ -8,7 +10,6 @@ public class ApplicationSettings {
     public static int SCR_WIDTH = 1920;
     public static int SCR_HEIGHT = 1200;
 
-    public static String COMMON_DELIMITER = " ";
 
     // ---- Schulte Table settings
 
@@ -24,7 +25,6 @@ public class ApplicationSettings {
 
 
     // ---- Proof-Reading test settings
-
 
     // ---- ---- Ui
 
@@ -45,10 +45,26 @@ public class ApplicationSettings {
     // TODO: remove it
     public static int COUNT_OF_FILES = 2;
 
+
     // ---- The extra fourth settings
 
     public static String FOURTH_CARD_DIR = "theExtraFourth/cardsImages/";
     public static int FOURTH_CARD_SIZE = 300;
     public static int FOURTH_CARD_PADDING = 50;
+
+    // ---- Memo settings
+
+    // ---- ---- Logic
+
+    public static String CARDS_DIR = "memo/cardsImages";
+    public static int COUNT_OF_CARDS_TO_REMEMBER = 15;
+    public static int COUNT_OF_ADDITION_CARDS = 15;
+    public static int SECONDS_TO_REMEMBER = 30;
+
+    // ---- ---- Ui
+
+    public static int CARD_SIZE = 170;
+    public static int CARD_PADDING = 20;
+    public static int CARD_IMAGE_SIZE = 140;
 
 }

@@ -15,35 +15,6 @@ public class ImageView extends View {
     public Texture imgTexture;
 
     public Sprite sprite;
-    public void setImgTexture(Texture imgTexture) {
-        this.imgTexture = imgTexture;
-    }
-
-    public String getImgSource() {
-        return imgSource;
-    }
-
-    public void setImgSource(String imgSource) {
-        if (imgSource.equals(this.imgSource)) return;
-        this.imgSource = imgSource;
-        imgTexture = new Texture(imgSource);
-
-        width = imgTexture.getWidth();
-        height = imgTexture.getHeight();
-
-        sprite = new Sprite(imgTexture);
-//        sprite.setRotation(0);
-    }
-
-    public void setImgSource2(String imgSource) {
-        if (imgSource.equals(this.imgSource)) return;
-        this.imgSource = imgSource;
-        imgTexture = new Texture(imgSource);
-
-        sprite = new Sprite(imgTexture);
-//        sprite.setRotation(0);
-    }
-
 
     public ImageView(float x, float y, String imgSource) {
         super(x, y);
@@ -63,7 +34,6 @@ public class ImageView extends View {
         width = imgTexture.getWidth();
         height = imgTexture.getHeight();
     }
-
 
     public ImageView(float x, float y, float width, float height, String imgSource) {
         super(x, y, width, height);
@@ -91,9 +61,33 @@ public class ImageView extends View {
         this.imgTexture = imgTexture;
     }
 
-    // TODO: implement this method
-    public void setRotation(int rotation) {
+    public void setImgTexture(Texture imgTexture) {
+        this.imgTexture = imgTexture;
+    }
 
+    public String getImgSource() {
+        return imgSource;
+    }
+
+    public void setImgSource(String imgSource) {
+        if (imgSource.equals(this.imgSource)) return;
+        this.imgSource = imgSource;
+        imgTexture = new Texture(imgSource);
+
+        width = imgTexture.getWidth();
+        height = imgTexture.getHeight();
+
+        sprite = new Sprite(imgTexture);
+//        sprite.setRotation(0);
+    }
+
+    public void setImgSource2(String imgSource) {
+        if (imgSource.equals(this.imgSource)) return;
+        this.imgSource = imgSource;
+        imgTexture = new Texture(imgSource);
+
+        sprite = new Sprite(imgTexture);
+//        sprite.setRotation(0);
     }
 
     @Override

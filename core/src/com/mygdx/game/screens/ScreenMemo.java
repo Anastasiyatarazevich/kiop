@@ -8,11 +8,6 @@ import com.mygdx.game.ui.TextButton;
 import com.mygdx.game.utils.RenderHelper;
 import com.mygdx.game.utils.SceneHelper;
 
-import java.awt.*;
-
-import static com.mygdx.game.testSessions.sessionsStates.StateMemo.GREETING;
-import static com.mygdx.game.testSessions.sessionsStates.StateMemo.PASSED;
-import static com.mygdx.game.testSessions.sessionsStates.StateTheExtraFourth.CARDS_SHOWING;
 import static com.mygdx.game.utils.UsingColors.COLOR_BG_GRAY;
 
 public class ScreenMemo implements Screen {

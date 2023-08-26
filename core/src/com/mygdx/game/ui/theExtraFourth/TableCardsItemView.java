@@ -20,11 +20,11 @@ public class TableCardsItemView extends View {
     public TableCardsItemView(float x, float y, String cardSrc) {
         super(x, y);
         textureCardItem = new Texture(cardSrc);
-        textureActiveCardBackground = new Texture("theExtraFourth/availableCardBackground.png");
-        textureSelectedCardBackground = new Texture("theExtraFourth/selectedCardBackground.png");
+        textureActiveCardBackground = new Texture("ui/availableCardBackground.png");
+        textureSelectedCardBackground = new Texture("ui/selectedCardBackground.png");
 
         imageViewBackground = new ImageView(x, y, textureActiveCardBackground);
-        imageViewBorder = new ImageView(x, y, "theExtraFourth/selectedCardBorder.png");
+        imageViewBorder = new ImageView(x, y, "ui/selectedCardBorder.png");
         imageViewCard = new ImageView(x, y, textureCardItem);
 
         imageViewBorder.x = imageViewBackground.x - (imageViewBorder.width - imageViewBackground.width) / 2;

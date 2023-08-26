@@ -4,7 +4,7 @@ import com.badlogic.gdx.Screen;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.testSessions.SessionSchulteTable;
 import com.mygdx.game.testSessions.sessionsStates.StateSchulteTable;
-import com.mygdx.game.ui.BackgroundPixmap;
+import com.mygdx.game.ui.BackgroundPixmapView;
 import com.mygdx.game.ui.TextButton;
 import com.mygdx.game.ui.TextView;
 import com.mygdx.game.ui.View;
@@ -79,7 +79,7 @@ public class ScreenSchulteTable implements Screen {
                 -1, 816
         );
 
-        BackgroundPixmap background = new BackgroundPixmap(COLOR_BG_GRAY);
+        BackgroundPixmapView background = new BackgroundPixmapView(COLOR_BG_GRAY);
 
         TextButton startButton = new TextButton(
                 myGdxGame.fontArialBlack64,

@@ -134,7 +134,7 @@ public class ScreenMenu implements Screen {
     View.OnClickListener textView6Clicked = new View.OnClickListener() {
         @Override
         public void onClicked() {
-            myGdxGame.setScreen(myGdxGame.screenMemoTest);
+            myGdxGame.setScreen(myGdxGame.screenMemo);
         }
     };
 }

@@ -10,7 +10,6 @@ import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.screens.*;
 import com.mygdx.game.utils.ApplicationSettings;
 import com.mygdx.game.utils.SessionHelper;
-import com.mygdx.game.utils.WebHelper;
 
 public class MyGdxGame extends Game {
 
@@ -23,7 +22,7 @@ public class MyGdxGame extends Game {
     public ScreenRavenMatrices screenRavenMatrices;
     public ScreenOverlayShapes screenOverlayShapes;
     public ScreenSchulteTable screenSchulteTable;
-    public ScreenMemoTest screenMemoTest;
+    public ScreenMemo screenMemo;
     public ScreenMenu screenMenu;
 
     public BitmapFont commonFont;
@@ -53,7 +52,7 @@ public class MyGdxGame extends Game {
         screenRavenMatrices = new ScreenRavenMatrices(this);
         screenOverlayShapes = new ScreenOverlayShapes(this);
         screenSchulteTable = new ScreenSchulteTable(this);
-        screenMemoTest = new ScreenMemoTest(this);
+        screenMemo = new ScreenMemo(this);
         screenMenu = new ScreenMenu(this);
 
         setScreen(screenMenu);

@@ -6,11 +6,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.utils.ApplicationSettings;
 
-public class BackgroundPixmap extends View {
+public class BackgroundPixmapView extends View {
 
     Texture backgroundTexture;
 
-    public BackgroundPixmap(Color pixmapColor) {
+    public BackgroundPixmapView(Color pixmapColor) {
         super(0, 0, ApplicationSettings.SCR_WIDTH, ApplicationSettings.SCR_HEIGHT);
         Pixmap pixmap = new Pixmap((int) width, (int) height, Pixmap.Format.RGBA8888);
         pixmap.setColor(pixmapColor);

@@ -11,7 +11,7 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.testSessions.SessionProofTest;
 import com.mygdx.game.testSessions.results.ResultsProofReadingTest;
 import com.mygdx.game.testSessions.sessionsStates.StateProofTable;
-import com.mygdx.game.ui.BackgroundPixmap;
+import com.mygdx.game.ui.BackgroundPixmapView;
 import com.mygdx.game.ui.TextButton;
 import com.mygdx.game.ui.TextView;
 import com.mygdx.game.ui.View;
@@ -50,7 +50,7 @@ public class ScreenProofreadingTest implements Screen {
         goBackText = new TextView(myGdxGame.fontArialBlack64, "Молодец, ты справился!", -1, 816);
 
 
-        BackgroundPixmap background = new BackgroundPixmap(COLOR_BG_GRAY);
+        BackgroundPixmapView background = new BackgroundPixmapView(COLOR_BG_GRAY);
 
         TextButton startButton = new TextButton(
                 myGdxGame.fontArialBlack64,

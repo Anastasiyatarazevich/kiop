@@ -50,7 +50,7 @@ public class ScreenTheExtraFourth implements Screen {
                 "icons/icon_next.png"
         );
 
-        BackgroundPixmap background = new BackgroundPixmap(COLOR_BG_GRAY);
+        BackgroundPixmapView background = new BackgroundPixmapView(COLOR_BG_GRAY);
 
         TextButton buttonStart = new TextButton(
                 myGdxGame.fontArialBlack64,

@@ -14,7 +14,6 @@ import com.mygdx.game.utils.RenderHelper;
 import com.mygdx.game.utils.SceneHelper;
 import com.mygdx.game.utils.overlayShapes.ColorsCodes;
 import com.mygdx.game.utils.overlayShapes.Shape;
-import com.mygdx.game.utils.time.Timer;
 
 import java.util.ArrayList;
 
@@ -51,7 +50,7 @@ public class ScreenOverlayShapes implements Screen {
         listShapesImages = new ArrayList<>();
         spritelistShapesImages = new ArrayList<>();
 
-        BackgroundPixmap background = new BackgroundPixmap(COLOR_BG_GRAY);
+        BackgroundPixmapView background = new BackgroundPixmapView(COLOR_BG_GRAY);
 
         TextView textViewTitle = new TextView(
                 myGdxGame.fontArialBlack64,

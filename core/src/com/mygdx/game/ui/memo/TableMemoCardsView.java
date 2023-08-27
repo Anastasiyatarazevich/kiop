@@ -14,26 +14,29 @@ public class TableMemoCardsView extends View {
 
     private int count_of_animated;
 
-    private int cardSize;
-    private int padding;
+    private final int cardSize;
+    private final int padding;
 
-    private Texture textureSelectedCardBackground;
-    private Texture textureActiveCardBackground;
+    private final Texture textureSelectedCardBackground;
+    private final Texture textureActiveCardBackground;
 
     OnTableItemClickListener onTableItemClickListener;
+    OnCardsReleasedListener onCardsReleasedListener;
 
     String[] arrayImagesSrc;
     ArrayList<TableMemoCardsItemsView> arrayListCardsView;
-    OnCardsHided onCardsHided;
+    OnCardsHidedListener onCardsHided;
 
     public TableMemoCardsView(float x, float y, int cardSize, int padding,
-                              OnTableItemClickListener onTableItemClickListener) {
+                              OnTableItemClickListener onTableItemClickListener,
+                              OnCardsReleasedListener onCardsReleasedListener) {
         super(x, y);
 
         this.cardSize = cardSize;
         this.padding = padding;
 
         this.onTableItemClickListener = onTableItemClickListener;
+        this.onCardsReleasedListener = onCardsReleasedListener;
 
         arrayListCardsView = new ArrayList<>();
         textureActiveCardBackground = new Texture("ui/availableCardBackground.png");
@@ -41,7 +44,7 @@ public class TableMemoCardsView extends View {
 
     }
 
-    public void setCards(String[] arrayImagesSrc, OnCardsHided onCardsHided) {
+    public void setCards(String[] arrayImagesSrc, OnCardsHidedListener onCardsHided) {
 
         this.onCardsHided = onCardsHided;
         this.arrayImagesSrc = arrayImagesSrc;
@@ -58,6 +61,7 @@ public class TableMemoCardsView extends View {
                         textureActiveCardBackground,
                         CARDS_DIR + arrayImagesSrc[j * 5 + i] + ".png"
                 );
+                tableMemoCardsItemsView.isClickable = false;
                 tableMemoCardsItemsView.setOnEndAnimationListener(onEndAnimation);
                 arrayListCardsView.add(tableMemoCardsItemsView);
             }
@@ -99,6 +103,8 @@ public class TableMemoCardsView extends View {
 
     public void releaseCards() {
 
+        count_of_animated = 0;
+
         float beginX = SCR_WIDTH / 2f - cardSize / 2f;
         float beginY = SCR_HEIGHT / 2f - cardSize / 2f;
 
@@ -109,21 +115,21 @@ public class TableMemoCardsView extends View {
                 if (i == 0 && j == 0) continue;
                 if (i == 0 && j == 7) continue;
 
-                arrayListCardsView.get(cardIdx).setImage(
-                        CARDS_DIR + arrayImagesSrc[cardIdx] + ".png"
-                );
+                TableMemoCardsItemsView card = arrayListCardsView.get(cardIdx);
 
-                arrayListCardsView.get(cardIdx).setPosition(
-                        beginX,
-                        beginY
-                );
+                card.setImage(CARDS_DIR + arrayImagesSrc[cardIdx] + ".png");
 
-                arrayListCardsView.get(cardIdx).setVector(
+                card.setPosition(beginX, beginY);
+
+                card.setVector(
                         x + j * cardSize + j * padding,
                         y + i * cardSize + i * padding
                 );
 
-                arrayListCardsView.get(cardIdx).isSelected = false;
+                card.setOnEndAnimationListener(onEndAnimation);
+
+                card.isSelected = false;
+                card.isClickable = true;
 
                 cardIdx += 1;
             }
@@ -163,8 +169,15 @@ public class TableMemoCardsView extends View {
         @Override
         public void onEnd() {
             count_of_animated += 1;
-            if (count_of_animated == COUNT_OF_CARDS_TO_REMEMBER) {
-                onCardsHided.onHided();
+            System.out.println(count_of_animated);
+            if (arrayListCardsView.size() == COUNT_OF_CARDS_TO_REMEMBER) {
+                if (count_of_animated == COUNT_OF_CARDS_TO_REMEMBER) {
+                    onCardsHided.onHided();
+                }
+            } else {
+                if (count_of_animated == COUNT_OF_CARDS_TO_REMEMBER + COUNT_OF_ADDITION_CARDS) {
+                    onCardsReleasedListener.onReleased();
+                }
             }
         }
     };
@@ -187,8 +200,12 @@ public class TableMemoCardsView extends View {
         public void onClicked(String cardSrc);
     }
 
-    public interface OnCardsHided {
+    public interface OnCardsHidedListener {
         public void onHided();
+    }
+
+    public interface OnCardsReleasedListener {
+        public void onReleased();
     }
 
 }

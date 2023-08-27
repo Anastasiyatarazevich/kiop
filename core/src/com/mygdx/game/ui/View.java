@@ -11,8 +11,11 @@ public class View implements Disposable {
     public float y;
     public float width;
     public float height;
-    public boolean isVisible;
+
     public OnClickListener onClickListener;
+
+    public boolean isVisible;
+    public boolean isClickable;
 
     private float velocityX;
     private float velocityY;
@@ -24,6 +27,7 @@ public class View implements Disposable {
         this.width = width;
         this.height = height;
         isVisible = true;
+        isClickable = false;
     }
 
     public View(float x, float y) {
@@ -31,6 +35,7 @@ public class View implements Disposable {
         this.y = y;
         this.onClickListener = null;
         isVisible = true;
+        isClickable = false;
     }
 
     public float getVelocityX() {
@@ -73,6 +78,7 @@ public class View implements Disposable {
     }
 
     public boolean isHit(float tx, float ty) {
+        if (!isClickable) return false;
         boolean isTouchHitComponent = x < tx && tx < x + width && y > ty && ty > y - height;
         if (isTouchHitComponent && onClickListener != null) onClickListener.onClicked();
         return isTouchHitComponent;

@@ -86,6 +86,7 @@ public class TableMemoCardsItemsView extends View implements Movable {
 
     @Override
     public boolean isHit(float tx, float ty) {
+        if (!isClickable) return false;
         boolean isHit = imageViewBackground.isHit(tx, ty);
         if (isHit) {
             isSelected = !isSelected;

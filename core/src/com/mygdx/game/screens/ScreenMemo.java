@@ -8,11 +8,11 @@ import com.mygdx.game.ui.*;
 import com.mygdx.game.ui.memo.TableMemoCardsView;
 import com.mygdx.game.utils.RenderHelper;
 import com.mygdx.game.utils.SceneHelper;
-import com.mygdx.game.utils.memo.CardsPresetsMemo;
 
 import static com.mygdx.game.utils.ApplicationSettings.*;
 import static com.mygdx.game.utils.UsingColors.COLOR_BG_GRAY;
-import static com.mygdx.game.utils.memo.CardsPresetsMemo.getShuffledPreset;
+
+// TODO: remove the opportunity to select more than COUNT_OF_CARDS_TO_REMEMBER cards
 
 public class ScreenMemo implements Screen {
 
@@ -26,6 +26,7 @@ public class ScreenMemo implements Screen {
 
     TableMemoCardsView tableMemoCardsView;
     TimeCounterView timeCounterView;
+    TextButton textButtonCompleteTest;
     TextView textViewRememberTitle;
 
     public ScreenMemo(MyGdxGame myGdxGame) {
@@ -38,7 +39,14 @@ public class ScreenMemo implements Screen {
         scenePassed = new SceneHelper();
 
         BackgroundPixmapView backgroundView = new BackgroundPixmapView(COLOR_BG_GRAY);
-        tableMemoCardsView = new TableMemoCardsView(0, 140, CARD_SIZE, CARD_PADDING, onTableItemClickListener);
+
+        tableMemoCardsView = new TableMemoCardsView(
+                0, 140,
+                CARD_SIZE,
+                CARD_PADDING,
+                onTableItemClickListener,
+                onCardsReleasedListener
+        );
 
         TextButton startButton = new TextButton(
                 myGdxGame.fontArialBlack64,
@@ -61,7 +69,30 @@ public class ScreenMemo implements Screen {
                 0
         );
 
+        textButtonCompleteTest = new TextButton(
+                myGdxGame.fontArialBlack64,
+                "Готово",
+                "schulteTable/buttonBackground.png",
+                -1, 62
+        );
+
+        TextButton backButton = new TextButton(
+                myGdxGame.fontArialBlack64,
+                "Вернуться в лес",
+                "schulteTable/buttonBackground.png",
+                -1, 228
+        );
+
+        TextView motivatorTextView = new TextView(
+                myGdxGame.fontArialBlack64,
+                "Молодец, ты справился!",
+                -1, 816
+        );
+
         startButton.setOnClickListener(onButtonStartClicked);
+        backButton.setOnClickListener(onBackButtonClicked);
+        textButtonCompleteTest.setOnClickListener(onButtonCompleteTestClicked);
+        textButtonCompleteTest.isVisible = false;
 
         sceneGreeting.addActor(backgroundView);
         sceneGreeting.addActor(startButton);
@@ -70,8 +101,11 @@ public class ScreenMemo implements Screen {
         sceneShowingCards.addActor(timeCounterView);
         sceneShowingCards.addActor(tableMemoCardsView);
         sceneShowingCards.addActor(textViewRememberTitle);
+        sceneShowingCards.addActor(textButtonCompleteTest);
 
         scenePassed.addActor(backgroundView);
+        scenePassed.addActor(backButton);
+        scenePassed.addActor(motivatorTextView);
     }
 
     @Override
@@ -140,13 +174,13 @@ public class ScreenMemo implements Screen {
     View.OnClickListener onButtonStartClicked = new View.OnClickListener() {
         @Override
         public void onClicked() {
-            tableMemoCardsView.setCards(getShuffledPreset(), onCardsHided);
+            tableMemoCardsView.setCards(testSession.shownCards, onCardsHided);
             testSession.startTest();
             timeCounterView.startTimer();
         }
     };
 
-    TableMemoCardsView.OnCardsHided onCardsHided = new TableMemoCardsView.OnCardsHided() {
+    TableMemoCardsView.OnCardsHidedListener onCardsHided = new TableMemoCardsView.OnCardsHidedListener() {
         @Override
         public void onHided() {
             timeCounterView.isVisible = false;
@@ -155,10 +189,32 @@ public class ScreenMemo implements Screen {
         }
     };
 
+    TableMemoCardsView.OnCardsReleasedListener onCardsReleasedListener = new TableMemoCardsView.OnCardsReleasedListener() {
+        @Override
+        public void onReleased() {
+            testSession.cardsWereReleased();
+        }
+    };
+
     TableMemoCardsView.OnTableItemClickListener onTableItemClickListener = new TableMemoCardsView.OnTableItemClickListener() {
         @Override
         public void onClicked(String cardSrc) {
-            System.out.println(cardSrc);
+            textButtonCompleteTest.isVisible = true;
+            testSession.selectCard(cardSrc.split("/")[2].split("\\.")[0]);
+        }
+    };
+
+    View.OnClickListener onButtonCompleteTestClicked = new View.OnClickListener() {
+        @Override
+        public void onClicked() {
+            testSession.endTest();
+        }
+    };
+
+    View.OnClickListener onBackButtonClicked = new View.OnClickListener() {
+        @Override
+        public void onClicked() {
+            myGdxGame.setScreen(myGdxGame.screenMenu);
         }
     };
 }

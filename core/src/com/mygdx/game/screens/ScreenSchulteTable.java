@@ -58,6 +58,7 @@ public class ScreenSchulteTable implements Screen {
                 myGdxGame.fontArialBlack64,
                 myGdxGame.fontArialBlackBold64
         );
+
         tableCounterView = new TableCounterView(
                 636, 660,
                 "Осталось", "таблицы",

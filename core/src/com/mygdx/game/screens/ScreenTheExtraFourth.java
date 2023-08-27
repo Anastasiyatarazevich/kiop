@@ -7,7 +7,7 @@ import com.mygdx.game.ui.*;
 import com.mygdx.game.ui.theExtraFourth.TableCardsView;
 import com.mygdx.game.utils.RenderHelper;
 import com.mygdx.game.utils.SceneHelper;
-import com.mygdx.game.utils.theExtraFourth.CardsPresets;
+import com.mygdx.game.utils.theExtraFourth.CardsPresetsTheExtraFourth;
 
 import static com.mygdx.game.utils.ApplicationSettings.*;
 import static com.mygdx.game.utils.UsingColors.COLOR_BG_GRAY;
@@ -36,12 +36,12 @@ public class ScreenTheExtraFourth implements Screen {
         tableCardsView = new TableCardsView(
                 -1, 160,
                 FOURTH_CARD_PADDING, FOURTH_CARD_SIZE,
-                CardsPresets.presets[testSession.currentQuadIdx].getListOfCardsSrc()
+                CardsPresetsTheExtraFourth.presets[testSession.currentQuadIdx].getListOfCardsSrc()
         );
 
         tableCounterView = new TextView(
                 myGdxGame.fontArialGray32,
-                "1/" + CardsPresets.presets.length,
+                "1/" + CardsPresetsTheExtraFourth.presets.length,
                 -1, 62
         );
 
@@ -176,8 +176,8 @@ public class ScreenTheExtraFourth implements Screen {
             if (!testSession.nextCards()) {
                 return;
             }
-            tableCardsView.setCards(CardsPresets.presets[testSession.currentQuadIdx].getListOfCardsSrc());
-            tableCounterView.setText((testSession.currentQuadIdx + 1) + "/" + CardsPresets.presets.length);
+            tableCardsView.setCards(CardsPresetsTheExtraFourth.presets[testSession.currentQuadIdx].getListOfCardsSrc());
+            tableCounterView.setText((testSession.currentQuadIdx + 1) + "/" + CardsPresetsTheExtraFourth.presets.length);
         }
     };
 

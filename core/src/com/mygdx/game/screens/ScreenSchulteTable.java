@@ -11,7 +11,7 @@ import com.mygdx.game.ui.View;
 import com.mygdx.game.ui.shulteTable.TableCounterView;
 import com.mygdx.game.ui.shulteTable.TableItemView;
 import com.mygdx.game.ui.shulteTable.TableView;
-import com.mygdx.game.ui.shulteTable.TimeCounterView;
+import com.mygdx.game.ui.TimeCounterView;
 import com.mygdx.game.utils.RenderHelper;
 import com.mygdx.game.utils.SceneHelper;
 import com.mygdx.game.utils.schulteHelper.SelectionResponse;
@@ -56,8 +56,7 @@ public class ScreenSchulteTable implements Screen {
                 623, 921,
                 "Прошло времени",
                 myGdxGame.fontArialBlack64,
-                myGdxGame.fontArialBlackBold64,
-                30000
+                myGdxGame.fontArialBlackBold64
         );
         tableCounterView = new TableCounterView(
                 636, 660,

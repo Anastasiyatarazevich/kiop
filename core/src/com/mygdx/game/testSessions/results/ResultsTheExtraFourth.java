@@ -1,6 +1,6 @@
 package com.mygdx.game.testSessions.results;
 
-import com.mygdx.game.utils.theExtraFourth.CardsPresets;
+import com.mygdx.game.utils.theExtraFourth.CardsPresetsTheExtraFourth;
 
 public class ResultsTheExtraFourth {
 
@@ -43,7 +43,7 @@ public class ResultsTheExtraFourth {
     }
 
     public void computeWorkEffectiveMark() {
-        workEffectiveMark = CardsPresets.presets.length - count_of_errors;
+        workEffectiveMark = CardsPresetsTheExtraFourth.presets.length - count_of_errors;
     }
 
     @Override

@@ -2,7 +2,7 @@ package com.mygdx.game.testSessions;
 
 import com.mygdx.game.testSessions.results.ResultsTheExtraFourth;
 import com.mygdx.game.testSessions.sessionsStates.StateTheExtraFourth;
-import com.mygdx.game.utils.theExtraFourth.CardsPresets;
+import com.mygdx.game.utils.theExtraFourth.CardsPresetsTheExtraFourth;
 import com.mygdx.game.utils.time.Timer;
 
 public class SessionTheExtraFourth {
@@ -25,7 +25,7 @@ public class SessionTheExtraFourth {
         testState = StateTheExtraFourth.CARDS_SHOWING;
         fullTime.startTimer();
         currentQuadIdx = 0;
-        CardsPresets.shufflePreset();
+        CardsPresetsTheExtraFourth.shufflePreset();
     }
 
     public void endTest() {
@@ -42,13 +42,13 @@ public class SessionTheExtraFourth {
     }
 
     public boolean nextCards() {
-        if (selectedCardIdx != CardsPresets.presets[currentQuadIdx].getIdxOfExtra()) {
+        if (selectedCardIdx != CardsPresetsTheExtraFourth.presets[currentQuadIdx].getIdxOfExtra()) {
             testResults.addError();
         }
         currentQuadIdx += 1;
         selectedCardIdx = -1;
 
-        if (currentQuadIdx == CardsPresets.presets.length) {
+        if (currentQuadIdx == CardsPresetsTheExtraFourth.presets.length) {
             endTest();
             return false;
         }

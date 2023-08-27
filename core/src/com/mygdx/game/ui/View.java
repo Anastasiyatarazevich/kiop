@@ -14,9 +14,10 @@ public class View implements Disposable {
     public boolean isVisible;
     public OnClickListener onClickListener;
 
-    public void setOnClickListener(OnClickListener onClickListener) {
-        this.onClickListener = onClickListener;
-    }
+    private float velocityX;
+    private float velocityY;
+    private float accelerationX;
+    private float accelerationY;
 
     View(float x, float y, float width, float height) {
         this(x, y);
@@ -30,6 +31,42 @@ public class View implements Disposable {
         this.y = y;
         this.onClickListener = null;
         isVisible = true;
+    }
+
+    public float getVelocityX() {
+        return velocityX;
+    }
+
+    public void setVelocityX(float velocityX) {
+        this.velocityX = velocityX;
+    }
+
+    public float getVelocityY() {
+        return velocityY;
+    }
+
+    public void setVelocityY(float velocityY) {
+        this.velocityY = velocityY;
+    }
+
+    public float getAccelerationX() {
+        return accelerationX;
+    }
+
+    public void setAccelerationX(float accelerationX) {
+        this.accelerationX = accelerationX;
+    }
+
+    public float getAccelerationY() {
+        return accelerationY;
+    }
+
+    public void setAccelerationY(float accelerationY) {
+        this.accelerationY = accelerationY;
+    }
+
+    public void setOnClickListener(OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
     }
 
     public void draw(MyGdxGame myGdxGame) {

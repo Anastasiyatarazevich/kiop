@@ -17,4 +17,16 @@ public class SessionMemo {
         guessingTime = new Timer();
     }
 
+    public void startTest() {
+        testState = StateMemo.REMEMBERING_CARDS;
+    }
+
+    public void hideCards() {
+        testState = StateMemo.HIDING_CARDS;
+    }
+
+    public void endTest() {
+
+    }
+
 }

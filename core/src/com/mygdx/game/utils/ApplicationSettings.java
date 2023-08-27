@@ -52,19 +52,21 @@ public class ApplicationSettings {
     public static int FOURTH_CARD_SIZE = 300;
     public static int FOURTH_CARD_PADDING = 50;
 
+
     // ---- Memo settings
 
     // ---- ---- Logic
 
-    public static String CARDS_DIR = "memo/cardsImages";
+    public static String CARDS_DIR = "memo/cardsImages/";
     public static int COUNT_OF_CARDS_TO_REMEMBER = 15;
     public static int COUNT_OF_ADDITION_CARDS = 15;
-    public static int SECONDS_TO_REMEMBER = 30;
+    public static int SECONDS_TO_REMEMBER = 3;
 
     // ---- ---- Ui
 
     public static int CARD_SIZE = 170;
+    public static float CARD_MOVING_VELOCITY = 5;
     public static int CARD_PADDING = 20;
-    public static int CARD_IMAGE_SIZE = 140;
+    public static int CARD_IMAGE_SIZE = 120;
 
 }

@@ -3,7 +3,7 @@ package com.mygdx.game.utils.theExtraFourth;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class CardsPresets {
+public class CardsPresetsTheExtraFourth {
 
     public static Quad[] presets = {
             new Quad("card4", "card2", "card3", "card5", 1),

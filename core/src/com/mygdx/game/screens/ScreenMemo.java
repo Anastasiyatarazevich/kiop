@@ -12,6 +12,7 @@ import com.mygdx.game.utils.memo.CardsPresetsMemo;
 
 import static com.mygdx.game.utils.ApplicationSettings.*;
 import static com.mygdx.game.utils.UsingColors.COLOR_BG_GRAY;
+import static com.mygdx.game.utils.memo.CardsPresetsMemo.getShuffledPreset;
 
 public class ScreenMemo implements Screen {
 
@@ -25,6 +26,7 @@ public class ScreenMemo implements Screen {
 
     TableMemoCardsView tableMemoCardsView;
     TimeCounterView timeCounterView;
+    TextView textViewRememberTitle;
 
     public ScreenMemo(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
@@ -36,7 +38,7 @@ public class ScreenMemo implements Screen {
         scenePassed = new SceneHelper();
 
         BackgroundPixmapView backgroundView = new BackgroundPixmapView(COLOR_BG_GRAY);
-        tableMemoCardsView = new TableMemoCardsView(0, 140, CARD_SIZE, CARD_PADDING);
+        tableMemoCardsView = new TableMemoCardsView(0, 140, CARD_SIZE, CARD_PADDING, onTableItemClickListener);
 
         TextButton startButton = new TextButton(
                 myGdxGame.fontArialBlack64,
@@ -45,10 +47,10 @@ public class ScreenMemo implements Screen {
                 -1, 155
         );
 
-        TextView textViewRememberTitle = new TextView(
+        textViewRememberTitle = new TextView(
                 myGdxGame.fontArialBlack64,
                 "Запомни как можно больше карточек",
-                -1, 1000
+                -1, 1050
         );
 
         timeCounterView = new TimeCounterView(
@@ -138,9 +140,25 @@ public class ScreenMemo implements Screen {
     View.OnClickListener onButtonStartClicked = new View.OnClickListener() {
         @Override
         public void onClicked() {
-            tableMemoCardsView.setCards(CardsPresetsMemo.preset);
+            tableMemoCardsView.setCards(getShuffledPreset(), onCardsHided);
             testSession.startTest();
             timeCounterView.startTimer();
+        }
+    };
+
+    TableMemoCardsView.OnCardsHided onCardsHided = new TableMemoCardsView.OnCardsHided() {
+        @Override
+        public void onHided() {
+            timeCounterView.isVisible = false;
+            tableMemoCardsView.addUnknownCards();
+            textViewRememberTitle.setText("Найди показанные ранее карточки");
+        }
+    };
+
+    TableMemoCardsView.OnTableItemClickListener onTableItemClickListener = new TableMemoCardsView.OnTableItemClickListener() {
+        @Override
+        public void onClicked(String cardSrc) {
+            System.out.println(cardSrc);
         }
     };
 }

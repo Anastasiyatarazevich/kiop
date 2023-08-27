@@ -7,7 +7,6 @@ import com.mygdx.game.ui.Movable;
 import com.mygdx.game.ui.View;
 
 import static com.mygdx.game.utils.ApplicationSettings.*;
-import static com.mygdx.game.utils.ApplicationSettings.SCR_HEIGHT;
 
 public class TableMemoCardsItemsView extends View implements Movable {
 
@@ -15,6 +14,11 @@ public class TableMemoCardsItemsView extends View implements Movable {
 
     ImageView imageViewBackground;
     ImageView imageViewCard;
+
+    private float endX;
+    private float endY;
+
+    private OnEndAnimation onEndAnimationListener;
 
     public TableMemoCardsItemsView(float x, float y, int cardSize, Texture backgroundTexture, String imageSrc) {
         super(x, y);
@@ -24,12 +28,21 @@ public class TableMemoCardsItemsView extends View implements Movable {
         setImage(imageSrc);
     }
 
-    private void setImage(String imageSrc) {
+    public void setOnEndAnimationListener(OnEndAnimation onEndAnimationListener) {
+        this.onEndAnimationListener = onEndAnimationListener;
+    }
+
+    public void setImage(String imageSrc) {
         if (imageViewCard == null) {
             imageViewCard = new ImageView(x, y, imageSrc);
         } else {
             imageViewCard.setImgSource(imageSrc);
         }
+
+        alignCardImage();
+    }
+
+    private void alignCardImage() {
         if (imageViewCard.width > imageViewCard.height) {
             float size_ratio = (float) CARD_IMAGE_SIZE / imageViewCard.width;
             imageViewCard.width = CARD_IMAGE_SIZE;
@@ -44,16 +57,25 @@ public class TableMemoCardsItemsView extends View implements Movable {
         imageViewCard.y = y + imageViewBackground.height / 2 - imageViewCard.height / 2;
     }
 
+    public void setPosition(float x, float y) {
+        this.x = x;
+        this.y = y;
+
+        imageViewBackground.x = x;
+        imageViewBackground.y = y;
+
+        imageViewCard.x = x + imageViewBackground.width / 2 - imageViewCard.width / 2;
+        imageViewCard.y = y + imageViewBackground.height / 2 - imageViewCard.height / 2;
+    }
+
     public void setVector(float endX, float endY) {
+        this.endX = endX;
+        this.endY = endY;
 
         float movementVector = (float) Math.sqrt((endX - x) * (endX - x) + (endY - y) * (endY - y));
         float speedRation = CARD_MOVING_VELOCITY / movementVector;
         setVelocityX((endX - x) * speedRation);
         setVelocityY((endY - y) * speedRation);
-
-        System.out.println(getVelocityX());
-        System.out.println(getVelocityY());
-
     }
 
     @Override
@@ -63,20 +85,42 @@ public class TableMemoCardsItemsView extends View implements Movable {
     }
 
     @Override
+    public boolean isHit(float tx, float ty) {
+        boolean isHit = imageViewBackground.isHit(tx, ty);
+        if (isHit) {
+            isSelected = !isSelected;
+        }
+        return isHit;
+    }
+
+    @Override
     public void move(int timeStep) {
-        x += getVelocityX() * timeStep + getAccelerationX() * timeStep * timeStep / 2;
-        imageViewCard.x += getVelocityX() * timeStep + getAccelerationX() * timeStep * timeStep / 2;
-        imageViewBackground.x += getVelocityX() * timeStep + getAccelerationX() * timeStep * timeStep / 2;
-        y += getVelocityY() * timeStep + getAccelerationY() * timeStep * timeStep / 2;
-        imageViewCard.y += getVelocityY() * timeStep + getAccelerationY() * timeStep * timeStep / 2;
-        imageViewBackground.y += getVelocityY() * timeStep + getAccelerationY() * timeStep * timeStep / 2;
 
-        System.out.println(getVelocityX() * timeStep + getAccelerationX() * timeStep * timeStep / 2);
+        boolean isFinalStep = false;
 
-        if (x < SCR_WIDTH / 2f - width / 2f + 4 && x > SCR_WIDTH / 2f - width / 2f - 4
-                && y < SCR_HEIGHT / 2f - height / 2f + 4 && y > SCR_HEIGHT / 2f - height / 2f - 4) {
+        float deltaX = getVelocityX() * timeStep + getAccelerationX() * timeStep * timeStep / 2;
+        float deltaY = getVelocityY() * timeStep + getAccelerationY() * timeStep * timeStep / 2;
+
+        if (x <= (endX + Math.abs(deltaX)) && x >= (endX - Math.abs(deltaX))
+                && y <= (endY + Math.abs(deltaY)) && y >= (endY - Math.abs(deltaY))) {
             setVelocityX(0);
             setVelocityY(0);
+            deltaX = endX - x;
+            deltaY = endY - y;
+            isFinalStep = true;
+        }
+
+        x += deltaX;
+        y += deltaY;
+
+        imageViewCard.x += deltaX;
+        imageViewCard.y += deltaY;
+
+        imageViewBackground.x += deltaX;
+        imageViewBackground.y += deltaY;
+
+        if (isFinalStep && onEndAnimationListener != null) {
+            onEndAnimationListener.onEnd();
         }
     }
 }

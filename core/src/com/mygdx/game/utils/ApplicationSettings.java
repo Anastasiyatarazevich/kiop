@@ -65,7 +65,7 @@ public class ApplicationSettings {
     // ---- ---- Ui
 
     public static int CARD_SIZE = 170;
-    public static float CARD_MOVING_VELOCITY = 5;
+    public static float CARD_MOVING_VELOCITY = 20;
     public static int CARD_PADDING = 20;
     public static int CARD_IMAGE_SIZE = 120;
 

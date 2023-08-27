@@ -25,6 +25,10 @@ public class SessionMemo {
         testState = StateMemo.HIDING_CARDS;
     }
 
+    public void showFullCards() {
+        testState = StateMemo.GETTING_CARDS;
+    }
+
     public void endTest() {
 
     }

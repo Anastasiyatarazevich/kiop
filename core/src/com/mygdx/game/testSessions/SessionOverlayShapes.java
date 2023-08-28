@@ -47,8 +47,8 @@ public class SessionOverlayShapes {
 
         int countOfSamples = COUNT_OF_FILES;
         selectedSample = (int) (Math.random() * countOfSamples);
-        System.out.println("Selected sample: " + selectedSample);
-        System.out.println("Count of samples: " + countOfSamples);
+        // System.out.println("Selected sample: " + selectedSample);
+        // System.out.println("Count of samples: " + countOfSamples);
 
         colorMap = new ColorMap(selectedSample);
         shapeList = ShapesDescriptor.getSampleShapes(selectedSample);

@@ -125,7 +125,7 @@ public class ScreenProofreadingTest implements Screen {
         testSession.testState = StateProofTable.PASSED;
         proofReadingTestResults = new ResultsProofReadingTest();
         testSession.endTest(proofReadingTestResults);
-        System.out.println("Результаты корректурной пробы: " + proofReadingTestResults);
+        // System.out.println("Результаты корректурной пробы: " + proofReadingTestResults);
     }
 
 
@@ -176,7 +176,7 @@ public class ScreenProofreadingTest implements Screen {
         public void onClicked(TableItemView tableItemView) {
             if (!(tableItemView.getIsClicked())) {
                 SelectionResponse clickResponse = testSession.checkSelection(tableItemView.value);
-                System.out.println(clickResponse);
+                // System.out.println(clickResponse);
                 switch (clickResponse) {
                     case SUCCESS:
                         tableItemView.setItemSelected();

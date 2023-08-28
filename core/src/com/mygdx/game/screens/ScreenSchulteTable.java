@@ -170,7 +170,7 @@ public class ScreenSchulteTable implements Screen {
     void closeTable(int closingCode) {
         if (testSession.tableIdx == COUNT_OF_SCHULTE_TABLES - 1) {
             testSession.endTest();
-            System.out.println(testSession.testResults);
+            // System.out.println(testSession.testResults);
             return;
         }
         testSession.testState = StateSchulteTable.BREAK;

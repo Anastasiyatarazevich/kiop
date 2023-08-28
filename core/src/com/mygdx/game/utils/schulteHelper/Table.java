@@ -37,7 +37,6 @@ public class Table {
     public boolean nextItem() {
         countOfSelectedItems += 1;
         if (countOfSelectedItems == 0) {
-            System.out.println("begin timer");
             timer.startTimer();
         }
         if (countOfSelectedItems > 0) tableMatrix.get(countOfSelectedItems - 1).endTimer();

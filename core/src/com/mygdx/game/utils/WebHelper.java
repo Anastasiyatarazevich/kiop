@@ -41,7 +41,6 @@ public class WebHelper {
         parameters.put("time", time);
         //todo: create user profile class and get info from that
         parameters.put("uId", 111);
-        System.out.println("hehehhe");
         try {
             url += ParameterStringBuilder.getParamsString(parameters);
             request.setUrl(url);

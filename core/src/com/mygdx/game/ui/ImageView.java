@@ -22,18 +22,14 @@ public class ImageView extends View {
     public void setImgTexture(Texture imgTexture) {
         this.imgTexture = imgTexture;
     }
+
     public void setTextureRegion(TextureRegion textureRegion) {
         this.textureRegion = textureRegion;
     }
 
     public void setTextureRegion(String textureRegion) {
-        this.textureRegion =  ScreenRavenMatrices.textureAtlas.findRegion(textureRegion);
-        ;
+        this.textureRegion = ScreenRavenMatrices.textureAtlas.findRegion(textureRegion);
     }
-
-
-
-
 
     public ImageView(float x, float y, String imgSource) {
         super(x, y);
@@ -45,7 +41,6 @@ public class ImageView extends View {
         width = imgTexture.getWidth();
         height = imgTexture.getHeight();
     }
-
 
     public ImageView(float x, float y, Texture imgTexture) {
         super(x, y);
@@ -105,11 +100,16 @@ public class ImageView extends View {
         this.imgSource = imgSource;
         imgTexture = new Texture(imgSource);
 
-        width = imgTexture.getWidth();
-        height = imgTexture.getHeight();
+        // was it necessary??????????????????
+        // width = imgTexture.getWidth();
+        // height = imgTexture.getHeight();
 
         sprite = new Sprite(imgTexture);
-//        sprite.setRotation(0);
+    }
+
+    public void loadSizeOfTexture() {
+        width = imgTexture.getWidth();
+        height = imgTexture.getHeight();
     }
 
     public void setImgSource2(String imgSource) {
@@ -125,8 +125,7 @@ public class ImageView extends View {
     public void draw(MyGdxGame myGdxGame) {
         if (imgTexture != null) {
             myGdxGame.batch.draw(imgTexture, x, y, width, height);
-        }
-        if (textureRegion != null) {
+        } else if (textureRegion != null) {
             myGdxGame.batch.draw(textureRegion, x, y, width, height);
         }
     }

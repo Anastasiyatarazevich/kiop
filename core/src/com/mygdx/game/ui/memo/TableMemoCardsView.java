@@ -169,7 +169,7 @@ public class TableMemoCardsView extends View {
         @Override
         public void onEnd() {
             countOfAnimated += 1;
-            System.out.println(countOfAnimated);
+            // System.out.println(countOfAnimated);
             if (arrayListCardsView.size() == COUNT_OF_CARDS_TO_REMEMBER) {
                 if (countOfAnimated == COUNT_OF_CARDS_TO_REMEMBER) {
                     onCardsHided.onHided();
@@ -187,9 +187,6 @@ public class TableMemoCardsView extends View {
         for (int i = 0; i < arrayListCardsView.size(); i++) {
             TableMemoCardsItemsView image = arrayListCardsView.get(i);
 
-            System.out.println("new click");
-            System.out.println(countOfSelected >= COUNT_OF_CARDS_TO_REMEMBER);
-            System.out.println(!image.isSelected);
             if (countOfSelected >= COUNT_OF_CARDS_TO_REMEMBER && !image.isSelected) {
                 continue;
             }
@@ -202,7 +199,6 @@ public class TableMemoCardsView extends View {
                     setCardActive(i);
                     countOfSelected -= 1;
                 }
-                System.out.println(countOfSelected);
                 onTableItemClickListener.onClicked(image.imageViewCard.getImgSource());
                 return true;
             }

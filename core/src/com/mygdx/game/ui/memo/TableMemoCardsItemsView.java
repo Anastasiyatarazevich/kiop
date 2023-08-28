@@ -37,6 +37,7 @@ public class TableMemoCardsItemsView extends View implements Movable {
             imageViewCard = new ImageView(x, y, imageSrc);
         } else {
             imageViewCard.setImgSource(imageSrc);
+            imageViewCard.loadSizeOfTexture();
         }
 
         alignCardImage();

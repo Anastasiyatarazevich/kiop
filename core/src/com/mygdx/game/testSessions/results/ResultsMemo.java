@@ -1,7 +1,6 @@
 package com.mygdx.game.testSessions.results;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import static com.mygdx.game.utils.ApplicationSettings.COUNT_OF_CARDS_TO_REMEMBER;
 

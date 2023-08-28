@@ -54,6 +54,7 @@ public class TableCardsItemView extends View {
 
     public void setCardImageSrc(String imageSrc) {
         imageViewCard.setImgSource(imageSrc);
+        imageViewCard.loadSizeOfTexture();
         imageViewCard.x = imageViewBackground.x + imageViewBackground.width / 2 - imageViewCard.width / 2;
         imageViewCard.y = imageViewBackground.y + imageViewBackground.height / 2 - imageViewCard.height / 2;
     }

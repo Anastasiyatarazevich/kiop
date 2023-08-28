@@ -12,7 +12,8 @@ import static com.mygdx.game.utils.ApplicationSettings.*;
 
 public class TableMemoCardsView extends View {
 
-    private int count_of_animated;
+    private int countOfAnimated;
+    private int countOfSelected;
 
     private final int cardSize;
     private final int padding;
@@ -42,6 +43,7 @@ public class TableMemoCardsView extends View {
         textureActiveCardBackground = new Texture("ui/availableCardBackground.png");
         textureSelectedCardBackground = new Texture("ui/selectedCardBackground.png");
 
+        countOfSelected = 0;
     }
 
     public void setCards(String[] arrayImagesSrc, OnCardsHidedListener onCardsHided) {
@@ -91,7 +93,7 @@ public class TableMemoCardsView extends View {
 
     public void hideCards() {
 
-        count_of_animated = 0;
+        countOfAnimated = 0;
 
         float endX = SCR_WIDTH / 2f - cardSize / 2f;
         float endY = SCR_HEIGHT / 2f - cardSize / 2f;
@@ -103,7 +105,7 @@ public class TableMemoCardsView extends View {
 
     public void releaseCards() {
 
-        count_of_animated = 0;
+        countOfAnimated = 0;
 
         float beginX = SCR_WIDTH / 2f - cardSize / 2f;
         float beginY = SCR_HEIGHT / 2f - cardSize / 2f;
@@ -118,9 +120,7 @@ public class TableMemoCardsView extends View {
                 TableMemoCardsItemsView card = arrayListCardsView.get(cardIdx);
 
                 card.setImage(CARDS_DIR + arrayImagesSrc[cardIdx] + ".png");
-
                 card.setPosition(beginX, beginY);
-
                 card.setVector(
                         x + j * cardSize + j * padding,
                         y + i * cardSize + i * padding
@@ -168,14 +168,14 @@ public class TableMemoCardsView extends View {
     Movable.OnEndAnimation onEndAnimation = new Movable.OnEndAnimation() {
         @Override
         public void onEnd() {
-            count_of_animated += 1;
-            System.out.println(count_of_animated);
+            countOfAnimated += 1;
+            System.out.println(countOfAnimated);
             if (arrayListCardsView.size() == COUNT_OF_CARDS_TO_REMEMBER) {
-                if (count_of_animated == COUNT_OF_CARDS_TO_REMEMBER) {
+                if (countOfAnimated == COUNT_OF_CARDS_TO_REMEMBER) {
                     onCardsHided.onHided();
                 }
             } else {
-                if (count_of_animated == COUNT_OF_CARDS_TO_REMEMBER + COUNT_OF_ADDITION_CARDS) {
+                if (countOfAnimated == COUNT_OF_CARDS_TO_REMEMBER + COUNT_OF_ADDITION_CARDS) {
                     onCardsReleasedListener.onReleased();
                 }
             }
@@ -186,9 +186,23 @@ public class TableMemoCardsView extends View {
     public boolean isHit(float tx, float ty) {
         for (int i = 0; i < arrayListCardsView.size(); i++) {
             TableMemoCardsItemsView image = arrayListCardsView.get(i);
+
+            System.out.println("new click");
+            System.out.println(countOfSelected >= COUNT_OF_CARDS_TO_REMEMBER);
+            System.out.println(!image.isSelected);
+            if (countOfSelected >= COUNT_OF_CARDS_TO_REMEMBER && !image.isSelected) {
+                continue;
+            }
+
             if (image.isHit(tx, ty)) {
-                if (image.isSelected) setCardSelected(i);
-                else setCardActive(i);
+                if (image.isSelected) {
+                    setCardSelected(i);
+                    countOfSelected += 1;
+                } else {
+                    setCardActive(i);
+                    countOfSelected -= 1;
+                }
+                System.out.println(countOfSelected);
                 onTableItemClickListener.onClicked(image.imageViewCard.getImgSource());
                 return true;
             }

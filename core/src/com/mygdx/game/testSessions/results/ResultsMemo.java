@@ -37,7 +37,7 @@ public class ResultsMemo {
         }
 
         countOfCorrectCards = correcntCards;
-        countOfErrors = COUNT_OF_CARDS_TO_REMEMBER - correcntCards;
+        countOfErrors = selectedCards.size() - correcntCards;
     }
 
     @Override

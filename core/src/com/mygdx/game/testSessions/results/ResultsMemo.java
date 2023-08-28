@@ -42,7 +42,7 @@ public class ResultsMemo {
 
     @Override
     public String toString() {
-        return "Result of overlay shapes{" +
+        return "Result of memo{" +
                 "spent time (sec) = " + spentTimeInSeconds +
                 ", count of errors = " + countOfErrors +
                 ", count of remembered = " + countOfCorrectCards +

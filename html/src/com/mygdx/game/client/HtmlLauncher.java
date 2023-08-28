@@ -15,11 +15,12 @@ public class HtmlLauncher extends GwtApplication {
         @Override
         public GwtApplicationConfiguration getConfig () {
                 // Resizable application, uses available space in browser
-                SessionHelper.params = Window.Location.getParameter("token");
-                return new GwtApplicationConfiguration(SCR_WIDTH, SCR_HEIGHT);
-//                return new GwtApplicationConfiguration(true);
+//                SessionHelper.params = Window.Location.getParameter("token");
+                GwtApplicationConfiguration gwtApplicationConfiguration = new GwtApplicationConfiguration();
+//                return new GwtApplicationConfiguration(1280, 800);
+                return new GwtApplicationConfiguration(true);
                 // Fixed size application:
-                //return new GwtApplicationConfiguration(480, 320);
+//                return new GwtApplicationConfiguration(1024, 768);
         }
 
         @Override

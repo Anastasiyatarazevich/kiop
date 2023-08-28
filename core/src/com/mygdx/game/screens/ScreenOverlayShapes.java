@@ -39,7 +39,6 @@ public class ScreenOverlayShapes implements Screen {
     public ScreenOverlayShapes(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
 
-        //пока пример чисто с beet
 
         testSession = new SessionOverlayShapes();
 

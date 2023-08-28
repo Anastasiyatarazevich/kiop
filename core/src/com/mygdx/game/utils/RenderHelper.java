@@ -69,16 +69,6 @@ public class RenderHelper extends InputAdapter {
         myGdxGame.batch.setProjectionMatrix(myGdxGame.camera.combined);
 
         drawScenes.draw(justTouch);
-
-//        if (draggingView != null && isDragging) {
-//
-//            x = (int) (Gdx.input.getX() - deltaX);
-//            y = (int) (SCR_HEIGHT - (Gdx.input.getY() + deltaY));
-//            draggingView.x = x;
-//            draggingView.y = y;
-//            draggingView.draw(myGdxGame);
-//        }
-
         if (draggingViewSprite != null && isDragging) {
 
             x = (int) (Gdx.input.getX() - deltaX);
@@ -86,9 +76,6 @@ public class RenderHelper extends InputAdapter {
             draggingViewSprite.setPos(x, y);
             draggingViewSprite.draw(myGdxGame);
         }
-
-//        spriteShapes = new SpriteShapes(new Texture("/Users/anastasiatarazevich/AndroidStudioProjects/kiop/assets/overlayShapes/blackWhiteShapes/beet.png"));
-//        spriteShapes.draw(myGdxGame);
 
         myGdxGame.batch.end();
     }

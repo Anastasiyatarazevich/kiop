@@ -69,4 +69,9 @@ public class ApplicationSettings {
     public static int CARD_PADDING = 20;
     public static int CARD_IMAGE_SIZE = 120;
 
+
+    // ---- Raven
+    public static String RAVEN_CARD_IMAGES_DIR = "ravensatlas/ravenscards.atlas";
+    public static int RAVEN_CARD_SIZE = 230;
+    public static int RAVEN_CARD_PADDING = 30;
 }

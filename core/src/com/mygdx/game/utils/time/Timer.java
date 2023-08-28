@@ -61,4 +61,8 @@ public class Timer {
         return Math.round((endTime - startTime) / 1000f);
     }
 
+
+    public int updateTime() {
+        return (int) Math.round((TimeUtils.millis() - startTime) / 1000f);
+    }
 }

@@ -65,12 +65,14 @@ public class ApplicationSettings {
     // ---- ---- Ui
 
     public static int CARD_SIZE = 170;
-    public static float CARD_MOVING_VELOCITY = 20;
+    public static float CARD_MOVING_VELOCITY = 12;
     public static int CARD_PADDING = 20;
     public static int CARD_IMAGE_SIZE = 120;
+    public static long CARD_MEMO_FADING_PERIOD = 800;
 
 
     // ---- Raven
+
     public static String RAVEN_CARD_IMAGES_DIR = "ravensatlas/ravenscards.atlas";
     public static int RAVEN_CARD_SIZE = 230;
     public static int RAVEN_CARD_PADDING = 30;

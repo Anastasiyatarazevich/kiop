@@ -40,6 +40,7 @@ public class ImageView extends View {
 
         width = imgTexture.getWidth();
         height = imgTexture.getHeight();
+
     }
 
     public ImageView(float x, float y, Texture imgTexture) {
@@ -47,6 +48,7 @@ public class ImageView extends View {
         this.imgTexture = imgTexture;
         width = imgTexture.getWidth();
         height = imgTexture.getHeight();
+
     }
 
     public ImageView(float x, float y, float width, float height, String imgSource) {
@@ -56,6 +58,7 @@ public class ImageView extends View {
 
         sprite = new Sprite(imgTexture, (int) x, (int) y, (int) width, (int) height);
         sprite.setRotation(0);
+
     }
 
     public ImageView(float x, float y, float width, float height, TextureRegion textureRegion) {
@@ -70,6 +73,7 @@ public class ImageView extends View {
 
         width = textureRegion.getRegionWidth();
         height = textureRegion.getRegionHeight();
+
     }
 
 
@@ -83,13 +87,20 @@ public class ImageView extends View {
         sprite.setRotation(0);
 
         x = (float) (SCR_WIDTH - imgTexture.getWidth()) / 2;
+
     }
 
     public ImageView(float x, float y, float width, float height, Texture imgTexture) {
         super(x, y, width, height);
         this.imgTexture = imgTexture;
+
+        sprite = new Sprite(imgTexture);
     }
 
+    public void loadSizeOfTexture() {
+        width = imgTexture.getWidth();
+        height = imgTexture.getHeight();
+    }
 
     public String getImgSource() {
         return imgSource;
@@ -100,16 +111,7 @@ public class ImageView extends View {
         this.imgSource = imgSource;
         imgTexture = new Texture(imgSource);
 
-        // was it necessary??????????????????
-        // width = imgTexture.getWidth();
-        // height = imgTexture.getHeight();
-
         sprite = new Sprite(imgTexture);
-    }
-
-    public void loadSizeOfTexture() {
-        width = imgTexture.getWidth();
-        height = imgTexture.getHeight();
     }
 
     public void setImgSource2(String imgSource) {
@@ -118,7 +120,6 @@ public class ImageView extends View {
         imgTexture = new Texture(imgSource);
 
         sprite = new Sprite(imgTexture);
-//        sprite.setRotation(0);
     }
 
     @Override

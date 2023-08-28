@@ -65,6 +65,7 @@ public class RenderHelper extends InputAdapter {
     public static void draw(MyGdxGame myGdxGame, DrawScenes drawScenes, boolean justTouch) {
         ScreenUtils.clear(0, 0, 0, 1);
         myGdxGame.camera.update();
+        myGdxGame.batch.enableBlending();
         myGdxGame.batch.begin();
         myGdxGame.batch.setProjectionMatrix(myGdxGame.camera.combined);
 

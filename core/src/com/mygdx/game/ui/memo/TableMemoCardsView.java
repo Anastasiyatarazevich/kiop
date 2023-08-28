@@ -100,6 +100,7 @@ public class TableMemoCardsView extends View {
 
         for (TableMemoCardsItemsView card : arrayListCardsView) {
             card.setVector(endX, endY);
+            card.imageViewCard.fadeAway(CARD_MEMO_FADING_PERIOD);
         }
     }
 
@@ -127,6 +128,7 @@ public class TableMemoCardsView extends View {
                 );
 
                 card.setOnEndAnimationListener(onEndAnimation);
+                card.imageViewCard.fadeIn(CARD_MEMO_FADING_PERIOD);
 
                 card.isSelected = false;
                 card.isClickable = true;
@@ -169,7 +171,6 @@ public class TableMemoCardsView extends View {
         @Override
         public void onEnd() {
             countOfAnimated += 1;
-            // System.out.println(countOfAnimated);
             if (arrayListCardsView.size() == COUNT_OF_CARDS_TO_REMEMBER) {
                 if (countOfAnimated == COUNT_OF_CARDS_TO_REMEMBER) {
                     onCardsHided.onHided();

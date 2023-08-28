@@ -2,6 +2,7 @@ package com.mygdx.game.ui.memo;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.ui.ImageAlphaView;
 import com.mygdx.game.ui.ImageView;
 import com.mygdx.game.ui.Movable;
 import com.mygdx.game.ui.View;
@@ -13,7 +14,7 @@ public class TableMemoCardsItemsView extends View implements Movable {
     boolean isSelected;
 
     ImageView imageViewBackground;
-    ImageView imageViewCard;
+    ImageAlphaView imageViewCard;
 
     private float endX;
     private float endY;
@@ -34,11 +35,11 @@ public class TableMemoCardsItemsView extends View implements Movable {
 
     public void setImage(String imageSrc) {
         if (imageViewCard == null) {
-            imageViewCard = new ImageView(x, y, imageSrc);
+            imageViewCard = new ImageAlphaView(x, y, imageSrc);
         } else {
             imageViewCard.setImgSource(imageSrc);
-            imageViewCard.loadSizeOfTexture();
         }
+        imageViewCard.loadSizeOfTexture();
 
         alignCardImage();
     }

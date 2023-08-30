@@ -3,7 +3,6 @@ package com.mygdx.game.ui.alerts;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.ui.*;
-import org.w3c.dom.Text;
 
 public class AlertPause extends View {
 
@@ -99,7 +98,7 @@ public class AlertPause extends View {
         if (stage == 1) {
             alertConfirmBack.isHit(tx, ty);
         }
-        return false;
+        return true;
     }
 
     AlertConfirmBack.OnButtonResumeClickListener onDoubleResumeClickListener = new AlertConfirmBack.OnButtonResumeClickListener() {

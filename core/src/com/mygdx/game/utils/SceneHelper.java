@@ -4,6 +4,7 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.ui.View;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class SceneHelper {
 
@@ -30,9 +31,13 @@ public class SceneHelper {
     }
 
     public void checkHits(MyGdxGame myGdxGame) {
+        Collections.reverse(uiComponentsList);
         for (View component : uiComponentsList) {
-            if (component.isVisible) component.isHit(myGdxGame.touch.x, myGdxGame.touch.y);
+            if (component.isVisible && component.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
+                break;
+            }
         }
+        Collections.reverse(uiComponentsList);
     }
 
     // todo: write disposing

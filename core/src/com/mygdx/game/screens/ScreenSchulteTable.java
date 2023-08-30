@@ -4,14 +4,11 @@ import com.badlogic.gdx.Screen;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.testSessions.SessionSchulteTable;
 import com.mygdx.game.testSessions.sessionsStates.StateSchulteTable;
-import com.mygdx.game.ui.BackgroundPixmapView;
-import com.mygdx.game.ui.TextButton;
-import com.mygdx.game.ui.TextView;
-import com.mygdx.game.ui.View;
+import com.mygdx.game.ui.*;
+import com.mygdx.game.ui.alerts.AlertPause;
 import com.mygdx.game.ui.shulteTable.TableCounterView;
 import com.mygdx.game.ui.shulteTable.TableItemView;
 import com.mygdx.game.ui.shulteTable.TableView;
-import com.mygdx.game.ui.TimeCounterView;
 import com.mygdx.game.utils.RenderHelper;
 import com.mygdx.game.utils.SceneHelper;
 import com.mygdx.game.utils.schulteHelper.SelectionResponse;
@@ -34,6 +31,8 @@ public class ScreenSchulteTable implements Screen {
     TextView smallTableCounterView;
     TimeCounterView timeCounterView;
     TableCounterView tableCounterView;
+
+    AlertPause alertPause;
 
     public ScreenSchulteTable(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
@@ -100,9 +99,17 @@ public class ScreenSchulteTable implements Screen {
                 775, 228
         );
 
+        ImageView imageViewPause = new ImageView(1741, 917, "icons/icon_pause.png");
+
+        alertPause = new AlertPause(myGdxGame.fontArialBlack64, myGdxGame.fontArialBlack32);
+
         backButton.setOnClickListener(onBackButtonClicked);
         startButton.setOnClickListener(onStartButtonClicked);
         continueButton.setOnClickListener(onContinueButtonClicked);
+        imageViewPause.setOnClickListener(onPauseClicked);
+
+        alertPause.setOnButtonResumeClickListener(onButtonResumeClickListener);
+        alertPause.setOnButtonReturnHomeClickListener(onButtonReturnHomeClickListener);
 
         scenePassed.addActor(background);
         scenePassed.addActor(backButton);
@@ -116,6 +123,8 @@ public class ScreenSchulteTable implements Screen {
         sceneTableShowing.addActor(timeCounterView);
         sceneTableShowing.addActors(tableView.getAllViews());
         sceneTableShowing.addActor(smallTableCounterView);
+        sceneTableShowing.addActor(imageViewPause);
+        sceneTableShowing.addActor(alertPause);
 
         sceneGreeting.addActor(background);
         sceneGreeting.addActor(startButton);
@@ -246,6 +255,27 @@ public class ScreenSchulteTable implements Screen {
         @Override
         public void onClicked() {
             myGdxGame.setScreen(myGdxGame.screenMenu);
+        }
+    };
+
+    View.OnClickListener onPauseClicked = new View.OnClickListener() {
+        @Override
+        public void onClicked() {
+            alertPause.isVisible = true;
+        }
+    };
+
+    AlertPause.OnButtonReturnHomeClickListener onButtonReturnHomeClickListener = new AlertPause.OnButtonReturnHomeClickListener() {
+        @Override
+        public void onClicked() {
+            System.out.println("Should return home");
+        }
+    };
+
+    AlertPause.OnButtonResumeClickListener onButtonResumeClickListener = new AlertPause.OnButtonResumeClickListener() {
+        @Override
+        public void onClicked() {
+            System.out.println("We are home Chewie");
         }
     };
 }

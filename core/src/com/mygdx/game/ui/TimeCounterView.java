@@ -48,7 +48,8 @@ public class TimeCounterView extends View {
         if (x == -1) alignCenter();
     }
 
-    private void alignCenter() {
+    @Override
+    public void alignCenter() {
         width = textViewTime.width + textViewTitle.width;
         x = SCR_WIDTH / 2f - width / 2f;
         textViewTitle.x = x;

@@ -27,6 +27,7 @@ public class MyGdxGame extends Game {
 
     public BitmapFont commonFont;
     public BitmapFont fontArialBlack64;
+    public BitmapFont fontArialBlack32;
     public BitmapFont fontArialBlackBold64;
     public BitmapFont fontArialGray64;
     public BitmapFont fontArialGray32;
@@ -43,6 +44,7 @@ public class MyGdxGame extends Game {
         // todo: rebuild fonts
         commonFont = new BitmapFont(Gdx.files.internal("fonts/ArialGray64.fnt"));
         fontArialBlack64 = new BitmapFont(Gdx.files.internal("fonts/ArialBlack64.fnt"));
+        fontArialBlack32 = new BitmapFont(Gdx.files.internal("fonts/ArialBlack32.fnt"));
         fontArialBlackBold64 = new BitmapFont(Gdx.files.internal("fonts/ArialBlackBold64.fnt"));
         fontArialGray64 = new BitmapFont(Gdx.files.internal("fonts/ArialGray64.fnt"));
         fontArialGray32 = new BitmapFont(Gdx.files.internal("fonts/ArialGray32.fnt"));

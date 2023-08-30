@@ -3,6 +3,7 @@ package com.mygdx.game.ui;
 import com.badlogic.gdx.utils.Disposable;
 import com.mygdx.game.MyGdxGame;
 
+import static com.mygdx.game.utils.ApplicationSettings.SCR_HEIGHT;
 import static com.mygdx.game.utils.ApplicationSettings.SCR_WIDTH;
 
 public class View implements Disposable {
@@ -82,6 +83,19 @@ public class View implements Disposable {
         boolean isTouchHitComponent = x < tx && tx < x + width && y > ty && ty > y - height;
         if (isTouchHitComponent && onClickListener != null) onClickListener.onClicked();
         return isTouchHitComponent;
+    }
+
+    public void alignCenter() {
+        x = SCR_WIDTH / 2f - width / 2f;
+        y = SCR_HEIGHT / 2f - height / 2f;
+    }
+
+    public void alignCenterHorizontal() {
+        x = SCR_WIDTH / 2f - width / 2f;
+    }
+
+    public void alignCenterVertical() {
+        y = SCR_HEIGHT / 2f - height / 2f;
     }
 
     @Override

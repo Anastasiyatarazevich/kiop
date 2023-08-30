@@ -9,6 +9,7 @@ import com.mygdx.game.screens.ScreenRavenMatrices;
 
 import java.util.Objects;
 
+import static com.mygdx.game.utils.ApplicationSettings.SCR_HEIGHT;
 import static com.mygdx.game.utils.ApplicationSettings.SCR_WIDTH;
 
 public class ImageView extends View {
@@ -73,7 +74,6 @@ public class ImageView extends View {
 
         width = textureRegion.getRegionWidth();
         height = textureRegion.getRegionHeight();
-
     }
 
 

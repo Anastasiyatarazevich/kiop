@@ -5,6 +5,7 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.testSessions.SessionMemo;
 import com.mygdx.game.testSessions.sessionsStates.StateMemo;
 import com.mygdx.game.ui.*;
+import com.mygdx.game.ui.alerts.AlertPause;
 import com.mygdx.game.ui.memo.TableMemoCardsView;
 import com.mygdx.game.utils.RenderHelper;
 import com.mygdx.game.utils.SceneHelper;
@@ -215,6 +216,13 @@ public class ScreenMemo implements Screen {
         @Override
         public void onClicked() {
             myGdxGame.setScreen(myGdxGame.screenMenu);
+        }
+    };
+
+    AlertPause.OnButtonResumeClickListener onButtonResumeClickListener = new AlertPause.OnButtonResumeClickListener() {
+        @Override
+        public void onClicked() {
+
         }
     };
 }

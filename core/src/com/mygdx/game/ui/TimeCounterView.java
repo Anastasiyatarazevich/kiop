@@ -1,12 +1,8 @@
 package com.mygdx.game.ui;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.utils.TimeUtils;
 import com.mygdx.game.MyGdxGame;
-import com.mygdx.game.ui.TextView;
-import com.mygdx.game.ui.View;
 import com.mygdx.game.utils.time.Timer;
-import org.w3c.dom.Text;
 
 import static com.mygdx.game.utils.ApplicationSettings.SCR_WIDTH;
 
@@ -68,13 +64,24 @@ public class TimeCounterView extends View {
 
     @Override
     public void draw(MyGdxGame myGdxGame) {
-        textViewTime.setText(String.valueOf(timer.getFinalTimeInSeconds()));
+        textViewTime.setText(getTime());
         textViewTime.draw(myGdxGame);
         textViewTitle.draw(myGdxGame);
     }
 
+    private String getTime() {
+        if (fullTime == -1)
+            return String.valueOf(timer.getFinalTimeInSeconds());
+        else
+            return String.valueOf(fullTime - timer.getFinalTimeInSeconds());
+    }
+
     public void startTimer() {
         timer.startTimer();
+    }
+
+    public boolean isTimerExpired() {
+        return fullTime - timer.getFinalTimeInSeconds() <= 0;
     }
 
 }

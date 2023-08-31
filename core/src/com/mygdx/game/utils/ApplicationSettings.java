@@ -1,8 +1,6 @@
 package com.mygdx.game.utils;
 
 
-import com.sun.org.apache.bcel.internal.generic.PUSH;
-
 public class ApplicationSettings {
 
     // ---- General settings
@@ -64,11 +62,11 @@ public class ApplicationSettings {
 
     // ---- ---- Ui
 
-    public static int CARD_SIZE = 170;
-    public static float CARD_MOVING_VELOCITY = 12;
-    public static int CARD_PADDING = 20;
-    public static int CARD_IMAGE_SIZE = 120;
-    public static long CARD_MEMO_FADING_PERIOD = 800;
+    public static float MEMO_CARD_MOVING_VELOCITY = 12;
+    public static long MEMO_CARD_FADING_PERIOD = 800;
+    public static int MEMO_CARD_SIZE = 170;
+    public static int MEMO_CARD_PADDING = 20;
+    public static int MEMO_CARD_IMAGE_SIZE = 120;
 
 
     // ---- Raven

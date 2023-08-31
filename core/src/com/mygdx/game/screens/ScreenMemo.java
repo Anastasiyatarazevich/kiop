@@ -43,8 +43,8 @@ public class ScreenMemo implements Screen {
 
         tableMemoCardsView = new TableMemoCardsView(
                 0, 140,
-                CARD_SIZE,
-                CARD_PADDING,
+                MEMO_CARD_SIZE,
+                MEMO_CARD_PADDING,
                 onTableItemClickListener,
                 onCardsReleasedListener
         );
@@ -116,7 +116,7 @@ public class ScreenMemo implements Screen {
 
     @Override
     public void render(float delta) {
-        if (/*timeCounterView.updateTimer() == 1 &&*/ testSession.testState == StateMemo.REMEMBERING_CARDS) {
+        if (timeCounterView.isTimerExpired() && testSession.testState == StateMemo.REMEMBERING_CARDS) {
             tableMemoCardsView.hideCards();
             testSession.hideCards();
         }

@@ -100,7 +100,7 @@ public class TableMemoCardsView extends View {
 
         for (TableMemoCardsItemsView card : arrayListCardsView) {
             card.setVector(endX, endY);
-            card.imageViewCard.fadeAway(CARD_MEMO_FADING_PERIOD);
+            card.imageViewCard.fadeAway(MEMO_CARD_FADING_PERIOD);
         }
     }
 
@@ -128,7 +128,7 @@ public class TableMemoCardsView extends View {
                 );
 
                 card.setOnEndAnimationListener(onEndAnimation);
-                card.imageViewCard.fadeIn(CARD_MEMO_FADING_PERIOD);
+                card.imageViewCard.fadeIn(MEMO_CARD_FADING_PERIOD);
 
                 card.isSelected = false;
                 card.isClickable = true;

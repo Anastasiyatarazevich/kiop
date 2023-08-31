@@ -46,12 +46,12 @@ public class TableMemoCardsItemsView extends View implements Movable {
 
     private void alignCardImage() {
         if (imageViewCard.width > imageViewCard.height) {
-            float size_ratio = (float) CARD_IMAGE_SIZE / imageViewCard.width;
-            imageViewCard.width = CARD_IMAGE_SIZE;
+            float size_ratio = (float) MEMO_CARD_IMAGE_SIZE / imageViewCard.width;
+            imageViewCard.width = MEMO_CARD_IMAGE_SIZE;
             imageViewCard.height *= size_ratio;
         } else {
-            float size_ratio = (float) CARD_IMAGE_SIZE / imageViewCard.height;
-            imageViewCard.height = CARD_IMAGE_SIZE;
+            float size_ratio = (float) MEMO_CARD_IMAGE_SIZE / imageViewCard.height;
+            imageViewCard.height = MEMO_CARD_IMAGE_SIZE;
             imageViewCard.width *= size_ratio;
         }
 
@@ -75,7 +75,7 @@ public class TableMemoCardsItemsView extends View implements Movable {
         this.endY = endY;
 
         float movementVector = (float) Math.sqrt((endX - x) * (endX - x) + (endY - y) * (endY - y));
-        float speedRation = CARD_MOVING_VELOCITY / movementVector;
+        float speedRation = MEMO_CARD_MOVING_VELOCITY / movementVector;
         setVelocityX((endX - x) * speedRation);
         setVelocityY((endY - y) * speedRation);
     }

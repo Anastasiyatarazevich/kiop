@@ -14,6 +14,11 @@ public class ResultsSchulteTable {
         workEffectiveMark = -1;
     }
 
+    public void resetResults() {
+        countOfDuplicates = 0;
+        countOfErrors = 0;
+    }
+
     public void setTime(long timeInMillis) {
         spentTimeInSeconds = Math.round((float) timeInMillis / 1000);
     }

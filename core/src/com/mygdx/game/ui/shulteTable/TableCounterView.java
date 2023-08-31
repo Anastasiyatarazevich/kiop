@@ -14,6 +14,7 @@ public class TableCounterView extends View {
     TextView textViewTitle2;
     TextView textViewTime;
     int padding = 32;
+    int allCountOfTables;
     int leftCountOfTimes;
 
     public TableCounterView(float x, float y, String text, String text2, BitmapFont fontText, BitmapFont fontTime, int leftCountOfTimes) {
@@ -21,6 +22,7 @@ public class TableCounterView extends View {
         this.fontTime = fontTime;
         this.fontText = fontText;
         this.leftCountOfTimes = leftCountOfTimes;
+        this.allCountOfTables = leftCountOfTimes;
         this.textViewTitle = new TextView(fontText, text, x, y);
         this.textViewTime = new TextView(fontTime, String.valueOf(leftCountOfTimes), x + textViewTitle.width + padding, y);
         this.textViewTitle2 = new TextView(fontText, text2, x + textViewTitle.width + 2 * padding + textViewTime.width, y);
@@ -36,6 +38,11 @@ public class TableCounterView extends View {
     public void decreaseCountOfTimes() {
         leftCountOfTimes -= 1;
         textViewTime.setText(String.valueOf(leftCountOfTimes));
+    }
+
+    public void resetCounter() {
+        System.out.println(leftCountOfTimes);
+        leftCountOfTimes = allCountOfTables;
     }
 
 }

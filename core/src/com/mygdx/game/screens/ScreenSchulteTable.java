@@ -84,19 +84,19 @@ public class ScreenSchulteTable implements Screen {
                 myGdxGame.fontArialBlack64,
                 "Начать",
                 "schulteTable/buttonBackground.png",
-                775, 155
+                -1, 155
         );
         TextButton continueButton = new TextButton(
                 myGdxGame.fontArialBlack64,
                 "Продолжить",
                 "schulteTable/buttonBackground.png",
-                775, 228
+                -1, 228
         );
         TextButton backButton = new TextButton(
                 myGdxGame.fontArialBlack64,
                 "Вернуться в лес",
                 "schulteTable/buttonBackground.png",
-                775, 228
+                -1, 228
         );
 
         ImageView imageViewPause = new ImageView(1741, 917, "icons/icon_pause.png");
@@ -113,6 +113,7 @@ public class ScreenSchulteTable implements Screen {
 
         scenePassed.addActor(background);
         scenePassed.addActor(backButton);
+        scenePassed.addActor(motivatorTextView);
 
         sceneBreak.addActor(background);
         sceneBreak.addActor(motivatorTextView);
@@ -139,10 +140,6 @@ public class ScreenSchulteTable implements Screen {
 
     @Override
     public void render(float delta) {
-        int timeLeft = timeCounterView.updateTimer();
-        if (timeLeft < 0 && testSession.testState == StateSchulteTable.TABLE_SHOWING) {
-            closeTable(1);
-        }
         boolean justTouched = RenderHelper.checkTouch(myGdxGame);
         RenderHelper.draw(myGdxGame, drawScenes, justTouched);
     }
@@ -159,7 +156,6 @@ public class ScreenSchulteTable implements Screen {
 
     @Override
     public void resume() {
-
     }
 
     @Override
@@ -172,14 +168,17 @@ public class ScreenSchulteTable implements Screen {
 
     }
 
-    void setTable() {
+    void setTableScene() {
+        smallTableCounterView.setText((testSession.tableIdx + 1) + "/" + COUNT_OF_SCHULTE_TABLES);
+        timeCounterView.timer.resetTimer();
+        timeCounterView.startTimer();
         tableView.setTable(testSession.tables.get(testSession.tableIdx).tableMatrix);
     }
 
-    void closeTable(int closingCode) {
+    void closeTable() {
         if (testSession.tableIdx == COUNT_OF_SCHULTE_TABLES - 1) {
             testSession.endTest();
-            // System.out.println(testSession.testResults);
+            System.out.println(testSession.testResults);
             return;
         }
         testSession.testState = StateSchulteTable.BREAK;
@@ -214,8 +213,7 @@ public class ScreenSchulteTable implements Screen {
         @Override
         public void onClicked() {
             testSession.startTest();
-            timeCounterView.startTimer();
-            setTable();
+            setTableScene();
         }
     };
 
@@ -228,7 +226,7 @@ public class ScreenSchulteTable implements Screen {
                 case SUCCESS:
                     tableItemView.setItemSelected();
                     if (!testSession.tables.get(testSession.tableIdx).nextItem())
-                        closeTable(0);
+                        closeTable();
                     break;
                 case ERROR:
                     testSession.testResults.addError();
@@ -244,10 +242,8 @@ public class ScreenSchulteTable implements Screen {
         @Override
         public void onClicked() {
             testSession.nextTable();
-            setTable();
+            setTableScene();
             testSession.testState = StateSchulteTable.TABLE_SHOWING;
-            timeCounterView.startTimer();
-            smallTableCounterView.setText((testSession.tableIdx + 1) + "/" + COUNT_OF_SCHULTE_TABLES);
         }
     };
 
@@ -262,20 +258,26 @@ public class ScreenSchulteTable implements Screen {
         @Override
         public void onClicked() {
             alertPause.isVisible = true;
+            testSession.pauseTest();
+            timeCounterView.timer.pauseTimer();
         }
     };
 
     AlertPause.OnButtonReturnHomeClickListener onButtonReturnHomeClickListener = new AlertPause.OnButtonReturnHomeClickListener() {
         @Override
         public void onClicked() {
-            System.out.println("Should return home");
+            testSession.clearSession();
+            timeCounterView.timer.resetTimer();
+            tableCounterView.resetCounter();
+            myGdxGame.setScreen(myGdxGame.screenMenu);
         }
     };
 
     AlertPause.OnButtonResumeClickListener onButtonResumeClickListener = new AlertPause.OnButtonResumeClickListener() {
         @Override
         public void onClicked() {
-            System.out.println("We are home Chewie");
+            testSession.resumeTest();
+            timeCounterView.timer.resumeTimer();
         }
     };
 }

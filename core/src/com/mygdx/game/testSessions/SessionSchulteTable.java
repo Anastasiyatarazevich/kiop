@@ -42,6 +42,16 @@ public class SessionSchulteTable {
         tables.get(tableIdx).nextItem();
     }
 
+    public void pauseTest() {
+        fullTime.pauseTimer();
+        tables.get(tableIdx).timer.pauseTimer();
+    }
+
+    public void resumeTest() {
+        fullTime.resumeTimer();
+        tables.get(tableIdx).timer.resumeTimer();
+    }
+
     public void endTest() {
         fullTime.terminateTimer();
         int testOnlyTime = 0;
@@ -52,6 +62,12 @@ public class SessionSchulteTable {
         testResults.setTime(testOnlyTime);
         // TODO: fetch user age from game session
         testResults.setWorkEffectiveMark(10, tables.size());
+    }
+
+    public void clearSession() {
+        testState = StateSchulteTable.GREETING;
+        fullTime.resetTimer();
+        testResults.resetResults();
     }
 
     public void nextTable() {
@@ -69,8 +85,5 @@ public class SessionSchulteTable {
         }
         return SelectionResponse.ERROR;
     }
-
-
-
 
 }

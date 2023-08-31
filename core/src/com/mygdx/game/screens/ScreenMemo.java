@@ -116,7 +116,7 @@ public class ScreenMemo implements Screen {
 
     @Override
     public void render(float delta) {
-        if (timeCounterView.updateTimer() == 1 && testSession.testState == StateMemo.REMEMBERING_CARDS) {
+        if (/*timeCounterView.updateTimer() == 1 &&*/ testSession.testState == StateMemo.REMEMBERING_CARDS) {
             tableMemoCardsView.hideCards();
             testSession.hideCards();
         }

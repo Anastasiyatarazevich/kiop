@@ -53,12 +53,24 @@ public class Timer {
         return 0;
     }
 
+    public void resetTimer() {
+        timerState = TimeState.READY_TO_START;
+    }
+
     public long getFinalTimeInMillis() {
-        return endTime - startTime;
+        long millisPeriod;
+        if (timerState == TimeState.STOPPED)
+            millisPeriod = pauseTime - startTime;
+        else if (timerState == TimeState.RUNNING)
+            millisPeriod = TimeUtils.millis() - startTime;
+        else
+            millisPeriod = endTime - startTime;
+
+        return millisPeriod;
     }
 
     public int getFinalTimeInSeconds() {
-        return Math.round((endTime - startTime) / 1000f);
+        return Math.round((getFinalTimeInMillis()) / 1000f);
     }
 
 

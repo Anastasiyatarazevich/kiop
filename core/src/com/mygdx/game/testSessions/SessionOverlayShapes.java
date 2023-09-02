@@ -36,7 +36,6 @@ public class SessionOverlayShapes {
         testState = StateOverlayShapes.GREETING;
         fullTime = new Timer();
         testResults = new ResultsOverlayShapes();
-        startSession();
     }
 
     public void startSession() {
@@ -47,19 +46,29 @@ public class SessionOverlayShapes {
 
         int countOfSamples = COUNT_OF_FILES;
         selectedSample = (int) (Math.random() * countOfSamples);
-        // System.out.println("Selected sample: " + selectedSample);
-        // System.out.println("Count of samples: " + countOfSamples);
 
         colorMap = new ColorMap(selectedSample);
         shapeList = ShapesDescriptor.getSampleShapes(selectedSample);
         leftShapes = shapeList.size();
-
 
     }
 
     public void startTest() {
         testState = StateOverlayShapes.SHAPES_SHOWING;
         fullTime.startTimer();
+    }
+
+    public void pauseTest() {
+        fullTime.pauseTimer();
+    }
+
+    public void resumeTest() {
+        fullTime.resumeTimer();
+    }
+
+    public void clearSession() {
+        testState = StateOverlayShapes.GREETING;
+        fullTime.resetTimer();
     }
 
     public void shapeWasFound(int shapeIdx) {

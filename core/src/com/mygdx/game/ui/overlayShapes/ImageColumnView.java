@@ -37,18 +37,23 @@ public class ImageColumnView extends View {
         }
     }
 
-    @Override
-    public void draw(MyGdxGame myGdxGame) {
-        for (ImageView imageView : imagesList) {
-            imageView.draw(myGdxGame);
-        }
+    public void clearColumn() {
+        imagesList.clear();
     }
+
     public String getImgSource(float tx, float ty) {
-        for (ImageView view: imagesList) {
+        for (ImageView view : imagesList) {
             if (view.isHit(tx, ty)) {
                 return view.getImgSource();
             }
         }
         return "";
+    }
+
+    @Override
+    public void draw(MyGdxGame myGdxGame) {
+        for (ImageView imageView : imagesList) {
+            imageView.draw(myGdxGame);
+        }
     }
 }

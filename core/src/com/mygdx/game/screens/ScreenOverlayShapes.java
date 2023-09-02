@@ -7,7 +7,9 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.testSessions.SessionOverlayShapes;
+import com.mygdx.game.testSessions.sessionsStates.StateOverlayShapes;
 import com.mygdx.game.ui.*;
+import com.mygdx.game.ui.alerts.AlertPauseView;
 import com.mygdx.game.ui.overlayShapes.ImageColumnView;
 import com.mygdx.game.ui.overlayShapes.ImageMapView;
 import com.mygdx.game.utils.RenderHelper;
@@ -30,6 +32,7 @@ public class ScreenOverlayShapes implements Screen {
     private final SceneHelper sceneShapesShowing;
     private final SceneHelper scenePassed;
 
+    AlertPauseView alertPauseView;
     ImageMapView imageMapView;
     ImageColumnView imageColumnView1, imageColumnView2;
 
@@ -38,7 +41,6 @@ public class ScreenOverlayShapes implements Screen {
 
     public ScreenOverlayShapes(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
-
 
         testSession = new SessionOverlayShapes();
 
@@ -51,10 +53,14 @@ public class ScreenOverlayShapes implements Screen {
 
         BackgroundPixmapView background = new BackgroundPixmapView(COLOR_BG_GRAY);
 
+        alertPauseView = new AlertPauseView(myGdxGame.fontArialBlack64, myGdxGame.fontArialBlack32);
+
+        ImageView imageViewPause = new ImageView(1680, 917, "icons/icon_pause.png");
+
         TextView textViewTitle = new TextView(
                 myGdxGame.fontArialBlack64,
                 "Перетащи овощи",
-                -1, 907
+                -1, 930
         );
 
         TextButton startButton = new TextButton(
@@ -77,22 +83,21 @@ public class ScreenOverlayShapes implements Screen {
                 -1, 300
         );
 
-        menuButton.setOnClickListener(onMenuButtonClicked);
+        imageMapView = new ImageMapView(
+                122, 1280, 720,
+                testSession.getSelectedSample(),
+                onImageMapViewPressedListener,
+                myGdxGame
+        );
 
         imageColumnView1 = new ImageColumnView(137, 122, 720, 25);
         imageColumnView2 = new ImageColumnView(1630, 122, 720, 25);
 
-        for (int i = 0; i < testSession.shapeList.size(); i++) {
-            if (i < testSession.shapeList.size() / 2)
-                imageColumnView1.addImage(COLUMN_BLACK_AND_WHITE_SHAPES_DIR + testSession.shapeList.get(i).getName());
-            else
-                imageColumnView2.addImage(COLUMN_BLACK_AND_WHITE_SHAPES_DIR + testSession.shapeList.get(i).getName());
-        }
-
-        imageMapView = new ImageMapView(122, 1280, 720, testSession.getSelectedSample(),
-                onImageMapViewPressed, myGdxGame);
-
         startButton.setOnClickListener(onStartButtonClicked);
+        menuButton.setOnClickListener(onMenuButtonClicked);
+        imageViewPause.setOnClickListener(onPauseClicked);
+        alertPauseView.setOnButtonResumeClickListener(onButtonResumeClicked);
+        alertPauseView.setOnButtonReturnHomeClickListener(onButtonReturnHomeClicked);
 
         sceneGreeting.addActor(background);
         sceneGreeting.addActor(startButton);
@@ -100,40 +105,24 @@ public class ScreenOverlayShapes implements Screen {
         sceneShapesShowing.addActor(background);
         sceneShapesShowing.addActor(imageMapView);
         sceneShapesShowing.addActor(textViewTitle);
+        sceneShapesShowing.addActor(imageViewPause);
         sceneShapesShowing.addActor(imageColumnView1);
         sceneShapesShowing.addActor(imageColumnView2);
+        sceneShapesShowing.addActor(alertPauseView);
 
         scenePassed.addActor(background);
         scenePassed.addActor(menuButton);
         scenePassed.addActor(endTitle);
-
-        // System.out.println("Count of shapes: " + testSession.shapeList.size());
-
-//        for (int i = 0; i < testSession.shapeList.size(); i++) {
-//            Shape shape = testSession.shapeList.get(i);
-//            listShapesImages.add(new ImageView(shape.getX(), shape.getY(), BLACK_AND_WHITE_SHAPES_DIR + shape.getName()));
-//            shape.setX((int) (shape.getX() + imageMapView.x));
-//            shape.setY((int) (shape.getY() + imageMapView.y));
-//            // shape.setX((int) (imageMapView.x));
-//            // shape.setY((int) (imageMapView.y));
-//        }
-
-
-        for (int i = 0; i < testSession.shapeList.size(); i++) {
-            Shape shape = testSession.shapeList.get(i);
-            spriteListShapesImages.add(new SpriteShapes(shape.getX(), shape.getY(), BLACK_AND_WHITE_SHAPES_DIR + shape.getName(), shape.getRotation()));
-            shape.setX((int) (shape.getX() + imageMapView.x));
-            shape.setY((int) (shape.getY() + imageMapView.y));
-        }
 
         Gdx.input.setInputProcessor(new MyInputProcessor());
     }
 
     @Override
     public void show() {
-        /*if (testSession.testState == StateOverlayShapes.GREETING) {
+        if (testSession.testState == StateOverlayShapes.GREETING) {
             testSession.startSession();
-        }*/
+            setSceneShowingShapes();
+        }
     }
 
     @Override
@@ -167,6 +156,28 @@ public class ScreenOverlayShapes implements Screen {
     @Override
     public void dispose() {
 
+    }
+
+    void setSceneShowingShapes() {
+
+        imageMapView.setSelectedSampleIdx(testSession.getSelectedSample());
+        imageColumnView1.clearColumn();
+        imageColumnView2.clearColumn();
+        spriteListShapesImages.clear();
+
+        for (int i = 0; i < testSession.shapeList.size(); i++) {
+            if (i < testSession.shapeList.size() / 2)
+                imageColumnView1.addImage(COLUMN_BLACK_AND_WHITE_SHAPES_DIR + testSession.shapeList.get(i).getName());
+            else
+                imageColumnView2.addImage(COLUMN_BLACK_AND_WHITE_SHAPES_DIR + testSession.shapeList.get(i).getName());
+        }
+
+        for (int i = 0; i < testSession.shapeList.size(); i++) {
+            Shape shape = testSession.shapeList.get(i);
+            spriteListShapesImages.add(new SpriteShapes(shape.getX(), shape.getY(), BLACK_AND_WHITE_SHAPES_DIR + shape.getName(), shape.getRotation()));
+            shape.setX((int) (shape.getX() + imageMapView.x));
+            shape.setY((int) (shape.getY() + imageMapView.y));
+        }
     }
 
     RenderHelper.DrawScenes drawScenes = new RenderHelper.DrawScenes() {
@@ -203,32 +214,47 @@ public class ScreenOverlayShapes implements Screen {
         }
     };
 
-    ImageMapView.OnImageMapViewPressed onImageMapViewPressed = new ImageMapView.OnImageMapViewPressed() {
+    ImageMapView.OnImageMapViewPressedListener onImageMapViewPressedListener = new ImageMapView.OnImageMapViewPressedListener() {
         @Override
         public void onPressed(int localX, int localY) {
             int code = testSession.colorMap.getColorCode(localX, localY);
 
-//            for (int i = 0; i < testSession.shapeList.size(); i++) {
-//                if (ColorsCodes.getImageNameByColorCode(code).equals(
-//                        testSession.shapeList.get(i).getName().split("\\.")[0])) {
-//                    listShapesImages.get(i).x = testSession.shapeList.get(i).getX();
-//                    listShapesImages.get(i).y = testSession.shapeList.get(i).getY();
-//                    RenderHelper.setDraggingView(listShapesImages.get(i), (int) myGdxGame.touch.x, (int) (myGdxGame.touch.y));
-//                    System.out.println(testSession.shapeList.get(i).getX() + " - " + testSession.shapeList.get(i).getY());
-//                    return;
-//                }
-//            }
-
             for (int i = 0; i < testSession.shapeList.size(); i++) {
-                if (ColorsCodes.getImageNameByColorCode(code).equals(
-                        testSession.shapeList.get(i).getName().split("\\.")[0])) {
+                String realImageName = testSession.shapeList.get(i).getName().split("\\.")[0];
+                if (ColorsCodes.getImageNameByColorCode(code).equals(realImageName)) {
                     spriteListShapesImages.get(i).x = testSession.shapeList.get(i).getX();
                     spriteListShapesImages.get(i).y = testSession.shapeList.get(i).getY();
-                    RenderHelper.setDraggingView(spriteListShapesImages.get(i), (int) myGdxGame.touch.x, (int) (myGdxGame.touch.y));
-                    // System.out.println(testSession.shapeList.get(i).getX() + " - " + testSession.shapeList.get(i).getY());
+                    RenderHelper.setDraggingView(
+                            spriteListShapesImages.get(i),
+                            (int) myGdxGame.touch.x,
+                            (int) (myGdxGame.touch.y)
+                    );
                     return;
                 }
             }
+        }
+    };
+
+    View.OnClickListener onPauseClicked = new View.OnClickListener() {
+        @Override
+        public void onClicked() {
+            testSession.pauseTest();
+            alertPauseView.show();
+        }
+    };
+
+    AlertPauseView.OnButtonResumeClickListener onButtonResumeClicked = new AlertPauseView.OnButtonResumeClickListener() {
+        @Override
+        public void onClicked() {
+            testSession.resumeTest();
+        }
+    };
+
+    AlertPauseView.OnButtonReturnHomeClickListener onButtonReturnHomeClicked = new AlertPauseView.OnButtonReturnHomeClickListener() {
+        @Override
+        public void onClicked() {
+            testSession.clearSession();
+            myGdxGame.setScreen(myGdxGame.screenMenu);
         }
     };
 

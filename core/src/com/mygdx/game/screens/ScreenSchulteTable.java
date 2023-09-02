@@ -5,7 +5,7 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.testSessions.SessionSchulteTable;
 import com.mygdx.game.testSessions.sessionsStates.StateSchulteTable;
 import com.mygdx.game.ui.*;
-import com.mygdx.game.ui.alerts.AlertPause;
+import com.mygdx.game.ui.alerts.AlertPauseView;
 import com.mygdx.game.ui.shulteTable.TableCounterView;
 import com.mygdx.game.ui.shulteTable.TableItemView;
 import com.mygdx.game.ui.shulteTable.TableView;
@@ -32,7 +32,7 @@ public class ScreenSchulteTable implements Screen {
     TimeCounterView timeCounterView;
     TableCounterView tableCounterView;
 
-    AlertPause alertPause;
+    AlertPauseView alertPauseView;
 
     public ScreenSchulteTable(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
@@ -101,15 +101,15 @@ public class ScreenSchulteTable implements Screen {
 
         ImageView imageViewPause = new ImageView(1741, 917, "icons/icon_pause.png");
 
-        alertPause = new AlertPause(myGdxGame.fontArialBlack64, myGdxGame.fontArialBlack32);
+        alertPauseView = new AlertPauseView(myGdxGame.fontArialBlack64, myGdxGame.fontArialBlack32);
 
         backButton.setOnClickListener(onBackButtonClicked);
         startButton.setOnClickListener(onStartButtonClicked);
         continueButton.setOnClickListener(onContinueButtonClicked);
         imageViewPause.setOnClickListener(onPauseClicked);
 
-        alertPause.setOnButtonResumeClickListener(onButtonResumeClickListener);
-        alertPause.setOnButtonReturnHomeClickListener(onButtonReturnHomeClickListener);
+        alertPauseView.setOnButtonResumeClickListener(onButtonResumeClickListener);
+        alertPauseView.setOnButtonReturnHomeClickListener(onButtonReturnHomeClickListener);
 
         scenePassed.addActor(background);
         scenePassed.addActor(backButton);
@@ -125,7 +125,7 @@ public class ScreenSchulteTable implements Screen {
         sceneTableShowing.addActors(tableView.getAllViews());
         sceneTableShowing.addActor(smallTableCounterView);
         sceneTableShowing.addActor(imageViewPause);
-        sceneTableShowing.addActor(alertPause);
+        sceneTableShowing.addActor(alertPauseView);
 
         sceneGreeting.addActor(background);
         sceneGreeting.addActor(startButton);
@@ -257,13 +257,13 @@ public class ScreenSchulteTable implements Screen {
     View.OnClickListener onPauseClicked = new View.OnClickListener() {
         @Override
         public void onClicked() {
-            alertPause.isVisible = true;
+            alertPauseView.show();
             testSession.pauseTest();
             timeCounterView.timer.pauseTimer();
         }
     };
 
-    AlertPause.OnButtonReturnHomeClickListener onButtonReturnHomeClickListener = new AlertPause.OnButtonReturnHomeClickListener() {
+    AlertPauseView.OnButtonReturnHomeClickListener onButtonReturnHomeClickListener = new AlertPauseView.OnButtonReturnHomeClickListener() {
         @Override
         public void onClicked() {
             testSession.clearSession();
@@ -273,7 +273,7 @@ public class ScreenSchulteTable implements Screen {
         }
     };
 
-    AlertPause.OnButtonResumeClickListener onButtonResumeClickListener = new AlertPause.OnButtonResumeClickListener() {
+    AlertPauseView.OnButtonResumeClickListener onButtonResumeClickListener = new AlertPauseView.OnButtonResumeClickListener() {
         @Override
         public void onClicked() {
             testSession.resumeTest();

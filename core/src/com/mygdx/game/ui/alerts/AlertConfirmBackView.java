@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.ui.*;
 
-public class AlertConfirmBack extends View {
+public class AlertConfirmBackView extends View {
 
     BlackoutView blackoutView;
     TextButton textButtonContinue;
@@ -23,7 +23,7 @@ public class AlertConfirmBack extends View {
         this.onButtonReturnHomeClickListener = onResumeButtonClicked;
     }
 
-    public AlertConfirmBack(BitmapFont titleFont, BitmapFont buttonsFont) {
+    public AlertConfirmBackView(BitmapFont titleFont, BitmapFont buttonsFont) {
         super(-1, -1);
         blackoutView = new BlackoutView();
         imageViewBackground = new ImageView(-1, -1, "alerts/alertConfirmBackground.png");

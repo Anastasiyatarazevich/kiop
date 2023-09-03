@@ -10,11 +10,13 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.testSessions.RavenSession;
+import com.mygdx.game.testSessions.sessionsStates.StateRaven;
 import com.mygdx.game.ui.BackgroundPixmapView;
 import com.mygdx.game.ui.ImageView;
 import com.mygdx.game.ui.TextButton;
 import com.mygdx.game.ui.TextView;
 import com.mygdx.game.ui.View;
+import com.mygdx.game.ui.alerts.AlertPauseView;
 import com.mygdx.game.ui.raven.MatrixCardsView;
 import com.mygdx.game.utils.RenderHelper;
 import com.mygdx.game.utils.SceneHelper;
@@ -23,13 +25,19 @@ import com.mygdx.game.utils.raven.Cards;
 public class ScreenRavenMatrices implements Screen {
 
     MyGdxGame myGdxGame;
-    SceneHelper sceneGreeting, sceneCardShowing, scenePassed;
+
     RavenSession testSession;
-    ImageView imageViewNext, imageViewTargetPicture;
-    MatrixCardsView tableCardsView;
+
+    SceneHelper sceneGreeting, sceneCardShowing, scenePassed;
 
     TextView tableCounterView;
+    ImageView imageViewNext;
+    ImageView imageViewTargetPicture;
+    MatrixCardsView tableCardsView;
+    AlertPauseView alertPauseView;
+
     public static TextureAtlas textureAtlas;
+
     public ScreenRavenMatrices(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
 
@@ -46,9 +54,14 @@ public class ScreenRavenMatrices implements Screen {
                 RAVEN_CARD_PADDING, RAVEN_CARD_SIZE,
                 Cards.presets[0].getListOfCardsSrc()
         );
-        tableCardsView.setOnTableCardsClickListener(onTableCardsClicked);
 
         BackgroundPixmapView background = new BackgroundPixmapView(COLOR_BG_GRAY);
+
+        alertPauseView = new AlertPauseView(
+                myGdxGame.fontArialBlack64,
+                myGdxGame.fontArialBlack32
+        );
+
         TextButton buttonStart = new TextButton(
                 myGdxGame.fontArialBlack64,
                 "Начать",
@@ -56,11 +69,17 @@ public class ScreenRavenMatrices implements Screen {
                 775, 155
         );
 
-        imageViewTargetPicture = new ImageView(100, 182, 712, 600, textureAtlas.findRegion(targetTextures[0]));
+        imageViewTargetPicture = new ImageView(
+                100, 182,
+                712, 600,
+                textureAtlas.findRegion(targetTextures[0])
+        );
+
         imageViewNext = new ImageView(
                 1750, 425,
                 "icons/icon_next.png"
         );
+
         TextView textViewTitle = new TextView(
                 myGdxGame.fontArialBlack64,
                 "Найди недостающий фрагмент",
@@ -86,13 +105,20 @@ public class ScreenRavenMatrices implements Screen {
                 -1, 62
         );
 
+        ImageView imageViewPause = new ImageView(
+                1680, 930,
+                "icons/icon_pause.png"
+        );
+
         buttonBack.setOnClickListener(onButtonBackClicked);
+        buttonStart.setOnClickListener(onButtonStartClicked);
+        imageViewPause.setOnClickListener(onButtonPauseClicked);
+        imageViewNext.setOnClickListener(onImageViewNextClicked);
+        tableCardsView.setOnTableCardsClickListener(onTableCardsClicked);
+        alertPauseView.setOnButtonResumeClickListener(onButtonResumeClicked);
+        alertPauseView.setOnButtonReturnHomeClickListener(onButtonReturnHomeClicked);
 
         imageViewNext.isVisible = false;
-        imageViewNext.setOnClickListener(onImageViewNextClicked);
-
-
-        buttonStart.setOnClickListener(onButtonStartClicked);
 
         sceneGreeting.addActor(background);
         sceneGreeting.addActor(buttonStart);
@@ -103,18 +129,19 @@ public class ScreenRavenMatrices implements Screen {
         sceneCardShowing.addActor(imageViewTargetPicture);
         sceneCardShowing.addActor(textViewTitle);
         sceneCardShowing.addActor(tableCounterView);
-
+        sceneCardShowing.addActor(imageViewPause);
+        sceneCardShowing.addActor(alertPauseView);
 
         scenePassed.addActor(background);
         scenePassed.addActor(buttonBack);
         scenePassed.addActor(textViewPassedTitle);
-
-
     }
 
     @Override
     public void show() {
-
+        if (testSession.testState == StateRaven.GREETING) {
+            setSceneCardShowing();
+        }
     }
 
     @Override
@@ -149,6 +176,13 @@ public class ScreenRavenMatrices implements Screen {
 
     }
 
+    public void setSceneCardShowing() {
+        imageViewNext.isVisible = false;
+        tableCardsView.setCards(Cards.presets[testSession.currentMatrixIndex].getListOfCardsSrc());
+        imageViewTargetPicture.setTextureRegion(textureAtlas.findRegion(targetTextures[testSession.currentMatrixIndex]));
+        tableCounterView.setText((testSession.currentMatrixIndex + 1) + "/" + Cards.presets.length);
+    }
+
     RenderHelper.DrawScenes drawScenes = new RenderHelper.DrawScenes() {
         @Override
         public void draw(boolean justTouched) {
@@ -168,6 +202,15 @@ public class ScreenRavenMatrices implements Screen {
             }
         }
     };
+
+    MatrixCardsView.OnTableCardsClickListener onTableCardsClicked = new MatrixCardsView.OnTableCardsClickListener() {
+        @Override
+        public void onClick(int cardIdx) {
+            imageViewNext.isVisible = true;
+            testSession.cardWasSelected(cardIdx);
+        }
+    };
+
     View.OnClickListener onButtonStartClicked = new View.OnClickListener() {
         @Override
         public void onClicked() {
@@ -178,29 +221,39 @@ public class ScreenRavenMatrices implements Screen {
     View.OnClickListener onImageViewNextClicked = new View.OnClickListener() {
         @Override
         public void onClicked() {
-            imageViewNext.isVisible = false;
             if (!testSession.nextCards()) {
                 return;
             }
-            tableCardsView.setCards(Cards.presets[testSession.currentMatrixIndex].getListOfCardsSrc());
-            imageViewTargetPicture.setTextureRegion(textureAtlas.findRegion(targetTextures[testSession.currentMatrixIndex]));
-            tableCounterView.setText((testSession.currentMatrixIndex + 1) + "/" + Cards.presets.length);
-
+            setSceneCardShowing();
         }
     };
-
-    MatrixCardsView.OnTableCardsClickListener onTableCardsClicked = new MatrixCardsView.OnTableCardsClickListener() {
-        @Override
-        public void onClick(int cardIdx) {
-            imageViewNext.isVisible = true;
-            testSession.cardWasSelected(cardIdx);
-        }
-    };
-
 
     View.OnClickListener onButtonBackClicked = new View.OnClickListener() {
         @Override
         public void onClicked() {
+            myGdxGame.setScreen(myGdxGame.screenMenu);
+        }
+    };
+
+    View.OnClickListener onButtonPauseClicked = new View.OnClickListener() {
+        @Override
+        public void onClicked() {
+            testSession.pauseTest();
+            alertPauseView.show();
+        }
+    };
+
+    AlertPauseView.OnButtonResumeClickListener onButtonResumeClicked = new AlertPauseView.OnButtonResumeClickListener() {
+        @Override
+        public void onClicked() {
+            testSession.resumeTest();
+        }
+    };
+
+    AlertPauseView.OnButtonReturnHomeClickListener onButtonReturnHomeClicked = new AlertPauseView.OnButtonReturnHomeClickListener() {
+        @Override
+        public void onClicked() {
+            testSession.clearSession();
             myGdxGame.setScreen(myGdxGame.screenMenu);
         }
     };

@@ -29,6 +29,10 @@ public class ResultsRaven {
         //todo: calculate mark
     }
 
+    public void clearResults() {
+        points = 0;
+    }
+
     @Override
     public String toString() {
         return "ResultsRaven{" +

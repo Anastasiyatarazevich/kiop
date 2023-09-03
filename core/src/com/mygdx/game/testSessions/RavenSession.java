@@ -6,9 +6,12 @@ import com.mygdx.game.utils.raven.Cards;
 import com.mygdx.game.utils.time.Timer;
 
 public class RavenSession {
+
     public StateRaven testState;
     public ResultsRaven testResults;
+
     Timer fullTime;
+
     public int currentMatrixIndex;
     private int selectedCardIndex;
 
@@ -25,11 +28,26 @@ public class RavenSession {
         currentMatrixIndex = 0;
     }
 
+    public void pauseTest() {
+        fullTime.pauseTimer();
+    }
+
+    public void resumeTest() {
+        fullTime.resumeTimer();
+    }
+
     public void endTest() {
         testState = StateRaven.PASSED;
         fullTime.terminateTimer();
         testResults.setSpentTimeInSeconds(fullTime.getFinalTimeInSeconds());
         System.out.println(testResults.toString());
+    }
+
+    public void clearSession() {
+        fullTime.resetTimer();
+        testResults.clearResults();
+        testState = StateRaven.GREETING;
+        currentMatrixIndex = 0;
     }
 
     public void checkingTime() {

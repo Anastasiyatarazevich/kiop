@@ -33,9 +33,9 @@ public class RavenSession {
     }
 
     public void checkingTime() {
-       if(fullTime.updateTime() > 240 && testState == StateRaven.CARDS_SHOWING) {
-           endTest();
-       }
+        if (fullTime.updateTime() > 240 && testState == StateRaven.CARDS_SHOWING) {
+            endTest();
+        }
     }
 
     public void cardWasSelected(int idxOfCard) {

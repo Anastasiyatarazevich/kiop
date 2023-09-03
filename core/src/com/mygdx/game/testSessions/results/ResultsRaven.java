@@ -1,9 +1,9 @@
 package com.mygdx.game.testSessions.results;
 
 public class ResultsRaven {
+
     private int points, workEffectiveMark;
     private int spentTimeInSeconds;
-
 
     public int getSpentTimeInSeconds() {
         return spentTimeInSeconds;
@@ -25,9 +25,8 @@ public class ResultsRaven {
         points += 1;
     }
 
-
     public void calculateWorkEffectiveMark() {
-       //todo: calculate mark
+        //todo: calculate mark
     }
 
     @Override

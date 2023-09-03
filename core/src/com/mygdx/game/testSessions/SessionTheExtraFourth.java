@@ -28,12 +28,27 @@ public class SessionTheExtraFourth {
         CardsPresetsTheExtraFourth.shufflePreset();
     }
 
+    public void pauseTest() {
+        fullTime.pauseTimer();
+    }
+
+    public void resumeTest() {
+        fullTime.resumeTimer();
+    }
+
     public void endTest() {
         testState = StateTheExtraFourth.PASSED;
         fullTime.terminateTimer();
         testResults.setTime(fullTime.getFinalTimeInSeconds());
         testResults.computeWorkEffectiveMark();
         System.out.println(testResults);
+    }
+
+    public void clearSession() {
+        currentQuadIdx = 0;
+        fullTime.resetTimer();
+        testResults.resetResults();
+        testState = StateTheExtraFourth.GREETING;
     }
 
     public void cardWasSelected(int idxOfCard) {

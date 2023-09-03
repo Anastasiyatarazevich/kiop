@@ -46,6 +46,11 @@ public class ResultsTheExtraFourth {
         workEffectiveMark = CardsPresetsTheExtraFourth.presets.length - count_of_errors;
     }
 
+    public void resetResults() {
+        count_of_selections = 0;
+        count_of_errors = 0;
+    }
+
     @Override
     public String toString() {
         return "ResultsSchulteTable{" +

@@ -21,21 +21,20 @@ public class SessionMemo {
         testResults = new ResultsMemo();
         testState = StateMemo.GREETING;
         guessingTime = new Timer();
-
-        shownCards = CardsPresetsMemo.getShuffledPreset();
         selectedCards = new ArrayList<>();
     }
 
     public void startTest() {
+        shownCards = CardsPresetsMemo.getShuffledPreset();
         testState = StateMemo.REMEMBERING_CARDS;
     }
 
-    public void hideCards() {
-        testState = StateMemo.HIDING_CARDS;
+    public void pauseTest() {
+        guessingTime.pauseTimer();
     }
 
-    public void cardsWereReleased() {
-        guessingTime.startTimer();
+    public void resumeTest() {
+        guessingTime.resumeTimer();
     }
 
     public void endTest() {
@@ -45,6 +44,19 @@ public class SessionMemo {
         testResults.setSpentTimeInSeconds(guessingTime.getFinalTimeInSeconds());
         testResults.calculateResults(shownCards, selectedCards);
         System.out.println(testResults);
+    }
+
+    public void clearSession() {
+        selectedCards.clear();
+        testState = StateMemo.GREETING;
+    }
+
+    public void hideCards() {
+        testState = StateMemo.HIDING_CARDS;
+    }
+
+    public void cardsWereReleased() {
+        guessingTime.startTimer();
     }
 
     public void selectCard(String cardSrc) {

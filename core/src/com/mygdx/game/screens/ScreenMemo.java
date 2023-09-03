@@ -13,8 +13,6 @@ import com.mygdx.game.utils.SceneHelper;
 import static com.mygdx.game.utils.ApplicationSettings.*;
 import static com.mygdx.game.utils.UsingColors.COLOR_BG_GRAY;
 
-// TODO: remove the opportunity to select more than COUNT_OF_CARDS_TO_REMEMBER cards
-
 public class ScreenMemo implements Screen {
 
     MyGdxGame myGdxGame;
@@ -29,6 +27,7 @@ public class ScreenMemo implements Screen {
     TimeCounterView timeCounterView;
     TextButton textButtonCompleteTest;
     TextView textViewRememberTitle;
+    AlertPauseView alertPauseView;
 
     public ScreenMemo(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
@@ -40,6 +39,11 @@ public class ScreenMemo implements Screen {
         scenePassed = new SceneHelper();
 
         BackgroundPixmapView backgroundView = new BackgroundPixmapView(COLOR_BG_GRAY);
+
+        alertPauseView = new AlertPauseView(
+                myGdxGame.fontArialBlack64,
+                myGdxGame.fontArialBlack32
+        );
 
         tableMemoCardsView = new TableMemoCardsView(
                 0, 140,
@@ -90,8 +94,16 @@ public class ScreenMemo implements Screen {
                 -1, 816
         );
 
+        ImageView imageViewPause = new ImageView(
+                1680, 1030,
+                "icons/icon_pause.png"
+        );
+
         startButton.setOnClickListener(onButtonStartClicked);
         backButton.setOnClickListener(onBackButtonClicked);
+        imageViewPause.setOnClickListener(onButtonPauseClicked);
+        alertPauseView.setOnButtonResumeClickListener(onButtonResumeClickListener);
+        alertPauseView.setOnButtonReturnHomeClickListener(onButtonReturnHomeClickListener);
         textButtonCompleteTest.setOnClickListener(onButtonCompleteTestClicked);
         textButtonCompleteTest.isVisible = false;
 
@@ -103,6 +115,8 @@ public class ScreenMemo implements Screen {
         sceneShowingCards.addActor(tableMemoCardsView);
         sceneShowingCards.addActor(textViewRememberTitle);
         sceneShowingCards.addActor(textButtonCompleteTest);
+        sceneShowingCards.addActor(imageViewPause);
+        sceneShowingCards.addActor(alertPauseView);
 
         scenePassed.addActor(backgroundView);
         scenePassed.addActor(backButton);
@@ -175,9 +189,11 @@ public class ScreenMemo implements Screen {
     View.OnClickListener onButtonStartClicked = new View.OnClickListener() {
         @Override
         public void onClicked() {
-            tableMemoCardsView.setCards(testSession.shownCards, onCardsHided);
             testSession.startTest();
+            tableMemoCardsView.setCards(testSession.shownCards, onCardsHided);
             timeCounterView.startTimer();
+            timeCounterView.isVisible = true;
+            textButtonCompleteTest.isVisible = false;
         }
     };
 
@@ -219,10 +235,27 @@ public class ScreenMemo implements Screen {
         }
     };
 
+    View.OnClickListener onButtonPauseClicked = new View.OnClickListener() {
+        @Override
+        public void onClicked() {
+            testSession.pauseTest();
+            alertPauseView.show();
+        }
+    };
+
     AlertPauseView.OnButtonResumeClickListener onButtonResumeClickListener = new AlertPauseView.OnButtonResumeClickListener() {
         @Override
         public void onClicked() {
+            testSession.resumeTest();
+        }
+    };
 
+    AlertPauseView.OnButtonReturnHomeClickListener onButtonReturnHomeClickListener = new AlertPauseView.OnButtonReturnHomeClickListener() {
+        @Override
+        public void onClicked() {
+            testSession.clearSession();
+            timeCounterView.timer.resetTimer();
+            myGdxGame.setScreen(myGdxGame.screenMenu);
         }
     };
 }

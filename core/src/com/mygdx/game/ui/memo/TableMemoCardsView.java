@@ -54,6 +54,7 @@ public class TableMemoCardsView extends View {
         width = cardSize * 5 + 4 * padding;
         x = SCR_WIDTH / 2f - width / 2f;
 
+        arrayListCardsView.clear();
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 5; j++) {
                 TableMemoCardsItemsView tableMemoCardsItemsView = new TableMemoCardsItemsView(

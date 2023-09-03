@@ -50,7 +50,7 @@ public class ScreenTheExtraFourth implements Screen {
         );
 
         ImageView imageViewPause = new ImageView(
-                1680, 917,
+                1680, 970,
                 "icons/icon_pause.png"
         );
 
@@ -76,7 +76,7 @@ public class ScreenTheExtraFourth implements Screen {
         TextView textViewTitle = new TextView(
                 myGdxGame.fontArialBlack64,
                 "Выбери лишнюю карточку",
-                -1, 925
+                -1, 985
         );
 
         TextView textViewPassedTitle = new TextView(

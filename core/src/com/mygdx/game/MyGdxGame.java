@@ -22,10 +22,10 @@ public class MyGdxGame extends Game {
     public ScreenRavenMatrices screenRavenMatrices;
     public ScreenOverlayShapes screenOverlayShapes;
     public ScreenSchulteTable screenSchulteTable;
+    public ScreenNonsense screenNonsense;
     public ScreenMemo screenMemo;
     public ScreenMenu screenMenu;
 
-    public BitmapFont commonFont;
     public BitmapFont fontArialBlack64;
     public BitmapFont fontArialBlack32;
     public BitmapFont fontArialBlackBold64;
@@ -41,8 +41,6 @@ public class MyGdxGame extends Game {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, ApplicationSettings.SCR_WIDTH, ApplicationSettings.SCR_HEIGHT);
 
-        // todo: rebuild fonts
-        commonFont = new BitmapFont(Gdx.files.internal("fonts/ArialGray64.fnt"));
         fontArialBlack64 = new BitmapFont(Gdx.files.internal("fonts/ArialBlack64.fnt"));
         fontArialBlack32 = new BitmapFont(Gdx.files.internal("fonts/ArialBlack32.fnt"));
         fontArialBlackBold64 = new BitmapFont(Gdx.files.internal("fonts/ArialBlackBold64.fnt"));
@@ -54,6 +52,7 @@ public class MyGdxGame extends Game {
         screenRavenMatrices = new ScreenRavenMatrices(this);
         screenOverlayShapes = new ScreenOverlayShapes(this);
         screenSchulteTable = new ScreenSchulteTable(this);
+        screenNonsense = new ScreenNonsense(this);
         screenMemo = new ScreenMemo(this);
         screenMenu = new ScreenMenu(this);
 

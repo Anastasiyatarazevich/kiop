@@ -9,7 +9,7 @@ public class ApplicationSettings {
     public static int SCR_HEIGHT = 1200;
 
 
-    // ---- Schulte Table settings
+// ---- Schulte Table settings
 
     // ---- ---- Logic
 
@@ -22,7 +22,7 @@ public class ApplicationSettings {
     public static int SCHULTE_TABLE_ITEMS_PADDING = 20;
 
 
-    // ---- Proof-Reading test settings
+// ---- Proof-Reading test settings
 
     // ---- ---- Ui
 
@@ -35,7 +35,7 @@ public class ApplicationSettings {
 
     public static String COLOR_MAP_DESCRIPTIONS_DIR = "overlayShapes/colorMap/";
     public static String OVERLAY_PICTURES_DIR = "overlayShapes/overlayPictures/";
-    public static String COLOR_MAP_DIR = "overlayShapes/colorMap/";
+    public static String OVERLAY_COLOR_MAP_DIR = "overlayShapes/colorMap/";
     public static String COLORED_SHAPES_DIR = "overlayShapes/coloredShapes/";
     public static String BLACK_AND_WHITE_SHAPES_DIR = "overlayShapes/blackWhiteShapes/";
     public static String COLUMN_BLACK_AND_WHITE_SHAPES_DIR = "overlayShapes/columnsBlackWhiteShapes/";
@@ -51,7 +51,7 @@ public class ApplicationSettings {
     public static int FOURTH_CARD_PADDING = 50;
 
 
-    // ---- Memo settings
+// ---- Memo settings
 
     // ---- ---- Logic
 
@@ -69,9 +69,18 @@ public class ApplicationSettings {
     public static int MEMO_CARD_IMAGE_SIZE = 120;
 
 
-    // ---- Raven
+// ---- Raven
 
     public static String RAVEN_CARD_IMAGES_DIR = "ravensatlas/ravenscards.atlas";
     public static int RAVEN_CARD_SIZE = 230;
     public static int RAVEN_CARD_PADDING = 30;
+
+
+// ---- Nonsense settings
+
+    public static int NONSENSE_COUNT_OF_SAMPLES = 1;
+    public static String NONSENSE_PICTURES_DIR = "nonsense/pictures/";
+    public static String NONSENSE_COLOR_MAP_DIR = "nonsense/colormaps/";
+
+
 }

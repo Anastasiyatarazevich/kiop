@@ -1,4 +1,4 @@
-package com.mygdx.game.utils.overlayShapes;
+package com.mygdx.game.utils.colorMapHelper;
 
 public class ColorsCodes {
 

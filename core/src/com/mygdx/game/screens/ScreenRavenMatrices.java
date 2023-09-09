@@ -9,7 +9,7 @@ import static com.mygdx.game.utils.raven.Cards.targetTextures;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.mygdx.game.MyGdxGame;
-import com.mygdx.game.testSessions.RavenSession;
+import com.mygdx.game.testSessions.SessionRaven;
 import com.mygdx.game.testSessions.sessionsStates.StateRaven;
 import com.mygdx.game.ui.BackgroundPixmapView;
 import com.mygdx.game.ui.ImageView;
@@ -26,7 +26,7 @@ public class ScreenRavenMatrices implements Screen {
 
     MyGdxGame myGdxGame;
 
-    RavenSession testSession;
+    SessionRaven testSession;
 
     SceneHelper sceneGreeting, sceneCardShowing, scenePassed;
 
@@ -47,7 +47,7 @@ public class ScreenRavenMatrices implements Screen {
         sceneCardShowing = new SceneHelper();
         scenePassed = new SceneHelper();
 
-        testSession = new RavenSession();
+        testSession = new SessionRaven();
 
         tableCardsView = new MatrixCardsView(
                 900, 270,

@@ -1,38 +1,37 @@
 package com.mygdx.game.testSessions;
 
 import com.mygdx.game.testSessions.results.ResultsOverlayShapes;
-import com.mygdx.game.testSessions.results.ResultsSchulteTable;
 import com.mygdx.game.testSessions.sessionsStates.StateOverlayShapes;
 import com.mygdx.game.utils.WebHelper;
-import com.mygdx.game.utils.overlayShapes.ColorMap;
+import com.mygdx.game.utils.colorMapHelper.ColorMap;
 import com.mygdx.game.utils.overlayShapes.Shape;
 import com.mygdx.game.utils.overlayShapes.ShapesDescriptor;
 import com.mygdx.game.utils.time.Timer;
 
 import java.util.ArrayList;
 
+import static com.mygdx.game.utils.ApplicationSettings.OVERLAY_COLOR_MAP_DIR;
 import static com.mygdx.game.utils.ApplicationSettings.COUNT_OF_FILES;
 
 public class SessionOverlayShapes {
 
     public StateOverlayShapes testState;
+    public ResultsOverlayShapes testResults;
+
     public ColorMap colorMap;
     private int selectedSample;
 
-    public ArrayList<Shape> shapeList;
+    public ArrayList<Shape> listShapes;
     public int leftShapes;
 
     Timer fullTime;
-
-    public ResultsOverlayShapes testResults;
-
 
     public int getSelectedSample() {
         return selectedSample;
     }
 
     public SessionOverlayShapes() {
-        shapeList = new ArrayList<>();
+        listShapes = new ArrayList<>();
         testState = StateOverlayShapes.GREETING;
         fullTime = new Timer();
         testResults = new ResultsOverlayShapes();
@@ -47,9 +46,9 @@ public class SessionOverlayShapes {
         int countOfSamples = COUNT_OF_FILES;
         selectedSample = (int) (Math.random() * countOfSamples);
 
-        colorMap = new ColorMap(selectedSample);
-        shapeList = ShapesDescriptor.getSampleShapes(selectedSample);
-        leftShapes = shapeList.size();
+        colorMap = new ColorMap(OVERLAY_COLOR_MAP_DIR, selectedSample);
+        listShapes = ShapesDescriptor.getSampleShapes(selectedSample);
+        leftShapes = listShapes.size();
 
     }
 
@@ -72,7 +71,7 @@ public class SessionOverlayShapes {
     }
 
     public void shapeWasFound(int shapeIdx) {
-        shapeList.get(shapeIdx).wasFound();
+        listShapes.get(shapeIdx).wasFound();
         leftShapes -= 1;
 
         if (leftShapes == 0) {

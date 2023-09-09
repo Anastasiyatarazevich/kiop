@@ -5,7 +5,7 @@ import com.mygdx.game.testSessions.sessionsStates.StateRaven;
 import com.mygdx.game.utils.raven.Cards;
 import com.mygdx.game.utils.time.Timer;
 
-public class RavenSession {
+public class SessionRaven {
 
     public StateRaven testState;
     public ResultsRaven testResults;
@@ -15,7 +15,7 @@ public class RavenSession {
     public int currentMatrixIndex;
     private int selectedCardIndex;
 
-    public RavenSession() {
+    public SessionRaven() {
         testResults = new ResultsRaven();
         fullTime = new Timer();
         testState = StateRaven.GREETING;

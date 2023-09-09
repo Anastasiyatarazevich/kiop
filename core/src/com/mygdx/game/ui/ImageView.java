@@ -97,6 +97,10 @@ public class ImageView extends View {
         sprite = new Sprite(imgTexture);
     }
 
+    public ImageView(float x, float y, int height) {
+        super(x, y, 0, height);
+    }
+
     public void loadSizeOfTexture() {
         width = imgTexture.getWidth();
         height = imgTexture.getHeight();

@@ -30,7 +30,7 @@ public class MatrixCardsView extends View {
                         this.y + j * cardsPadding + j * cardsSize,
                          cardsSrc.get(i * 2 + j)
                 );
-                System.out.println(cardsSrc.get(i * 2 + j));
+                // System.out.println(cardsSrc.get(i * 2 + j));
             }
         }
         idxOfSelectedCard = -1;

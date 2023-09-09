@@ -14,7 +14,7 @@ import com.mygdx.game.ui.overlayShapes.ImageColumnView;
 import com.mygdx.game.ui.overlayShapes.ImageMapView;
 import com.mygdx.game.utils.RenderHelper;
 import com.mygdx.game.utils.SceneHelper;
-import com.mygdx.game.utils.overlayShapes.ColorsCodes;
+import com.mygdx.game.utils.colorMapHelper.ColorsCodes;
 import com.mygdx.game.utils.overlayShapes.Shape;
 
 import java.util.ArrayList;
@@ -165,15 +165,15 @@ public class ScreenOverlayShapes implements Screen {
         imageColumnView2.clearColumn();
         spriteListShapesImages.clear();
 
-        for (int i = 0; i < testSession.shapeList.size(); i++) {
-            if (i < testSession.shapeList.size() / 2)
-                imageColumnView1.addImage(COLUMN_BLACK_AND_WHITE_SHAPES_DIR + testSession.shapeList.get(i).getName());
+        for (int i = 0; i < testSession.listShapes.size(); i++) {
+            if (i < testSession.listShapes.size() / 2)
+                imageColumnView1.addImage(COLUMN_BLACK_AND_WHITE_SHAPES_DIR + testSession.listShapes.get(i).getName());
             else
-                imageColumnView2.addImage(COLUMN_BLACK_AND_WHITE_SHAPES_DIR + testSession.shapeList.get(i).getName());
+                imageColumnView2.addImage(COLUMN_BLACK_AND_WHITE_SHAPES_DIR + testSession.listShapes.get(i).getName());
         }
 
-        for (int i = 0; i < testSession.shapeList.size(); i++) {
-            Shape shape = testSession.shapeList.get(i);
+        for (int i = 0; i < testSession.listShapes.size(); i++) {
+            Shape shape = testSession.listShapes.get(i);
             spriteListShapesImages.add(new SpriteShapes(shape.getX(), shape.getY(), BLACK_AND_WHITE_SHAPES_DIR + shape.getName(), shape.getRotation()));
             shape.setX((int) (shape.getX() + imageMapView.x));
             shape.setY((int) (shape.getY() + imageMapView.y));
@@ -219,11 +219,11 @@ public class ScreenOverlayShapes implements Screen {
         public void onPressed(int localX, int localY) {
             int code = testSession.colorMap.getColorCode(localX, localY);
 
-            for (int i = 0; i < testSession.shapeList.size(); i++) {
-                String realImageName = testSession.shapeList.get(i).getName().split("\\.")[0];
+            for (int i = 0; i < testSession.listShapes.size(); i++) {
+                String realImageName = testSession.listShapes.get(i).getName().split("\\.")[0];
                 if (ColorsCodes.getImageNameByColorCode(code).equals(realImageName)) {
-                    spriteListShapesImages.get(i).x = testSession.shapeList.get(i).getX();
-                    spriteListShapesImages.get(i).y = testSession.shapeList.get(i).getY();
+                    spriteListShapesImages.get(i).x = testSession.listShapes.get(i).getX();
+                    spriteListShapesImages.get(i).y = testSession.listShapes.get(i).getY();
                     RenderHelper.setDraggingView(
                             spriteListShapesImages.get(i),
                             (int) myGdxGame.touch.x,
@@ -286,20 +286,20 @@ public class ScreenOverlayShapes implements Screen {
 
                 if (!shapeName.isEmpty()) {
                     shapeName = shapeName.split("/")[shapeName.split("/").length - 1];
-                    for (int i = 0; i < testSession.shapeList.size(); i++) {
-                        if (testSession.shapeList.get(i).getName().equals(shapeName)) {
+                    for (int i = 0; i < testSession.listShapes.size(); i++) {
+                        if (testSession.listShapes.get(i).getName().equals(shapeName)) {
 
                             if (!shapeName.equals(draggingShapeName)) continue;
 
-                            if (!testSession.shapeList.get(i).getIsFound()) {
+                            if (!testSession.listShapes.get(i).getIsFound()) {
                                 testSession.shapeWasFound(i);
 
-                                if (i < testSession.shapeList.size() / 2) {
-                                    String newDir = COLORED_SHAPES_DIR + testSession.shapeList.get(i).getName();
+                                if (i < testSession.listShapes.size() / 2) {
+                                    String newDir = COLORED_SHAPES_DIR + testSession.listShapes.get(i).getName();
                                     imageColumnView1.imagesList.get(i).setImgSource(newDir);
                                 } else {
-                                    int newIdx = i - testSession.shapeList.size() / 2;
-                                    String newDir = COLORED_SHAPES_DIR + testSession.shapeList.get(i).getName();
+                                    int newIdx = i - testSession.listShapes.size() / 2;
+                                    String newDir = COLORED_SHAPES_DIR + testSession.listShapes.get(i).getName();
                                     imageColumnView2.imagesList.get(newIdx).setImgSource(newDir);
                                 }
                                 return true;

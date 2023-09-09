@@ -10,10 +10,12 @@ import static com.mygdx.game.utils.ApplicationSettings.OVERLAY_PICTURES_DIR;
 // returns local coordinates of user press
 public class ImageMapView extends ImageView {
 
-    private OnImageMapViewPressedListener onImageMapViewPressedListener;
+    private final OnImageMapViewPressedListener onImageMapViewPressedListener;
     MyGdxGame myGdxGame;
 
-    public ImageMapView(float y, float width, float height, int selectedSample, OnImageMapViewPressedListener onImageMapViewPressedListener, MyGdxGame myGdxGame) {
+    public ImageMapView(float y, float width, float height, int selectedSample,
+                        OnImageMapViewPressedListener onImageMapViewPressedListener, MyGdxGame myGdxGame) {
+
         super(y, width, height, OVERLAY_PICTURES_DIR + selectedSample + ".png");
         this.onImageMapViewPressedListener = onImageMapViewPressedListener;
         this.myGdxGame = myGdxGame;
@@ -22,10 +24,6 @@ public class ImageMapView extends ImageView {
 
     public void setSelectedSampleIdx(int selectedSampleIdx) {
         setImgSource(OVERLAY_PICTURES_DIR + selectedSampleIdx + ".png");
-    }
-
-    public interface OnImageMapViewPressedListener {
-        void onPressed(int localX, int localY);
     }
 
     View.OnClickListener onClickListener = new OnClickListener() {
@@ -40,4 +38,8 @@ public class ImageMapView extends ImageView {
             onImageMapViewPressedListener.onPressed(localX, localY);
         }
     };
+
+    public interface OnImageMapViewPressedListener {
+        void onPressed(int localX, int localY);
+    }
 }

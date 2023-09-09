@@ -21,12 +21,13 @@ public class ScreenMenu implements Screen {
 
         uiComponentsList = new ArrayList<>();
 
-        TextView textViewTest1 = new TextView(myGdxGame.fontArialGray64, "1. Таблица Шульте", 100, 700);
-        TextView textViewTest2 = new TextView(myGdxGame.fontArialGray64, "2. Коррекатурная проба", 100, 600);
-        TextView textViewTest3 = new TextView(myGdxGame.fontArialGray64, "3. Наложенные фигуры", 100, 500);
-        TextView textViewTest4 = new TextView(myGdxGame.fontArialGray64, "4. Четвёртый лишний", 100, 400);
-        TextView textViewTest5 = new TextView(myGdxGame.fontArialGray64, "5. Матрицы Равена", 100, 300);
-        TextView textViewTest6 = new TextView(myGdxGame.fontArialGray64, "6. Мемо", 100, 200);
+        TextView textViewTest1 = new TextView(myGdxGame.fontArialGray64, "1. Таблица Шульте", 100, 800);
+        TextView textViewTest2 = new TextView(myGdxGame.fontArialGray64, "2. Коррекатурная проба", 100, 700);
+        TextView textViewTest3 = new TextView(myGdxGame.fontArialGray64, "3. Наложенные фигуры", 100, 600);
+        TextView textViewTest4 = new TextView(myGdxGame.fontArialGray64, "4. Четвёртый лишний", 100, 500);
+        TextView textViewTest5 = new TextView(myGdxGame.fontArialGray64, "5. Матрицы Равена", 100, 400);
+        TextView textViewTest6 = new TextView(myGdxGame.fontArialGray64, "6. Мемо", 100, 300);
+        TextView textViewTest7 = new TextView(myGdxGame.fontArialGray64, "7. Нелепицы", 100, 200);
 
         textViewTest1.setOnClickListener(textView3clicked);
         textViewTest2.setOnClickListener(textView2clicked);
@@ -34,6 +35,7 @@ public class ScreenMenu implements Screen {
         textViewTest4.setOnClickListener(textView4Clicked);
         textViewTest5.setOnClickListener(textView5Clicked);
         textViewTest6.setOnClickListener(textView6Clicked);
+        textViewTest7.setOnClickListener(textView7Clicked);
 
         uiComponentsList.add(textViewTest1);
         uiComponentsList.add(textViewTest2);
@@ -41,6 +43,7 @@ public class ScreenMenu implements Screen {
         uiComponentsList.add(textViewTest4);
         uiComponentsList.add(textViewTest5);
         uiComponentsList.add(textViewTest6);
+        uiComponentsList.add(textViewTest7);
     }
 
     @Override
@@ -135,6 +138,13 @@ public class ScreenMenu implements Screen {
         @Override
         public void onClicked() {
             myGdxGame.setScreen(myGdxGame.screenMemo);
+        }
+    };
+
+    View.OnClickListener textView7Clicked = new View.OnClickListener() {
+        @Override
+        public void onClicked() {
+            myGdxGame.setScreen(myGdxGame.screenNonsense);
         }
     };
 }

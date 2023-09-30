@@ -22,6 +22,7 @@ public class MyGdxGame extends Game {
     public ScreenRavenMatrices screenRavenMatrices;
     public ScreenOverlayShapes screenOverlayShapes;
     public ScreenSchulteTable screenSchulteTable;
+    public ScreenSequences screenSequences;
     public ScreenNonsense screenNonsense;
     public ScreenMemo screenMemo;
     public ScreenMenu screenMenu;
@@ -52,6 +53,7 @@ public class MyGdxGame extends Game {
         screenRavenMatrices = new ScreenRavenMatrices(this);
         screenOverlayShapes = new ScreenOverlayShapes(this);
         screenSchulteTable = new ScreenSchulteTable(this);
+        screenSequences = new ScreenSequences(this);
         screenNonsense = new ScreenNonsense(this);
         screenMemo = new ScreenMemo(this);
         screenMenu = new ScreenMenu(this);

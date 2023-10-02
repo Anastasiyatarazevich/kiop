@@ -32,6 +32,10 @@ public class ImageView extends View {
         this.textureRegion = ScreenRavenMatrices.textureAtlas.findRegion(textureRegion);
     }
 
+    public ImageView(float x, float y) {
+        super(x, y);
+    }
+
     public ImageView(float x, float y, String imgSource) {
         super(x, y);
         this.imgSource = imgSource;

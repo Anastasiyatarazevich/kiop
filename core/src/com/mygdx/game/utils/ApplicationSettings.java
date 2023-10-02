@@ -58,7 +58,7 @@ public class ApplicationSettings {
     public static String CARDS_DIR = "memo/cardsImages/";
     public static int COUNT_OF_CARDS_TO_REMEMBER = 15;
     public static int COUNT_OF_ADDITION_CARDS = 15;
-    public static int SECONDS_TO_REMEMBER = 3;
+    public static int SECONDS_TO_REMEMBER = 10;
 
     // ---- ---- Ui
 
@@ -82,5 +82,11 @@ public class ApplicationSettings {
     public static String NONSENSE_PICTURES_DIR = "nonsense/pictures/";
     public static String NONSENSE_COLOR_MAP_DIR = "nonsense/colormaps/";
 
+
+// ---- Sequences settings
+
+
+    public static int SEQUENCES_COUNT = 2;
+    public static int SEQUENCES_COUNT_CARDS = 4;
 
 }

@@ -40,6 +40,7 @@ public class SessionRaven {
         testState = StateRaven.PASSED;
         fullTime.terminateTimer();
         testResults.setSpentTimeInSeconds(fullTime.getFinalTimeInSeconds());
+        System.out.println("here");
         System.out.println(testResults.toString());
     }
 
@@ -68,12 +69,7 @@ public class SessionRaven {
         }
         currentMatrixIndex += 1;
         selectedCardIndex = -1;
-        if (currentMatrixIndex == Cards.presets.length) {
-            endTest();
-            return false;
-        }
-
-        return true;
+        return currentMatrixIndex != Cards.presets.length;
     }
 
 }

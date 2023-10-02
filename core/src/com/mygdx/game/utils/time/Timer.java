@@ -63,6 +63,8 @@ public class Timer {
             millisPeriod = pauseTime - startTime;
         else if (timerState == TimeState.RUNNING)
             millisPeriod = TimeUtils.millis() - startTime;
+        else if (timerState == TimeState.READY_TO_START)
+            millisPeriod = 0;
         else
             millisPeriod = endTime - startTime;
 

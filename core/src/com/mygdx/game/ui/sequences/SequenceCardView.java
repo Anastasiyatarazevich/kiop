@@ -25,19 +25,28 @@ public class SequenceCardView extends View {
     }
 
     public void setImageIdx(int idx) {
+        imageViewIdx.isVisible = true;
         imageViewIdx.setImgSource(listImagesIdx[idx - 1]);
         imageViewIdx.loadSizeOfTexture();
+    }
+
+    public void dropImageIdx() {
+        imageViewIdx.isVisible = false;
     }
 
     public void setImageContent(String source) {
         imageViewContent.setImgSource(source);
         imageViewContent.loadSizeOfTexture();
+        setImageIdx(1);
+        dropImageIdx();
+        imageViewIdx.x = x + imageViewContent.width - imageViewIdx.width - 25;
+        imageViewIdx.y = y + imageViewContent.height - imageViewIdx.height - 25;
     }
 
     @Override
     public void draw(MyGdxGame myGdxGame) {
         imageViewContent.draw(myGdxGame);
-        imageViewIdx.draw(myGdxGame);
+        if (imageViewIdx.isVisible) imageViewIdx.draw(myGdxGame);
     }
 
     @Override

@@ -88,5 +88,6 @@ public class ApplicationSettings {
 
     public static int SEQUENCES_COUNT = 2;
     public static int SEQUENCES_COUNT_CARDS = 4;
+    public static int SEQUENCES_TIME_IN_SECONDS = 5 * 60;
 
 }

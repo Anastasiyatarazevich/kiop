@@ -51,6 +51,7 @@ public class ImageAlphaView extends View {
     }
 
     public void fadeIn(long fadingPeriod) {
+        System.out.println(isVisible);
         isFadingAway = false;
         isFadingIn = true;
         alpha = 0f;

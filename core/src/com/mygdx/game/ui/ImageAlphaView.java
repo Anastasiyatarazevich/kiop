@@ -26,6 +26,10 @@ public class ImageAlphaView extends View {
         sprite = new Sprite(imgTexture);
     }
 
+    public float getAlpha() {
+        return alpha;
+    }
+
     public void setImgSource(String imgSource) {
         if (imgSource.equals(this.imgSource)) return;
         this.imgSource = imgSource;
@@ -51,7 +55,6 @@ public class ImageAlphaView extends View {
     }
 
     public void fadeIn(long fadingPeriod) {
-        System.out.println(isVisible);
         isFadingAway = false;
         isFadingIn = true;
         alpha = 0f;

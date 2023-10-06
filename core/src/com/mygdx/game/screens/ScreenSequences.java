@@ -203,7 +203,9 @@ public class ScreenSequences implements Screen {
     View.OnClickListener onButtonDropClicked = new View.OnClickListener() {
         @Override
         public void onClicked() {
-            imageAlertErrorView.fadeAway(800);
+            if (imageAlertErrorView.getAlpha() != 0f) {
+                imageAlertErrorView.fadeAway(800);
+            }
             buttonReady.isVisible = false;
             sequenceCardsWrapperView.dropIdxes();
             testSession.dropIdxes();
@@ -254,6 +256,4 @@ public class ScreenSequences implements Screen {
             myGdxGame.setScreen(myGdxGame.screenMenu);
         }
     };
-
-    Movable.OnEndAnimation
 }

@@ -254,4 +254,6 @@ public class ScreenSequences implements Screen {
             myGdxGame.setScreen(myGdxGame.screenMenu);
         }
     };
+
+    Movable.OnEndAnimation
 }

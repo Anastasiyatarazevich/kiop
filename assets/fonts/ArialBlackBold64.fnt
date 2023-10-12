@@ -1,4 +1,4 @@
-info face="Arial Полужирный" size=64 bold=1 italic=0 charset="" unicode=0 stretchH=100 smooth=1 aa=1 padding=1,1,1,1 spacing=-2,-2
+info face="Arial пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" size=64 bold=1 italic=0 charset="" unicode=0 stretchH=100 smooth=1 aa=1 padding=1,1,1,1 spacing=-2,-2
 common lineHeight=74 base=58 scaleW=512 scaleH=512 pages=2 packed=0
 page id=0 file="ArialBlackBold641.png"
 page id=1 file="ArialBlackBold642.png"
@@ -133,7 +133,7 @@ char id=1072    x=138  y=413  width=34   height=38   xoffset=1    yoffset=22   x
 char id=1073    x=102  y=122  width=37   height=50   xoffset=2    yoffset=10   xadvance=40   page=0    chnl=0 
 char id=1074    x=297  y=451  width=34   height=36   xoffset=4    yoffset=23   xadvance=39   page=0    chnl=0 
 char id=1075    x=331  y=451  width=24   height=36   xoffset=4    yoffset=23   xadvance=27   page=0    chnl=0 
-char id=1076    x=316  y=365  width=42   height=45   xoffset=-1   yoffset=23   xadvance=41   page=0    chnl=0 
+char id=1076    x=316  y=365  width=42   height=45   xoffset=-1   yoffset=23   xadvance=41   page=0    chnl=0
 char id=1077    x=172  y=413  width=35   height=38   xoffset=1    yoffset=22   xadvance=36   page=0    chnl=0 
 char id=1078    x=355  y=451  width=47   height=36   xoffset=-1   yoffset=23   xadvance=45   page=0    chnl=0 
 char id=1079    x=207  y=413  width=31   height=38   xoffset=0    yoffset=22   xadvance=32   page=0    chnl=0 

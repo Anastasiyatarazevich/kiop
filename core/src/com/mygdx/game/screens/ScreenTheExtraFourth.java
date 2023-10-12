@@ -7,6 +7,7 @@ import com.mygdx.game.testSessions.sessionsStates.StateTheExtraFourth;
 import com.mygdx.game.ui.*;
 import com.mygdx.game.ui.alerts.AlertPauseView;
 import com.mygdx.game.ui.theExtraFourth.TableCardsView;
+import com.mygdx.game.utils.ApplicationStrings;
 import com.mygdx.game.utils.RenderHelper;
 import com.mygdx.game.utils.SceneHelper;
 import com.mygdx.game.utils.theExtraFourth.CardsPresetsTheExtraFourth;
@@ -92,6 +93,12 @@ public class ScreenTheExtraFourth implements Screen {
                 -1, 228
         );
 
+        TaskView taskView = new TaskView(
+                myGdxGame.fontArialBlackBold64,
+                myGdxGame.fontArialGray64,
+                ApplicationStrings.EXTRA_FOURTH_TASK_DESCRIPTION
+        );
+
         imageViewNext.isVisible = false;
         imageViewNext.setOnClickListener(onImageViewNextClicked);
         tableCardsView.setOnTableCardsClickListener(onTableCardsClicked);
@@ -103,6 +110,7 @@ public class ScreenTheExtraFourth implements Screen {
 
         sceneGreeting.addActor(background);
         sceneGreeting.addActor(buttonStart);
+        sceneGreeting.addActor(taskView);
 
         sceneCardShowing.addActor(background);
         sceneCardShowing.addActor(tableCardsView);

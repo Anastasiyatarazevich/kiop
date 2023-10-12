@@ -16,6 +16,7 @@ import com.mygdx.game.ui.alerts.AlertPauseView;
 import com.mygdx.game.ui.proofReading.TableViewProof;
 import com.mygdx.game.ui.shulteTable.FindTextView;
 import com.mygdx.game.ui.shulteTable.TableItemView;
+import com.mygdx.game.utils.ApplicationStrings;
 import com.mygdx.game.utils.RenderHelper;
 import com.mygdx.game.utils.SceneHelper;
 import com.mygdx.game.utils.schulteHelper.SelectionResponse;
@@ -92,11 +93,21 @@ public class ScreenProofreadingTest implements Screen {
                 "icons/icon_pause.png"
         );
 
+        TaskView taskView = new TaskView(
+                myGdxGame.fontArialBlackBold64,
+                myGdxGame.fontArialGray64,
+                ApplicationStrings.PROOF_READING_TASK_DESCRIPTION
+        );
+
         backButton.setOnClickListener(onBackButtonClicked);
         startButton.setOnClickListener(onStartButtonClicked);
         imageViewPause.setOnClickListener(onButtonPauseClicked);
         alertPauseView.setOnButtonReturnHomeClickListener(onButtonReturnHomeClickListener);
         alertPauseView.setOnButtonResumeClickListener(onButtonResumeClickListener);
+
+        sceneGreeting.addActor(background);
+        sceneGreeting.addActor(startButton);
+        sceneGreeting.addActor(taskView);
 
         scenePassed.addActor(background);
         scenePassed.addActor(backButton);
@@ -107,9 +118,6 @@ public class ScreenProofreadingTest implements Screen {
         sceneTableShowing.addActor(findText);
         sceneTableShowing.addActor(imageViewPause);
         sceneTableShowing.addActor(alertPauseView);
-
-        sceneGreeting.addActor(background);
-        sceneGreeting.addActor(startButton);
     }
 
     @Override

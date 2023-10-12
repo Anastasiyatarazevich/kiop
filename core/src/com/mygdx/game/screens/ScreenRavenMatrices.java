@@ -11,13 +11,10 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.testSessions.SessionRaven;
 import com.mygdx.game.testSessions.sessionsStates.StateRaven;
-import com.mygdx.game.ui.BackgroundPixmapView;
-import com.mygdx.game.ui.ImageView;
-import com.mygdx.game.ui.TextButton;
-import com.mygdx.game.ui.TextView;
-import com.mygdx.game.ui.View;
+import com.mygdx.game.ui.*;
 import com.mygdx.game.ui.alerts.AlertPauseView;
 import com.mygdx.game.ui.raven.MatrixCardsView;
+import com.mygdx.game.utils.ApplicationStrings;
 import com.mygdx.game.utils.RenderHelper;
 import com.mygdx.game.utils.SceneHelper;
 import com.mygdx.game.utils.raven.Cards;
@@ -110,6 +107,12 @@ public class ScreenRavenMatrices implements Screen {
                 "icons/icon_pause.png"
         );
 
+        TaskView taskView = new TaskView(
+                myGdxGame.fontArialBlackBold64,
+                myGdxGame.fontArialGray64,
+                ApplicationStrings.RAVEN_TASK_DESCRIPTION
+        );
+
         buttonBack.setOnClickListener(onButtonBackClicked);
         buttonStart.setOnClickListener(onButtonStartClicked);
         imageViewPause.setOnClickListener(onButtonPauseClicked);
@@ -122,6 +125,7 @@ public class ScreenRavenMatrices implements Screen {
 
         sceneGreeting.addActor(background);
         sceneGreeting.addActor(buttonStart);
+        sceneGreeting.addActor(taskView);
 
         sceneCardShowing.addActor(background);
         sceneCardShowing.addActor(tableCardsView);

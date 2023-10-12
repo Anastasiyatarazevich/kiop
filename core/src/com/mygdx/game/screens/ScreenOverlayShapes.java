@@ -12,6 +12,7 @@ import com.mygdx.game.ui.*;
 import com.mygdx.game.ui.alerts.AlertPauseView;
 import com.mygdx.game.ui.overlayShapes.ImageColumnView;
 import com.mygdx.game.ui.overlayShapes.ImageMapView;
+import com.mygdx.game.utils.ApplicationStrings;
 import com.mygdx.game.utils.RenderHelper;
 import com.mygdx.game.utils.SceneHelper;
 import com.mygdx.game.utils.colorMapHelper.ColorsCodes;
@@ -90,6 +91,12 @@ public class ScreenOverlayShapes implements Screen {
                 myGdxGame
         );
 
+        TaskView taskView = new TaskView(
+                myGdxGame.fontArialBlackBold64,
+                myGdxGame.fontArialGray64,
+                ApplicationStrings.OVERLAY_SHAPES_TASK_DESCRIPTION
+        );
+
         imageColumnView1 = new ImageColumnView(137, 122, 720, 25);
         imageColumnView2 = new ImageColumnView(1630, 122, 720, 25);
 
@@ -101,6 +108,7 @@ public class ScreenOverlayShapes implements Screen {
 
         sceneGreeting.addActor(background);
         sceneGreeting.addActor(startButton);
+        sceneGreeting.addActor(taskView);
 
         sceneShapesShowing.addActor(background);
         sceneShapesShowing.addActor(imageMapView);

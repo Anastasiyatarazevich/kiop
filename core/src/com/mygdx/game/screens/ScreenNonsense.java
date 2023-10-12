@@ -6,6 +6,7 @@ import com.mygdx.game.testSessions.SessionNonsense;
 import com.mygdx.game.ui.*;
 import com.mygdx.game.ui.alerts.AlertPauseView;
 import com.mygdx.game.ui.nonsense.ImageMapView;
+import com.mygdx.game.utils.ApplicationStrings;
 import com.mygdx.game.utils.RenderHelper;
 import com.mygdx.game.utils.SceneHelper;
 import com.mygdx.game.utils.nonsense.Nonsense;
@@ -98,6 +99,12 @@ public class ScreenNonsense implements Screen {
                 -1, 816
         );
 
+        TaskView taskView = new TaskView(
+                myGdxGame.fontArialBlackBold64,
+                myGdxGame.fontArialGray64,
+                ApplicationStrings.NONSENSE_TASK_DESCRIPTION
+        );
+
         imagePause.setOnClickListener(onImagePauseClicked);
         buttonStart.setOnClickListener(onButtonStartClicked);
         buttonBackToMenu.setOnClickListener(onButtonBackClicked);
@@ -109,6 +116,7 @@ public class ScreenNonsense implements Screen {
 
         sceneGreeting.addActor(backgroundView);
         sceneGreeting.addActor(buttonStart);
+        sceneGreeting.addActor(taskView);
 
         scenePassed.addActor(backgroundView);
         scenePassed.addActor(buttonBackToMenu);

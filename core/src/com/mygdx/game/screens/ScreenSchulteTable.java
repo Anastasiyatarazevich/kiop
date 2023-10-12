@@ -9,6 +9,8 @@ import com.mygdx.game.ui.alerts.AlertPauseView;
 import com.mygdx.game.ui.shulteTable.TableCounterView;
 import com.mygdx.game.ui.shulteTable.TableItemView;
 import com.mygdx.game.ui.shulteTable.TableView;
+import com.mygdx.game.utils.ApplicationSettings;
+import com.mygdx.game.utils.ApplicationStrings;
 import com.mygdx.game.utils.RenderHelper;
 import com.mygdx.game.utils.SceneHelper;
 import com.mygdx.game.utils.schulteHelper.SelectionResponse;
@@ -80,6 +82,12 @@ public class ScreenSchulteTable implements Screen {
 
         BackgroundPixmapView background = new BackgroundPixmapView(COLOR_BG_GRAY);
 
+        TaskView taskView = new TaskView(
+                myGdxGame.fontArialBlackBold64,
+                myGdxGame.fontArialGray64,
+                ApplicationStrings.SCHULTE_TABLE_TASK_DESCRIPTION
+        );
+
         TextButton startButton = new TextButton(
                 myGdxGame.fontArialBlack64,
                 "Начать",
@@ -111,6 +119,10 @@ public class ScreenSchulteTable implements Screen {
         alertPauseView.setOnButtonResumeClickListener(onButtonResumeClickListener);
         alertPauseView.setOnButtonReturnHomeClickListener(onButtonReturnHomeClickListener);
 
+        sceneGreeting.addActor(background);
+        sceneGreeting.addActor(startButton);
+        sceneGreeting.addActor(taskView);
+
         scenePassed.addActor(background);
         scenePassed.addActor(backButton);
         scenePassed.addActor(motivatorTextView);
@@ -126,9 +138,6 @@ public class ScreenSchulteTable implements Screen {
         sceneTableShowing.addActor(smallTableCounterView);
         sceneTableShowing.addActor(imageViewPause);
         sceneTableShowing.addActor(alertPauseView);
-
-        sceneGreeting.addActor(background);
-        sceneGreeting.addActor(startButton);
     }
 
     @Override

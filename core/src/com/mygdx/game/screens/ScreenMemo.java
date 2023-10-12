@@ -7,6 +7,7 @@ import com.mygdx.game.testSessions.sessionsStates.StateMemo;
 import com.mygdx.game.ui.*;
 import com.mygdx.game.ui.alerts.AlertPauseView;
 import com.mygdx.game.ui.memo.TableMemoCardsView;
+import com.mygdx.game.utils.ApplicationStrings;
 import com.mygdx.game.utils.RenderHelper;
 import com.mygdx.game.utils.SceneHelper;
 
@@ -43,6 +44,12 @@ public class ScreenMemo implements Screen {
         alertPauseView = new AlertPauseView(
                 myGdxGame.fontArialBlack64,
                 myGdxGame.fontArialBlack32
+        );
+
+        TaskView taskView = new TaskView(
+                myGdxGame.fontArialBlackBold64,
+                myGdxGame.fontArialGray64,
+                ApplicationStrings.MEMO_TASK_DESCRIPTION
         );
 
         tableMemoCardsView = new TableMemoCardsView(
@@ -109,6 +116,7 @@ public class ScreenMemo implements Screen {
 
         sceneGreeting.addActor(backgroundView);
         sceneGreeting.addActor(startButton);
+        sceneGreeting.addActor(taskView);
 
         sceneShowingCards.addActor(backgroundView);
         sceneShowingCards.addActor(timeCounterView);

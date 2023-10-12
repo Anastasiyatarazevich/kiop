@@ -6,6 +6,7 @@ import com.mygdx.game.testSessions.SessionSequences;
 import com.mygdx.game.ui.*;
 import com.mygdx.game.ui.alerts.AlertPauseView;
 import com.mygdx.game.ui.sequences.SequenceCardsWrapperView;
+import com.mygdx.game.utils.ApplicationStrings;
 import com.mygdx.game.utils.RenderHelper;
 import com.mygdx.game.utils.SceneHelper;
 
@@ -91,6 +92,12 @@ public class ScreenSequences implements Screen {
                 "icons/icon_pause.png"
         );
 
+        TaskView taskView = new TaskView(
+                myGdxGame.fontArialBlackBold64,
+                myGdxGame.fontArialGray64,
+                ApplicationStrings.SEQUANCE_TASK_DESCRIPTION
+        );
+
         alertPauseView.setOnButtonResumeClickListener(onButtonResumeClickListener);
         alertPauseView.setOnButtonReturnHomeClickListener(onButtonReturnHomeClickListener);
         sequenceCardsWrapperView.setOnSequenceItemClicked(onSequenceItemClicked);
@@ -102,6 +109,7 @@ public class ScreenSequences implements Screen {
 
         sceneGreeting.addActor(backgroundView);
         sceneGreeting.addActor(buttonStart);
+        sceneGreeting.addActor(taskView);
 
         sceneShowingSequences.addActor(backgroundView);
         sceneShowingSequences.addActor(sequenceCardsWrapperView);

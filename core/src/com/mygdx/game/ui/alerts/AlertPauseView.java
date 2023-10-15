@@ -33,7 +33,7 @@ public class AlertPauseView extends View {
         );
 
         imageViewRaccoon = new ImageView(
-                -1, 460,
+                -1, 420,
                 "images/slippingRaccoon.png"
         );
 

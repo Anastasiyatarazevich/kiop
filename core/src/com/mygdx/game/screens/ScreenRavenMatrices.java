@@ -63,7 +63,13 @@ public class ScreenRavenMatrices implements Screen {
                 myGdxGame.fontArialBlack64,
                 "Начать",
                 "schulteTable/buttonBackground.png",
-                775, 155
+                660, 155
+        );
+
+        TextView textViewBack = new TextView(
+                myGdxGame.fontArialBlack64,
+                "Назад",
+                1040, 180
         );
 
         imageViewTargetPicture = new ImageView(
@@ -116,6 +122,7 @@ public class ScreenRavenMatrices implements Screen {
         buttonBack.setOnClickListener(onButtonBackClicked);
         buttonStart.setOnClickListener(onButtonStartClicked);
         imageViewPause.setOnClickListener(onButtonPauseClicked);
+        textViewBack.setOnClickListener(onButtonReturnClickListener);
         imageViewNext.setOnClickListener(onImageViewNextClicked);
         tableCardsView.setOnTableCardsClickListener(onTableCardsClicked);
         alertPauseView.setOnButtonResumeClickListener(onButtonResumeClicked);
@@ -126,6 +133,7 @@ public class ScreenRavenMatrices implements Screen {
         sceneGreeting.addActor(background);
         sceneGreeting.addActor(buttonStart);
         sceneGreeting.addActor(taskView);
+        sceneGreeting.addActor(textViewBack);
 
         sceneCardShowing.addActor(background);
         sceneCardShowing.addActor(tableCardsView);
@@ -260,6 +268,13 @@ public class ScreenRavenMatrices implements Screen {
         @Override
         public void onClicked() {
             testSession.clearSession();
+            myGdxGame.setScreen(myGdxGame.screenMenu);
+        }
+    };
+
+    View.OnClickListener onButtonReturnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClicked() {
             myGdxGame.setScreen(myGdxGame.screenMenu);
         }
     };

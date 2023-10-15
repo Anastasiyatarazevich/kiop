@@ -92,8 +92,15 @@ public class ScreenSchulteTable implements Screen {
                 myGdxGame.fontArialBlack64,
                 "Начать",
                 "schulteTable/buttonBackground.png",
-                -1, 155
+                660, 155
         );
+
+        TextView textViewBack = new TextView(
+                myGdxGame.fontArialBlack64,
+                "Назад",
+                1040, 180
+        );
+
         TextButton continueButton = new TextButton(
                 myGdxGame.fontArialBlack64,
                 "Продолжить",
@@ -115,6 +122,7 @@ public class ScreenSchulteTable implements Screen {
         startButton.setOnClickListener(onStartButtonClicked);
         continueButton.setOnClickListener(onContinueButtonClicked);
         imageViewPause.setOnClickListener(onPauseClicked);
+        textViewBack.setOnClickListener(onButtonReturnClickListener);
 
         alertPauseView.setOnButtonResumeClickListener(onButtonResumeClickListener);
         alertPauseView.setOnButtonReturnHomeClickListener(onButtonReturnHomeClickListener);
@@ -122,6 +130,7 @@ public class ScreenSchulteTable implements Screen {
         sceneGreeting.addActor(background);
         sceneGreeting.addActor(startButton);
         sceneGreeting.addActor(taskView);
+        sceneGreeting.addActor(textViewBack);
 
         scenePassed.addActor(background);
         scenePassed.addActor(backButton);
@@ -288,6 +297,13 @@ public class ScreenSchulteTable implements Screen {
         public void onClicked() {
             testSession.resumeTest();
             timeCounterView.timer.resumeTimer();
+        }
+    };
+
+    View.OnClickListener onButtonReturnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClicked() {
+            myGdxGame.setScreen(myGdxGame.screenMenu);
         }
     };
 }

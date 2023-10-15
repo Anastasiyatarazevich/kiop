@@ -64,7 +64,13 @@ public class ScreenMemo implements Screen {
                 myGdxGame.fontArialBlack64,
                 "Начать",
                 "schulteTable/buttonBackground.png",
-                -1, 155
+                660, 155
+        );
+
+        TextView textViewBack = new TextView(
+                myGdxGame.fontArialBlack64,
+                "Назад",
+                1040, 180
         );
 
         textViewRememberTitle = new TextView(
@@ -109,6 +115,7 @@ public class ScreenMemo implements Screen {
         startButton.setOnClickListener(onButtonStartClicked);
         backButton.setOnClickListener(onBackButtonClicked);
         imageViewPause.setOnClickListener(onButtonPauseClicked);
+        textViewBack.setOnClickListener(onButtonReturnClickListener);
         alertPauseView.setOnButtonResumeClickListener(onButtonResumeClickListener);
         alertPauseView.setOnButtonReturnHomeClickListener(onButtonReturnHomeClickListener);
         textButtonCompleteTest.setOnClickListener(onButtonCompleteTestClicked);
@@ -117,6 +124,7 @@ public class ScreenMemo implements Screen {
         sceneGreeting.addActor(backgroundView);
         sceneGreeting.addActor(startButton);
         sceneGreeting.addActor(taskView);
+        sceneGreeting.addActor(textViewBack);
 
         sceneShowingCards.addActor(backgroundView);
         sceneShowingCards.addActor(timeCounterView);
@@ -264,6 +272,13 @@ public class ScreenMemo implements Screen {
         public void onClicked() {
             testSession.clearSession();
             timeCounterView.timer.resetTimer();
+            myGdxGame.setScreen(myGdxGame.screenMenu);
+        }
+    };
+
+    View.OnClickListener onButtonReturnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClicked() {
             myGdxGame.setScreen(myGdxGame.screenMenu);
         }
     };

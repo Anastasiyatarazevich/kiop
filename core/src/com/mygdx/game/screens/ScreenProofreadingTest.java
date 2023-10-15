@@ -78,7 +78,13 @@ public class ScreenProofreadingTest implements Screen {
                 myGdxGame.fontArialBlack64,
                 "Начать",
                 "schulteTable/buttonBackground.png",
-                -1, 155
+                660, 155
+        );
+
+        TextView textViewBack = new TextView(
+                myGdxGame.fontArialBlack64,
+                "Назад",
+                1040, 180
         );
 
         TextButton backButton = new TextButton(
@@ -102,12 +108,14 @@ public class ScreenProofreadingTest implements Screen {
         backButton.setOnClickListener(onBackButtonClicked);
         startButton.setOnClickListener(onStartButtonClicked);
         imageViewPause.setOnClickListener(onButtonPauseClicked);
+        textViewBack.setOnClickListener(onButtonReturnClickListener);
         alertPauseView.setOnButtonReturnHomeClickListener(onButtonReturnHomeClickListener);
         alertPauseView.setOnButtonResumeClickListener(onButtonResumeClickListener);
 
         sceneGreeting.addActor(background);
         sceneGreeting.addActor(startButton);
         sceneGreeting.addActor(taskView);
+        sceneGreeting.addActor(textViewBack);
 
         scenePassed.addActor(background);
         scenePassed.addActor(backButton);
@@ -247,6 +255,13 @@ public class ScreenProofreadingTest implements Screen {
         @Override
         public void onClicked() {
             testSession.clearTest();
+            myGdxGame.setScreen(myGdxGame.screenMenu);
+        }
+    };
+
+    View.OnClickListener onButtonReturnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClicked() {
             myGdxGame.setScreen(myGdxGame.screenMenu);
         }
     };

@@ -71,7 +71,13 @@ public class ScreenTheExtraFourth implements Screen {
                 myGdxGame.fontArialBlack64,
                 "Начать",
                 "schulteTable/buttonBackground.png",
-                775, 155
+                660, 155
+        );
+
+        TextView textViewBack = new TextView(
+                myGdxGame.fontArialBlack64,
+                "Назад",
+                1040, 180
         );
 
         TextView textViewTitle = new TextView(
@@ -105,12 +111,14 @@ public class ScreenTheExtraFourth implements Screen {
         buttonStart.setOnClickListener(onButtonStartClicked);
         buttonBack.setOnClickListener(onButtonBackClicked);
         imageViewPause.setOnClickListener(onButtonPauseClicked);
+        textViewBack.setOnClickListener(onButtonReturnClickListener);
         alertPauseView.setOnButtonReturnHomeClickListener(onButtonReturnHomeClicked);
         alertPauseView.setOnButtonResumeClickListener(onButtonResumeClicked);
 
         sceneGreeting.addActor(background);
         sceneGreeting.addActor(buttonStart);
         sceneGreeting.addActor(taskView);
+        sceneGreeting.addActor(textViewBack);
 
         sceneCardShowing.addActor(background);
         sceneCardShowing.addActor(tableCardsView);
@@ -242,6 +250,13 @@ public class ScreenTheExtraFourth implements Screen {
         @Override
         public void onClicked() {
             testSession.clearSession();
+            myGdxGame.setScreen(myGdxGame.screenMenu);
+        }
+    };
+
+    View.OnClickListener onButtonReturnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClicked() {
             myGdxGame.setScreen(myGdxGame.screenMenu);
         }
     };

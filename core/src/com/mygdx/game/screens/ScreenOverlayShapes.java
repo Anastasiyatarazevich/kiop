@@ -68,7 +68,13 @@ public class ScreenOverlayShapes implements Screen {
                 myGdxGame.fontArialBlack64,
                 "Начать",
                 "schulteTable/buttonBackground.png",
-                775, 155
+                660, 155
+        );
+
+        TextView textViewBack = new TextView(
+                myGdxGame.fontArialBlack64,
+                "Назад",
+                1040, 180
         );
 
         TextView endTitle = new TextView(
@@ -103,12 +109,14 @@ public class ScreenOverlayShapes implements Screen {
         startButton.setOnClickListener(onStartButtonClicked);
         menuButton.setOnClickListener(onMenuButtonClicked);
         imageViewPause.setOnClickListener(onPauseClicked);
+        textViewBack.setOnClickListener(onButtonReturnClickListener);
         alertPauseView.setOnButtonResumeClickListener(onButtonResumeClicked);
         alertPauseView.setOnButtonReturnHomeClickListener(onButtonReturnHomeClicked);
 
         sceneGreeting.addActor(background);
         sceneGreeting.addActor(startButton);
         sceneGreeting.addActor(taskView);
+        sceneGreeting.addActor(textViewBack);
 
         sceneShapesShowing.addActor(background);
         sceneShapesShowing.addActor(imageMapView);
@@ -263,6 +271,13 @@ public class ScreenOverlayShapes implements Screen {
         @Override
         public void onClicked() {
             testSession.clearSession();
+            myGdxGame.setScreen(myGdxGame.screenMenu);
+        }
+    };
+
+    View.OnClickListener onButtonReturnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClicked() {
             myGdxGame.setScreen(myGdxGame.screenMenu);
         }
     };

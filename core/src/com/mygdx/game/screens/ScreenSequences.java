@@ -52,7 +52,13 @@ public class ScreenSequences implements Screen {
                 myGdxGame.fontArialBlack64,
                 "Начать",
                 "schulteTable/buttonBackground.png",
-                -1, 155
+                660, 155
+        );
+
+        TextView textViewBack = new TextView(
+                myGdxGame.fontArialBlack64,
+                "Назад",
+                1040, 180
         );
 
         buttonReady = new TextButton(
@@ -98,18 +104,20 @@ public class ScreenSequences implements Screen {
                 ApplicationStrings.SEQUANCE_TASK_DESCRIPTION
         );
 
-        alertPauseView.setOnButtonResumeClickListener(onButtonResumeClickListener);
-        alertPauseView.setOnButtonReturnHomeClickListener(onButtonReturnHomeClickListener);
-        sequenceCardsWrapperView.setOnSequenceItemClicked(onSequenceItemClicked);
         buttonStart.setOnClickListener(onButtonStartClicked);
-        buttonReady.setOnClickListener(onButtonReadyClicked);
         textViewDrop.setOnClickListener(onButtonDropClicked);
         buttonBack.setOnClickListener(onButtonBackClicked);
         imageViewPause.setOnClickListener(onButtonPauseClicked);
+        textViewBack.setOnClickListener(onButtonReturnClickListener);
+        buttonReady.setOnClickListener(onButtonReadyClicked);
+        sequenceCardsWrapperView.setOnSequenceItemClicked(onSequenceItemClicked);
+        alertPauseView.setOnButtonResumeClickListener(onButtonResumeClickListener);
+        alertPauseView.setOnButtonReturnHomeClickListener(onButtonReturnHomeClickListener);
 
         sceneGreeting.addActor(backgroundView);
         sceneGreeting.addActor(buttonStart);
         sceneGreeting.addActor(taskView);
+        sceneGreeting.addActor(textViewBack);
 
         sceneShowingSequences.addActor(backgroundView);
         sceneShowingSequences.addActor(sequenceCardsWrapperView);
@@ -262,6 +270,13 @@ public class ScreenSequences implements Screen {
         @Override
         public void onClicked() {
             testSession.clearSession();
+            myGdxGame.setScreen(myGdxGame.screenMenu);
+        }
+    };
+
+    View.OnClickListener onButtonReturnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClicked() {
             myGdxGame.setScreen(myGdxGame.screenMenu);
         }
     };

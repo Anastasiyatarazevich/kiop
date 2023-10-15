@@ -58,7 +58,13 @@ public class ScreenNonsense implements Screen {
                 myGdxGame.fontArialBlack64,
                 "Начать",
                 "schulteTable/buttonBackground.png",
-                -1, 155
+                660, 155
+        );
+
+        TextView textViewBack = new TextView(
+                myGdxGame.fontArialBlack64,
+                "Назад",
+                1040, 180
         );
 
         TextView textViewTitle = new TextView(
@@ -109,6 +115,7 @@ public class ScreenNonsense implements Screen {
         buttonStart.setOnClickListener(onButtonStartClicked);
         buttonBackToMenu.setOnClickListener(onButtonBackClicked);
         buttonCompleteTest.setOnClickListener(onButtonCompleteClicked);
+        textViewBack.setOnClickListener(onButtonReturnClickListener);
         testSession.setOnNonsenseFoundListener(onNonsenseFoundListener);
         imageMapView.setOnImageMapViewPressedListener(onImageMapViewPressedListener);
         alertPauseView.setOnButtonResumeClickListener(onButtonResumeClickListener);
@@ -117,6 +124,7 @@ public class ScreenNonsense implements Screen {
         sceneGreeting.addActor(backgroundView);
         sceneGreeting.addActor(buttonStart);
         sceneGreeting.addActor(taskView);
+        sceneGreeting.addActor(textViewBack);
 
         scenePassed.addActor(backgroundView);
         scenePassed.addActor(buttonBackToMenu);
@@ -255,6 +263,13 @@ public class ScreenNonsense implements Screen {
         public void onFound(Nonsense nonsense) {
             imageMapView.addHighlight(nonsense.getX(), nonsense.getY(), nonsense.getPointerRadius());
             textViewNonsenseCount.setText(String.valueOf(testSession.countOfFoundNonsenses));
+        }
+    };
+
+    View.OnClickListener onButtonReturnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClicked() {
+            myGdxGame.setScreen(myGdxGame.screenMenu);
         }
     };
 }

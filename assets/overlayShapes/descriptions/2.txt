@@ -1,0 +1,8 @@
+(311, 111);1;pumpkin.png
+(128, 306);0;eggplant.png
+(609, 201);47;broccoli.png
+(716, 279);61;cabbage.png
+(312, 49);58;carrot.png
+(126, 192);64;beet.png
+(475, -46);50;peas.png
+(804, 182);70;cauliflower.png

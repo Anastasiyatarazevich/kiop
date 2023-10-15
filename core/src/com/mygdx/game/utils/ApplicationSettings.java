@@ -41,7 +41,7 @@ public class ApplicationSettings {
     public static String COLUMN_BLACK_AND_WHITE_SHAPES_DIR = "overlayShapes/columnsBlackWhiteShapes/";
 
     // TODO: remove it
-    public static int COUNT_OF_FILES = 2;
+    public static int COUNT_OF_FILES = 5;
 
 
     // ---- The extra fourth settings

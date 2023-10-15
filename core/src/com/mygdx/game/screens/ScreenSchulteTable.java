@@ -107,18 +107,30 @@ public class ScreenSchulteTable implements Screen {
                 "schulteTable/buttonBackground.png",
                 -1, 228
         );
-        TextButton backButton = new TextButton(
+
+        ImageView imageRaccoon = new ImageView(
+                1350, 60,
+                "images/sitting_raccoon.png"
+        );
+
+        TextButton buttonBackToMenu = new TextButton(
                 myGdxGame.fontArialBlack64,
                 "Вернуться в лес",
                 "schulteTable/buttonBackground.png",
-                -1, 228
+                -1, 480
+        );
+
+        TextView textViewMotivator = new TextView(
+                myGdxGame.fontArialBlack64,
+                "Молодец, ты справился!",
+                -1, 680
         );
 
         ImageView imageViewPause = new ImageView(1741, 917, "icons/icon_pause.png");
 
         alertPauseView = new AlertPauseView(myGdxGame.fontArialBlack64, myGdxGame.fontArialBlack32);
 
-        backButton.setOnClickListener(onBackButtonClicked);
+        buttonBackToMenu.setOnClickListener(onBackButtonClicked);
         startButton.setOnClickListener(onStartButtonClicked);
         continueButton.setOnClickListener(onContinueButtonClicked);
         imageViewPause.setOnClickListener(onPauseClicked);
@@ -133,8 +145,9 @@ public class ScreenSchulteTable implements Screen {
         sceneGreeting.addActor(textViewBack);
 
         scenePassed.addActor(background);
-        scenePassed.addActor(backButton);
-        scenePassed.addActor(motivatorTextView);
+        scenePassed.addActor(buttonBackToMenu);
+        scenePassed.addActor(textViewMotivator);
+        scenePassed.addActor(imageRaccoon);
 
         sceneBreak.addActor(background);
         sceneBreak.addActor(motivatorTextView);

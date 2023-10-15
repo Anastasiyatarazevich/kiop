@@ -77,17 +77,22 @@ public class ScreenOverlayShapes implements Screen {
                 1040, 180
         );
 
-        TextView endTitle = new TextView(
-                myGdxGame.fontArialBlack64,
-                "Молодец, ты справился!",
-                -1, 900
+        ImageView imageRaccoon = new ImageView(
+                1350, 60,
+                "images/sitting_raccoon.png"
         );
 
         TextButton menuButton = new TextButton(
                 myGdxGame.fontArialBlack64,
                 "Вернуться в лес",
                 "schulteTable/buttonBackground.png",
-                -1, 300
+                -1, 480
+        );
+
+        TextView endTitle = new TextView(
+                myGdxGame.fontArialBlack64,
+                "Молодец, ты справился!",
+                -1, 680
         );
 
         imageMapView = new ImageMapView(
@@ -129,6 +134,7 @@ public class ScreenOverlayShapes implements Screen {
         scenePassed.addActor(background);
         scenePassed.addActor(menuButton);
         scenePassed.addActor(endTitle);
+        scenePassed.addActor(imageRaccoon);
 
         Gdx.input.setInputProcessor(new MyInputProcessor());
     }

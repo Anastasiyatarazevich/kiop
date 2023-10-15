@@ -94,17 +94,22 @@ public class ScreenMemo implements Screen {
                 -1, 62
         );
 
-        TextButton backButton = new TextButton(
+        ImageView imageRaccoon = new ImageView(
+                1350, 60,
+                "images/sitting_raccoon.png"
+        );
+
+        TextButton buttonBackToMenu = new TextButton(
                 myGdxGame.fontArialBlack64,
                 "Вернуться в лес",
                 "schulteTable/buttonBackground.png",
-                -1, 228
+                -1, 480
         );
 
-        TextView motivatorTextView = new TextView(
+        TextView textViewMotivator = new TextView(
                 myGdxGame.fontArialBlack64,
                 "Молодец, ты справился!",
-                -1, 816
+                -1, 680
         );
 
         ImageView imageViewPause = new ImageView(
@@ -113,7 +118,7 @@ public class ScreenMemo implements Screen {
         );
 
         startButton.setOnClickListener(onButtonStartClicked);
-        backButton.setOnClickListener(onBackButtonClicked);
+        buttonBackToMenu.setOnClickListener(onBackButtonClicked);
         imageViewPause.setOnClickListener(onButtonPauseClicked);
         textViewBack.setOnClickListener(onButtonReturnClickListener);
         alertPauseView.setOnButtonResumeClickListener(onButtonResumeClickListener);
@@ -135,8 +140,9 @@ public class ScreenMemo implements Screen {
         sceneShowingCards.addActor(alertPauseView);
 
         scenePassed.addActor(backgroundView);
-        scenePassed.addActor(backButton);
-        scenePassed.addActor(motivatorTextView);
+        scenePassed.addActor(buttonBackToMenu);
+        scenePassed.addActor(textViewMotivator);
+        scenePassed.addActor(imageRaccoon);
     }
 
     @Override

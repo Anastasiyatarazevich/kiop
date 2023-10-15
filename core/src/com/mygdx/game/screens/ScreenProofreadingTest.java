@@ -32,7 +32,7 @@ public class ScreenProofreadingTest implements Screen {
     AlertPauseView alertPauseView;
     TableViewProof tableView;
     FindTextView findText;
-    TextView goBackText;
+    TextView textViewMotivator;
 
     ResultsProofReadingTest proofReadingTestResults;
 
@@ -68,12 +68,6 @@ public class ScreenProofreadingTest implements Screen {
                 " "
         );
 
-        goBackText = new TextView(
-                myGdxGame.fontArialBlack64,
-                "Молодец, ты справился!",
-                -1, 816
-        );
-
         TextButton startButton = new TextButton(
                 myGdxGame.fontArialBlack64,
                 "Начать",
@@ -87,11 +81,22 @@ public class ScreenProofreadingTest implements Screen {
                 1040, 180
         );
 
+        ImageView imageRaccoon = new ImageView(
+                1350, 60,
+                "images/sitting_raccoon.png"
+        );
+
         TextButton backButton = new TextButton(
                 myGdxGame.fontArialBlack64,
-                "Вернуться в лес!",
+                "Вернуться в лес",
                 "schulteTable/buttonBackground.png",
-                -1, 228
+                -1, 480
+        );
+
+        textViewMotivator = new TextView(
+                myGdxGame.fontArialBlack64,
+                "Молодец, ты справился!",
+                -1, 680
         );
 
         ImageView imageViewPause = new ImageView(
@@ -119,7 +124,8 @@ public class ScreenProofreadingTest implements Screen {
 
         scenePassed.addActor(background);
         scenePassed.addActor(backButton);
-        scenePassed.addActor(goBackText);
+        scenePassed.addActor(textViewMotivator);
+        scenePassed.addActor(imageRaccoon);
 
         sceneTableShowing.addActor(background);
         sceneTableShowing.addActors(tableView.getAllViews());

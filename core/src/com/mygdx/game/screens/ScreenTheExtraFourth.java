@@ -86,19 +86,23 @@ public class ScreenTheExtraFourth implements Screen {
                 -1, 985
         );
 
-        TextView textViewPassedTitle = new TextView(
-                myGdxGame.fontArialBlack64,
-                "Молодец, ты справился!",
-                -1, 816
+        ImageView imageRaccoon = new ImageView(
+                1350, 60,
+                "images/sitting_raccoon.png"
         );
 
-        TextButton buttonBack = new TextButton(
+        TextButton buttonBackToMenu = new TextButton(
                 myGdxGame.fontArialBlack64,
                 "Вернуться в лес",
                 "schulteTable/buttonBackground.png",
-                -1, 228
+                -1, 480
         );
 
+        TextView textViewMotivator = new TextView(
+                myGdxGame.fontArialBlack64,
+                "Молодец, ты справился!",
+                -1, 680
+        );
         TaskView taskView = new TaskView(
                 myGdxGame.fontArialBlackBold64,
                 myGdxGame.fontArialGray64,
@@ -109,7 +113,7 @@ public class ScreenTheExtraFourth implements Screen {
         imageViewNext.setOnClickListener(onImageViewNextClicked);
         tableCardsView.setOnTableCardsClickListener(onTableCardsClicked);
         buttonStart.setOnClickListener(onButtonStartClicked);
-        buttonBack.setOnClickListener(onButtonBackClicked);
+        buttonBackToMenu.setOnClickListener(onButtonBackClicked);
         imageViewPause.setOnClickListener(onButtonPauseClicked);
         textViewBack.setOnClickListener(onButtonReturnClickListener);
         alertPauseView.setOnButtonReturnHomeClickListener(onButtonReturnHomeClicked);
@@ -129,8 +133,9 @@ public class ScreenTheExtraFourth implements Screen {
         sceneCardShowing.addActor(alertPauseView);
 
         scenePassed.addActor(background);
-        scenePassed.addActor(buttonBack);
-        scenePassed.addActor(textViewPassedTitle);
+        scenePassed.addActor(buttonBackToMenu);
+        scenePassed.addActor(textViewMotivator);
+        scenePassed.addActor(imageRaccoon);
     }
 
     @Override

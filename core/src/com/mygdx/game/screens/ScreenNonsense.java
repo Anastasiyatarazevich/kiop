@@ -92,17 +92,22 @@ public class ScreenNonsense implements Screen {
                 1450, 525
         );
 
+        ImageView imageRaccoon = new ImageView(
+                1350, 60,
+                "images/sitting_raccoon.png"
+        );
+
         TextButton buttonBackToMenu = new TextButton(
                 myGdxGame.fontArialBlack64,
                 "Вернуться в лес",
                 "schulteTable/buttonBackground.png",
-                -1, 228
+                -1, 480
         );
 
         TextView textViewMotivator = new TextView(
                 myGdxGame.fontArialBlack64,
                 "Молодец, ты справился!",
-                -1, 816
+                -1, 680
         );
 
         TaskView taskView = new TaskView(
@@ -129,6 +134,7 @@ public class ScreenNonsense implements Screen {
         scenePassed.addActor(backgroundView);
         scenePassed.addActor(buttonBackToMenu);
         scenePassed.addActor(textViewMotivator);
+        scenePassed.addActor(imageRaccoon);
 
         sceneFindingNonsense.addActor(backgroundView);
         sceneFindingNonsense.addActor(textViewTitle);

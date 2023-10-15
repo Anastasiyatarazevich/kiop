@@ -14,7 +14,7 @@ public class ApplicationSettings {
     // ---- ---- Logic
 
     public static int COUNT_OF_SCHULTE_TABLES = 3;
-    public static int SCHULTE_TABLE_SIZE = 5;
+    public static int SCHULTE_TABLE_SIZE = 1;
 
     // ---- ---- Ui
 

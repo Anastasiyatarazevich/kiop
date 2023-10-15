@@ -89,17 +89,22 @@ public class ScreenRavenMatrices implements Screen {
                 -1, 950
         );
 
-        TextView textViewPassedTitle = new TextView(
-                myGdxGame.fontArialBlack64,
-                "Молодец, ты справился!",
-                -1, 816
+        ImageView imageRaccoon = new ImageView(
+                1350, 60,
+                "images/sitting_raccoon.png"
         );
 
-        TextButton buttonBack = new TextButton(
+        TextButton buttonBackToMenu = new TextButton(
                 myGdxGame.fontArialBlack64,
                 "Вернуться в лес",
                 "schulteTable/buttonBackground.png",
-                -1, 228
+                -1, 480
+        );
+
+        TextView textViewMotivator = new TextView(
+                myGdxGame.fontArialBlack64,
+                "Молодец, ты справился!",
+                -1, 680
         );
 
         tableCounterView = new TextView(
@@ -119,7 +124,7 @@ public class ScreenRavenMatrices implements Screen {
                 ApplicationStrings.RAVEN_TASK_DESCRIPTION
         );
 
-        buttonBack.setOnClickListener(onButtonBackClicked);
+        buttonBackToMenu.setOnClickListener(onButtonBackClicked);
         buttonStart.setOnClickListener(onButtonStartClicked);
         imageViewPause.setOnClickListener(onButtonPauseClicked);
         textViewBack.setOnClickListener(onButtonReturnClickListener);
@@ -145,8 +150,9 @@ public class ScreenRavenMatrices implements Screen {
         sceneCardShowing.addActor(alertPauseView);
 
         scenePassed.addActor(background);
-        scenePassed.addActor(buttonBack);
-        scenePassed.addActor(textViewPassedTitle);
+        scenePassed.addActor(buttonBackToMenu);
+        scenePassed.addActor(textViewMotivator);
+        scenePassed.addActor(imageRaccoon);
     }
 
     @Override

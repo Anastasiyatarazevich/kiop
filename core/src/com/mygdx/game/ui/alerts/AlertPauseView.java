@@ -34,7 +34,7 @@ public class AlertPauseView extends View {
 
         imageViewRaccoon = new ImageView(
                 -1, 420,
-                "images/slippingRaccoon.png"
+                "images/slipping_raccoon.png"
         );
 
         textViewTitle = new TextView(

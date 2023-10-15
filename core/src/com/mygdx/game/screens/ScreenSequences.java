@@ -80,19 +80,23 @@ public class ScreenSequences implements Screen {
                 115, 950
         );
 
-        TextButton buttonBack = new TextButton(
+        ImageView imageRaccoon = new ImageView(
+                1350, 60,
+                "images/sitting_raccoon.png"
+        );
+
+        TextButton buttonBackToMenu = new TextButton(
                 myGdxGame.fontArialBlack64,
                 "Вернуться в лес",
                 "schulteTable/buttonBackground.png",
-                -1, 228
+                -1, 480
         );
 
-        TextView motivatorTextView = new TextView(
+        TextView textViewMotivator = new TextView(
                 myGdxGame.fontArialBlack64,
                 "Молодец, ты справился!",
-                -1, 816
+                -1, 680
         );
-
         ImageView imageViewPause = new ImageView(
                 1680, 940,
                 "icons/icon_pause.png"
@@ -106,7 +110,7 @@ public class ScreenSequences implements Screen {
 
         buttonStart.setOnClickListener(onButtonStartClicked);
         textViewDrop.setOnClickListener(onButtonDropClicked);
-        buttonBack.setOnClickListener(onButtonBackClicked);
+        buttonBackToMenu.setOnClickListener(onButtonBackClicked);
         imageViewPause.setOnClickListener(onButtonPauseClicked);
         textViewBack.setOnClickListener(onButtonReturnClickListener);
         buttonReady.setOnClickListener(onButtonReadyClicked);
@@ -129,8 +133,9 @@ public class ScreenSequences implements Screen {
         sceneShowingSequences.addActor(alertPauseView);
 
         scenePassed.addActor(backgroundView);
-        scenePassed.addActor(buttonBack);
-        scenePassed.addActor(motivatorTextView);
+        scenePassed.addActor(buttonBackToMenu);
+        scenePassed.addActor(textViewMotivator);
+        scenePassed.addActor(imageRaccoon);
     }
 
     @Override

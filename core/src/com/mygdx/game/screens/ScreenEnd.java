@@ -1,6 +1,7 @@
 package com.mygdx.game.screens;
 
 import static com.mygdx.game.utils.UsingColors.COLOR_BG_GRAY;
+import static com.mygdx.game.utils.UsingColors.COLOR_BG_WHITE;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -20,7 +21,7 @@ public class ScreenEnd implements Screen {
         this.myGdxGame = myGdxGame;
         sceneRacoon = new SceneHelper();
 
-        BackgroundPixmapView backgroundView = new BackgroundPixmapView(COLOR_BG_GRAY);
+        BackgroundPixmapView backgroundView = new BackgroundPixmapView(COLOR_BG_WHITE);
         TextButton buttonExit = new TextButton(
                 myGdxGame.fontArialBlack64,
                 "Пока!",

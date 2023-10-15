@@ -148,8 +148,9 @@ public class ScreenMenu implements Screen {
 
         Integer[] xArray = new Integer[countOfTests];
         for (int i = 0; i < countOfTests; i++) {
-            xArray[i] = horizontalPadding + (SCR_WIDTH - 2 * horizontalPadding) /
-                    countOfTests * i + random.nextInt(-randomDelta, randomDelta);
+            int randomX = random.nextInt(0, randomDelta);
+            randomX = (random.nextBoolean()) ? randomX : -randomX;
+            xArray[i] = horizontalPadding + (SCR_WIDTH - 2 * horizontalPadding) / countOfTests * i + randomX;
         }
 
         return xArray;
@@ -163,7 +164,9 @@ public class ScreenMenu implements Screen {
 
         Integer[] yArray = new Integer[countOfTests];
         for (int i = 0; i < countOfTests; i++) {
-            yArray[i] = bottomPadding + (i % 2) * padding + random.nextInt(-randomDelta, randomDelta);
+            int randomY = random.nextInt(0, randomDelta);
+            randomY = (random.nextBoolean()) ? randomY : -randomY;
+            yArray[i] = bottomPadding + (i % 2) * padding + randomY;
         }
 
         return yArray;

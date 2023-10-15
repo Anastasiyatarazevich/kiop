@@ -27,6 +27,7 @@ public class MyGdxGame extends Game {
     public ScreenMemo screenMemo;
     public ScreenMenu screenMenu;
     public ScreenStart screenStart;
+    public ScreenEnd screenEnd;
 
     public BitmapFont fontArialBlack64;
     public BitmapFont fontArialBlack32;
@@ -59,6 +60,7 @@ public class MyGdxGame extends Game {
         screenMemo = new ScreenMemo(this);
         screenMenu = new ScreenMenu(this);
         screenStart = new ScreenStart(this);
+        screenEnd = new ScreenEnd(this);
 
         setScreen(screenStart);
         //WebHelper.getRequest();

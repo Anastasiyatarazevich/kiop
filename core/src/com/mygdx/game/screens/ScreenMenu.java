@@ -1,52 +1,99 @@
 package com.mygdx.game.screens;
 
+import static com.mygdx.game.utils.ApplicationSettings.SCR_WIDTH;
 import static com.mygdx.game.utils.UsingColors.COLOR_BG_GRAY;
+import static com.mygdx.game.utils.UsingColors.COLOR_BG_WHITE;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.ui.BackgroundPixmapView;
+import com.mygdx.game.ui.ImageView;
 import com.mygdx.game.ui.TextView;
 import com.mygdx.game.ui.View;
+import com.mygdx.game.utils.RenderHelper;
+import com.mygdx.game.utils.SceneHelper;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 public class ScreenMenu implements Screen {
 
     MyGdxGame myGdxGame;
     ArrayList<View> uiComponentsList;
+    SceneHelper sceneMenu;
 
-    public ScreenMenu(MyGdxGame myGdxGame) {
+    int countOfTests = 8;
+    int countOfCompletedTests = 0;
+
+    Boolean[] arrayPassed = new Boolean[countOfTests];
+    ImageView[] imageViewsMushroomArray = new ImageView[countOfTests];
+
+    String[] arrayDirsBefore = {
+            "menu/mushrooms/1",
+            "menu/mushrooms/2",
+            "menu/mushrooms/2",
+            "menu/mushrooms/1",
+            "menu/mushrooms/2",
+            "menu/mushrooms/1",
+            "menu/mushrooms/1",
+            "menu/mushrooms/2"
+    };
+
+    TextView textViewCountOfTests;
+
+    public ScreenMenu(final MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
 
         uiComponentsList = new ArrayList<>();
+        sceneMenu = new SceneHelper();
 
-        TextView textViewTest1 = new TextView(myGdxGame.fontArialGray64, "1. Таблица Шульте", 100, 900);
-        TextView textViewTest2 = new TextView(myGdxGame.fontArialGray64, "2. Коррекатурная проба", 100, 800);
-        TextView textViewTest3 = new TextView(myGdxGame.fontArialGray64, "3. Наложенные фигуры", 100, 700);
-        TextView textViewTest4 = new TextView(myGdxGame.fontArialGray64, "4. Четвёртый лишний", 100, 600);
-        TextView textViewTest5 = new TextView(myGdxGame.fontArialGray64, "5. Матрицы Равена", 100, 500);
-        TextView textViewTest6 = new TextView(myGdxGame.fontArialGray64, "6. Мемо", 100, 400);
-        TextView textViewTest7 = new TextView(myGdxGame.fontArialGray64, "7. Нелепицы", 100, 300);
-        TextView textViewTest8 = new TextView(myGdxGame.fontArialGray64, "8. Последовательности", 100, 200);
+        final Screen[] arrayScreens = {
+                myGdxGame.screenSchulteTable,
+                myGdxGame.screenProofreadingTest,
+                myGdxGame.screenOverlayShapes,
+                myGdxGame.screenTheExtraFourth,
+                myGdxGame.screenRavenMatrices,
+                myGdxGame.screenMemo,
+                myGdxGame.screenNonsense,
+                myGdxGame.screenSequences
+        };
 
-        textViewTest1.setOnClickListener(textView3clicked);
-        textViewTest2.setOnClickListener(textView2clicked);
-        textViewTest3.setOnClickListener(textView1clicked);
-        textViewTest4.setOnClickListener(textView4Clicked);
-        textViewTest5.setOnClickListener(textView5Clicked);
-        textViewTest6.setOnClickListener(textView6Clicked);
-        textViewTest7.setOnClickListener(textView7Clicked);
-        textViewTest8.setOnClickListener(textView8Clicked);
 
-        uiComponentsList.add(textViewTest1);
-        uiComponentsList.add(textViewTest2);
-        uiComponentsList.add(textViewTest3);
-        uiComponentsList.add(textViewTest4);
-        uiComponentsList.add(textViewTest5);
-        uiComponentsList.add(textViewTest6);
-        uiComponentsList.add(textViewTest7);
-        uiComponentsList.add(textViewTest8);
+        Integer[] xArray = getXArray();
+        Integer[] yArray = getYArray();
+
+        for (int i = 0; i < countOfTests; i++) {
+            imageViewsMushroomArray[i] = new ImageView(xArray[i], yArray[i], arrayDirsBefore[i] + ".png");
+            arrayPassed[i] = false;
+
+            final int finalI = i;
+            View.OnClickListener imageMushroomClicked = new View.OnClickListener() {
+                @Override
+                public void onClicked() {
+                    if (!arrayPassed[finalI]) {
+                        myGdxGame.setScreen(arrayScreens[finalI]);
+                    }
+                }
+            };
+
+            imageViewsMushroomArray[i].setOnClickListener(imageMushroomClicked);
+        }
+
+        textViewCountOfTests = new TextView(myGdxGame.fontArialGray32, "Грибы: 0/" + countOfTests, 665, 770);
+
+        ImageView imageViewDialog = new ImageView(370, 650, "menu/raccoon_dialog.png");
+        BackgroundPixmapView backgroundView = new BackgroundPixmapView(COLOR_BG_WHITE);
+
+        sceneMenu.addActor(backgroundView);
+        for (int i = 0; i < countOfTests; i++) {
+            sceneMenu.addActor(imageViewsMushroomArray[i]);
+        }
+
+        sceneMenu.addActor(imageViewDialog);
+        sceneMenu.addActor(textViewCountOfTests);
     }
 
     @Override
@@ -57,24 +104,8 @@ public class ScreenMenu implements Screen {
     @Override
     public void render(float delta) {
 
-        if (Gdx.input.justTouched()) {
-            myGdxGame.touch.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-            myGdxGame.touch = myGdxGame.camera.unproject(myGdxGame.touch);
-            for (View component : uiComponentsList) {
-                if (component.isVisible) component.isHit(myGdxGame.touch.x, myGdxGame.touch.y);
-            }
-        }
-
-        ScreenUtils.clear(COLOR_BG_GRAY);
-        myGdxGame.camera.update();
-        myGdxGame.batch.begin();
-        myGdxGame.batch.setProjectionMatrix(myGdxGame.camera.combined);
-
-        for (View component : uiComponentsList) {
-            component.draw(myGdxGame);
-        }
-
-        myGdxGame.batch.end();
+        boolean justTouched = RenderHelper.checkTouch(myGdxGame);
+        RenderHelper.draw(myGdxGame, drawScenes, justTouched);
     }
 
     @Override
@@ -102,59 +133,52 @@ public class ScreenMenu implements Screen {
 
     }
 
-    View.OnClickListener textView1clicked = new View.OnClickListener() {
+    RenderHelper.DrawScenes drawScenes = new RenderHelper.DrawScenes() {
         @Override
-        public void onClicked() {
-            myGdxGame.setScreen(myGdxGame.screenOverlayShapes);
+        public void draw(boolean justTouched) {
+            if (justTouched) sceneMenu.checkHits(myGdxGame);
+            sceneMenu.drawScene(myGdxGame);
         }
     };
 
-    View.OnClickListener textView2clicked = new View.OnClickListener() {
-        @Override
-        public void onClicked() {
-            myGdxGame.setScreen(myGdxGame.screenProofreadingTest);
-        }
-    };
+    private Integer[] getXArray() {
+        Random random = new Random();
+        int horizontalPadding = 100;
+        int randomDelta = 60;
 
-    View.OnClickListener textView3clicked = new View.OnClickListener() {
-        @Override
-        public void onClicked() {
-            myGdxGame.setScreen(myGdxGame.screenSchulteTable);
+        Integer[] xArray = new Integer[countOfTests];
+        for (int i = 0; i < countOfTests; i++) {
+            xArray[i] = horizontalPadding + (SCR_WIDTH - 2 * horizontalPadding) /
+                    countOfTests * i + random.nextInt(-randomDelta, randomDelta);
         }
-    };
 
-    View.OnClickListener textView4Clicked = new View.OnClickListener() {
-        @Override
-        public void onClicked() {
-            myGdxGame.setScreen(myGdxGame.screenTheExtraFourth);
-        }
-    };
+        return xArray;
+    }
 
-    View.OnClickListener textView5Clicked = new View.OnClickListener() {
-        @Override
-        public void onClicked() {
-            myGdxGame.setScreen(myGdxGame.screenRavenMatrices);
-        }
-    };
+    private Integer[] getYArray() {
+        Random random = new Random();
+        int bottomPadding = 80;
+        int padding = 250;
+        int randomDelta = 30;
 
-    View.OnClickListener textView6Clicked = new View.OnClickListener() {
-        @Override
-        public void onClicked() {
-            myGdxGame.setScreen(myGdxGame.screenMemo);
+        Integer[] yArray = new Integer[countOfTests];
+        for (int i = 0; i < countOfTests; i++) {
+            yArray[i] = bottomPadding + (i % 2) * padding + random.nextInt(-randomDelta, randomDelta);
         }
-    };
 
-    View.OnClickListener textView7Clicked = new View.OnClickListener() {
-        @Override
-        public void onClicked() {
-            myGdxGame.setScreen(myGdxGame.screenNonsense);
-        }
-    };
+        return yArray;
+    }
 
-    View.OnClickListener textView8Clicked = new View.OnClickListener() {
-        @Override
-        public void onClicked() {
-            myGdxGame.setScreen(myGdxGame.screenSequences);
+    public void setTestPassed(int testIdx) {
+        arrayPassed[testIdx] = true;
+        imageViewsMushroomArray[testIdx].setImgSource(arrayDirsBefore[testIdx].split("\\.")[0] + "colored.png");
+        countOfCompletedTests += 1;
+
+        textViewCountOfTests.setText("Грибы: " + countOfCompletedTests + "/" + countOfTests);
+
+        System.out.println(countOfCompletedTests == countOfTests);
+        if (countOfCompletedTests == countOfTests) {
+            myGdxGame.setScreen(myGdxGame.screenEnd);
         }
-    };
+    }
 }

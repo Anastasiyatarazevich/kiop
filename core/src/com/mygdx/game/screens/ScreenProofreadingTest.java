@@ -224,6 +224,7 @@ public class ScreenProofreadingTest implements Screen {
         @Override
         public void onClicked() {
             myGdxGame.setScreen(myGdxGame.screenMenu);
+            myGdxGame.screenMenu.setTestPassed(1);
         }
     };
 

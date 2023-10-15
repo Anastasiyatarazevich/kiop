@@ -226,6 +226,7 @@ public class ScreenRavenMatrices implements Screen {
         @Override
         public void onClicked() {
             if (!testSession.nextCards()) {
+                testSession.endTest();
                 return;
             }
             setSceneCardShowing();
@@ -236,6 +237,7 @@ public class ScreenRavenMatrices implements Screen {
         @Override
         public void onClicked() {
             myGdxGame.setScreen(myGdxGame.screenMenu);
+            myGdxGame.screenMenu.setTestPassed(4);
         }
     };
 

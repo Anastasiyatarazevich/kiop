@@ -218,6 +218,7 @@ public class ScreenTheExtraFourth implements Screen {
     View.OnClickListener onButtonBackClicked = new View.OnClickListener() {
         @Override
         public void onClicked() {
+            myGdxGame.screenMenu.setTestPassed(3);
             myGdxGame.setScreen(myGdxGame.screenMenu);
         }
     };

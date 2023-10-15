@@ -62,7 +62,8 @@ public class SessionRaven {
     }
 
     public boolean nextCards() {
-        if (selectedCardIndex != Cards.presets[currentMatrixIndex].getIdxOfExtra()) {
+        if (currentMatrixIndex >= Cards.presets.length
+                || selectedCardIndex != Cards.presets[currentMatrixIndex].getIdxOfExtra()) {
             // todo: error case in raven
         } else {
             testResults.addPoint();

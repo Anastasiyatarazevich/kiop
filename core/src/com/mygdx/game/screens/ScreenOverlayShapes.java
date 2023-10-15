@@ -219,6 +219,7 @@ public class ScreenOverlayShapes implements Screen {
         @Override
         public void onClicked() {
             myGdxGame.setScreen(myGdxGame.screenMenu);
+            myGdxGame.screenMenu.setTestPassed(2);
         }
     };
 

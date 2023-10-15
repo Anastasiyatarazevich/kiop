@@ -222,6 +222,7 @@ public class ScreenNonsense implements Screen {
         @Override
         public void onClicked() {
             myGdxGame.setScreen(myGdxGame.screenMenu);
+            myGdxGame.screenMenu.setTestPassed(6);
         }
     };
 

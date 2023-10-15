@@ -239,6 +239,7 @@ public class ScreenSequences implements Screen {
         @Override
         public void onClicked() {
             myGdxGame.setScreen(myGdxGame.screenMenu);
+            myGdxGame.screenMenu.setTestPassed(7);
         }
     };
 

@@ -1,12 +1,9 @@
 package com.mygdx.game.screens;
 
 import static com.mygdx.game.utils.ApplicationSettings.SCR_WIDTH;
-import static com.mygdx.game.utils.UsingColors.COLOR_BG_GRAY;
 import static com.mygdx.game.utils.UsingColors.COLOR_BG_WHITE;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.ui.BackgroundPixmapView;
 import com.mygdx.game.ui.ImageView;
@@ -16,7 +13,6 @@ import com.mygdx.game.utils.RenderHelper;
 import com.mygdx.game.utils.SceneHelper;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public class ScreenMenu implements Screen {
@@ -148,7 +144,7 @@ public class ScreenMenu implements Screen {
 
         Integer[] xArray = new Integer[countOfTests];
         for (int i = 0; i < countOfTests; i++) {
-            int randomX = random.nextInt(0, randomDelta);
+            int randomX = random.nextInt(randomDelta);
             randomX = (random.nextBoolean()) ? randomX : -randomX;
             xArray[i] = horizontalPadding + (SCR_WIDTH - 2 * horizontalPadding) / countOfTests * i + randomX;
         }
@@ -164,7 +160,7 @@ public class ScreenMenu implements Screen {
 
         Integer[] yArray = new Integer[countOfTests];
         for (int i = 0; i < countOfTests; i++) {
-            int randomY = random.nextInt(0, randomDelta);
+            int randomY = random.nextInt(randomDelta);
             randomY = (random.nextBoolean()) ? randomY : -randomY;
             yArray[i] = bottomPadding + (i % 2) * padding + randomY;
         }

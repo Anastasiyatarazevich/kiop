@@ -88,17 +88,24 @@ public class ScreenSchulteTable implements Screen {
                 ApplicationStrings.SCHULTE_TABLE_TASK_DESCRIPTION
         );
 
+        TextButton buttonINotKnow = new TextButton(
+                myGdxGame.fontArialBlack64,
+                "Я не знаю цифры",
+                "schulteTable/buttonBackground.png",
+                266, 155
+        );
+
         TextButton startButton = new TextButton(
                 myGdxGame.fontArialBlack64,
                 "Начать",
                 "schulteTable/buttonBackground.png",
-                660, 155
+                900, 155
         );
 
         TextView textViewBack = new TextView(
                 myGdxGame.fontArialBlack64,
                 "Назад",
-                1040, 180
+                1240, 180
         );
 
         TextButton continueButton = new TextButton(
@@ -135,6 +142,7 @@ public class ScreenSchulteTable implements Screen {
         continueButton.setOnClickListener(onContinueButtonClicked);
         imageViewPause.setOnClickListener(onPauseClicked);
         textViewBack.setOnClickListener(onButtonReturnClickListener);
+        buttonINotKnow.setOnClickListener(onButtonIDoNotKnowClickListener);
 
         alertPauseView.setOnButtonResumeClickListener(onButtonResumeClickListener);
         alertPauseView.setOnButtonReturnHomeClickListener(onButtonReturnHomeClickListener);
@@ -143,6 +151,7 @@ public class ScreenSchulteTable implements Screen {
         sceneGreeting.addActor(startButton);
         sceneGreeting.addActor(taskView);
         sceneGreeting.addActor(textViewBack);
+        sceneGreeting.addActor(buttonINotKnow);
 
         scenePassed.addActor(background);
         scenePassed.addActor(buttonBackToMenu);
@@ -317,6 +326,14 @@ public class ScreenSchulteTable implements Screen {
         @Override
         public void onClicked() {
             myGdxGame.setScreen(myGdxGame.screenMenu);
+        }
+    };
+
+    View.OnClickListener onButtonIDoNotKnowClickListener = new View.OnClickListener() {
+        @Override
+        public void onClicked() {
+            myGdxGame.setScreen(myGdxGame.screenMenu);
+            myGdxGame.screenMenu.setTestPassed(0);
         }
     };
 }

@@ -51,11 +51,38 @@ public class TableMemoCardsView extends View {
         this.onCardsHided = onCardsHided;
         this.arrayImagesSrc = arrayImagesSrc;
 
-        width = cardSize * 5 + 4 * padding;
+        width = cardSize * 4 + 3 * padding;
         x = SCR_WIDTH / 2f - width / 2f;
 
         arrayListCardsView.clear();
+
         for (int i = 0; i < 3; i++) {
+            TableMemoCardsItemsView tableMemoCardsItemsView = new TableMemoCardsItemsView(
+                    x + i * cardSize + i * padding + (cardSize + padding) * 0.5f,
+                    y,
+                    cardSize,
+                    textureActiveCardBackground,
+                    CARDS_DIR + arrayImagesSrc[i] + ".png"
+            );
+            tableMemoCardsItemsView.isClickable = false;
+            tableMemoCardsItemsView.setOnEndAnimationListener(onEndAnimation);
+            arrayListCardsView.add(tableMemoCardsItemsView);
+        }
+
+        for (int i = 0; i < 4; i++) {
+            TableMemoCardsItemsView tableMemoCardsItemsView = new TableMemoCardsItemsView(
+                    x + i * cardSize + i * padding,
+                    y + cardSize + padding,
+                    cardSize,
+                    textureActiveCardBackground,
+                    CARDS_DIR + arrayImagesSrc[3 + i] + ".png"
+            );
+            tableMemoCardsItemsView.isClickable = false;
+            tableMemoCardsItemsView.setOnEndAnimationListener(onEndAnimation);
+            arrayListCardsView.add(tableMemoCardsItemsView);
+        }
+
+        /*for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 5; j++) {
                 TableMemoCardsItemsView tableMemoCardsItemsView = new TableMemoCardsItemsView(
                         x + j * cardSize + j * padding,
@@ -68,7 +95,7 @@ public class TableMemoCardsView extends View {
                 tableMemoCardsItemsView.setOnEndAnimationListener(onEndAnimation);
                 arrayListCardsView.add(tableMemoCardsItemsView);
             }
-        }
+        }*/
     }
 
     public void addUnknownCards() {
@@ -83,8 +110,8 @@ public class TableMemoCardsView extends View {
         }
         Collections.shuffle(arrayListCardsView);
 
-        width = 8 * cardSize + padding * 7;
-        height = 4 * cardSize + padding * 3;
+        width = 5 * cardSize + padding * 4;
+        height = 3 * cardSize + padding * 2;
 
         x = SCR_WIDTH / 2f - width / 2f;
         y = SCR_HEIGHT / 2f - height / 2f;
@@ -113,11 +140,8 @@ public class TableMemoCardsView extends View {
         float beginY = SCR_HEIGHT / 2f - cardSize / 2f;
 
         int cardIdx = 0;
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 8; j++) {
-
-                if (i == 0 && j == 0) continue;
-                if (i == 0 && j == 7) continue;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 5; j++) {
 
                 TableMemoCardsItemsView card = arrayListCardsView.get(cardIdx);
 
@@ -133,6 +157,7 @@ public class TableMemoCardsView extends View {
 
                 card.isSelected = false;
                 card.isClickable = true;
+                card.isVisible = true;
 
                 cardIdx += 1;
             }
@@ -158,7 +183,9 @@ public class TableMemoCardsView extends View {
     @Override
     public void draw(MyGdxGame myGdxGame) {
         for (int i = 0; i < arrayListCardsView.size(); i++) {
+
             TableMemoCardsItemsView image = arrayListCardsView.get(i);
+
             if (image.getVelocityX() != 0 || image.getVelocityY() != 0) {
                 image.move(1);
             }

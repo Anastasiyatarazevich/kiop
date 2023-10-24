@@ -53,7 +53,7 @@ public class ScreenMemo implements Screen {
         );
 
         tableMemoCardsView = new TableMemoCardsView(
-                0, 140,
+                0, 250,
                 MEMO_CARD_SIZE,
                 MEMO_CARD_PADDING,
                 onTableItemClickListener,

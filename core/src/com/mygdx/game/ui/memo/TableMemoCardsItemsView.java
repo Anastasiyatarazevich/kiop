@@ -75,6 +75,11 @@ public class TableMemoCardsItemsView extends View implements Movable {
         this.endY = endY;
 
         float movementVector = (float) Math.sqrt((endX - x) * (endX - x) + (endY - y) * (endY - y));
+        if (movementVector == 0) {
+            setVelocityX(0);
+            setVelocityY(0);
+            return;
+        }
         float speedRation = MEMO_CARD_MOVING_VELOCITY / movementVector;
         setVelocityX((endX - x) * speedRation);
         setVelocityY((endY - y) * speedRation);

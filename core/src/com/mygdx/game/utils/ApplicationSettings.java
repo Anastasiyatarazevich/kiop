@@ -14,7 +14,7 @@ public class ApplicationSettings {
     // ---- ---- Logic
 
     public static int COUNT_OF_SCHULTE_TABLES = 3;
-    public static int SCHULTE_TABLE_SIZE = 1;
+    public static int SCHULTE_TABLE_SIZE = 5;
 
     // ---- ---- Ui
 
@@ -56,13 +56,13 @@ public class ApplicationSettings {
     // ---- ---- Logic
 
     public static String CARDS_DIR = "memo/cardsImages/";
-    public static int COUNT_OF_CARDS_TO_REMEMBER = 15;
-    public static int COUNT_OF_ADDITION_CARDS = 15;
-    public static int SECONDS_TO_REMEMBER = 10;
+    public static int COUNT_OF_CARDS_TO_REMEMBER = 7;
+    public static int COUNT_OF_ADDITION_CARDS = 8;
+    public static int SECONDS_TO_REMEMBER = 2;
 
     // ---- ---- Ui
 
-    public static float MEMO_CARD_MOVING_VELOCITY = 12;
+    public static float MEMO_CARD_MOVING_VELOCITY = 9;
     public static long MEMO_CARD_FADING_PERIOD = 800;
     public static int MEMO_CARD_SIZE = 170;
     public static int MEMO_CARD_PADDING = 20;

@@ -70,7 +70,7 @@ public class ScreenSequences implements Screen {
 
         TextView textViewDrop = new TextView(
                 myGdxGame.fontArialBlack64,
-                "Сбрость",
+                "Сбросить",
                 115, 115
         );
 

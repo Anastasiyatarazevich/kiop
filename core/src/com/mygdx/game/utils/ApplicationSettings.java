@@ -78,7 +78,7 @@ public class ApplicationSettings {
 
 // ---- Nonsense settings
 
-    public static int NONSENSE_COUNT_OF_SAMPLES = 1;
+    public static int NONSENSE_COUNT_OF_SAMPLES = 2;
     public static String NONSENSE_PICTURES_DIR = "nonsense/pictures/";
     public static String NONSENSE_COLOR_MAP_DIR = "nonsense/colormaps/";
 

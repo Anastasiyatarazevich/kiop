@@ -13,5 +13,17 @@ public class NonsensePicturesDescriptions {
                     new Nonsense(3, 30, 295, 144),
                     new Nonsense(10, 30, 325, 70)
             },
+            {
+                    new Nonsense(1, 100, 357, 640),
+                    new Nonsense(2, 50, 400, 560),
+                    new Nonsense(3, 50, 250, 562),
+                    new Nonsense(4, 50, 87, 540),
+                    new Nonsense(5, 50, 200, 467),
+                    new Nonsense(6, 50, 85, 465),
+                    new Nonsense(7, 50, 127, 363),
+                    new Nonsense(8, 50, 80, 250),
+                    new Nonsense(9, 100, 215, 107),
+                    new Nonsense(10, 50, 403, 287)
+            },
     };
 }

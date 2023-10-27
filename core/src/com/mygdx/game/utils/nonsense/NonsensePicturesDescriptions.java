@@ -25,5 +25,17 @@ public class NonsensePicturesDescriptions {
                     new Nonsense(9, 100, 215, 107),
                     new Nonsense(10, 50, 403, 287)
             },
+            {
+                    new Nonsense(1, 174 / 2, 394, 606),
+                    new Nonsense(2, 104 / 2, 464, 460),
+                    new Nonsense(3, 126 / 2, 257, 567),
+                    new Nonsense(4, 55 / 2, 169, 502),
+                    new Nonsense(6, 107 / 2, 183, 376),
+                    new Nonsense(5, 55 / 2, 303, 464),
+                    new Nonsense(7, 139 / 2, 30, 283),
+                    new Nonsense(8, 107 / 2, 507, 246),
+                    new Nonsense(9, 136 / 2, 213, 178),
+                    new Nonsense(10, 71 / 2, 453, 340)
+            },
     };
 }
